@@ -244,7 +244,7 @@
 
                     <div v-else :id="selectedEntry.summary + '_tryItHere'" class="tryItButtonClick">
                       <hds-card
-                          class="mb-4 elevation-2 tryItButtonClick"
+                          class="mb-4 elevation-2"
                           :icon="{
                             icon: 'mdi-code-json',
                             color: 'stone-gray'
