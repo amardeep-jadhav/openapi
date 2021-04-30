@@ -1,0 +1,2825 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "FHIR Server",
+    "license": {
+      "name": "Medecision"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8281/fhir"
+    }
+  ],
+  "paths": {
+    "/api/r4/Patient": {
+      "post": {
+        "summary": "creates a patient",
+        "tags": [
+          "Patient"
+        ],
+        "requestBody": {
+          "description": "patient",
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "patient",
+                "$ref": "#/components/schemas/PatientR4"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieves patients by multiple query params",
+        "tags": [
+          "Patient"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundlePatientR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "family",
+            "in": "query",
+            "description": "A portion of the family name of the patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "given",
+            "in": "query",
+            "description": "A portion of the given name of the patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_has",
+            "in": "query",
+            "description": "The parameter to support reverse chaning of resources",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_page",
+            "in": "query",
+            "description": "The page number of the search results to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "description": "Whether the patient record is active",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "birthdate",
+            "in": "query",
+            "description": "The patient's date of birth",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "A patient identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/Patient/{resourceId}": {
+      "get": {
+        "summary": "Retrieves a specific patient by Resource ID",
+        "tags": [
+          "Patient"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Patient Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Updates a specifc patient identified by the Resource ID",
+        "tags": [
+          "Patient"
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Patient Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/Coverage": {
+      "post": {
+        "summary": "creates a coverage",
+        "tags": [
+          "Coverage"
+        ],
+        "requestBody": {
+          "description": "coverage",
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "coverage",
+                "$ref": "#/components/schemas/CoverageR4"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoverageR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieves coverages by multiple query params",
+        "tags": [
+          "Coverage"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleCoverageR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "_page",
+            "in": "query",
+            "description": "The page number of the search results to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "beneficiary",
+            "in": "query",
+            "description": "Covered Party",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "beneficiary-identifier",
+            "in": "query",
+            "description": "The beneficiary identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "description": "The coverage period",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "rank",
+            "in": "query",
+            "description": "The rank of the coverage",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "The status of the coverage",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subscriberid",
+            "in": "query",
+            "description": "The subscriber ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The kind of coverage(health plan, auto, Workers Compensation)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/Coverage/{resourceId}": {
+      "get": {
+        "summary": "Retrieves a specific coverage by Resource ID",
+        "tags": [
+          "Coverage"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoverageR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Coverage Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Updates a specifc coverage identified by the Resource ID",
+        "tags": [
+          "Coverage"
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoverageR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Coverage Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/Location": {
+      "post": {
+        "summary": "creates a location",
+        "tags": [
+          "Location"
+        ],
+        "requestBody": {
+          "description": "location",
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "location",
+                "$ref": "#/components/schemas/LocationR4"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieves location by multiple query params",
+        "tags": [
+          "Location"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleLocationR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "_page",
+            "in": "query",
+            "description": "The page number of the search results to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "address-city",
+            "in": "query",
+            "description": "A city specified in an address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address-country",
+            "in": "query",
+            "description": "A country specified in an address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address-line1",
+            "in": "query",
+            "description": "Line 1 of the address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address-postalcode",
+            "in": "query",
+            "description": "The postal code specified in the address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address-state",
+            "in": "query",
+            "description": "A state specified in an address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "An identifier for the location",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Searches for locations with a specific kind of status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/Location/{resourceId}": {
+      "get": {
+        "summary": "Retrieves a specific location by Resource ID",
+        "tags": [
+          "Location"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Location Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Updates a specifc location identified by the Resource ID",
+        "tags": [
+          "Location"
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Location Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/Organization": {
+      "post": {
+        "summary": "creates a organization",
+        "tags": [
+          "Organization"
+        ],
+        "requestBody": {
+          "description": "organization",
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "organization",
+                "$ref": "#/components/schemas/OrganizationR4"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleOrganizationR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieves prganization by multiple query params",
+        "tags": [
+          "Organization"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "_page",
+            "in": "query",
+            "description": "The page number of the search results to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "address-city",
+            "in": "query",
+            "description": "A city specified in an address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address-postalcode",
+            "in": "query",
+            "description": "The postal code specified in the address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address-state",
+            "in": "query",
+            "description": "A state specified in an address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Any identifier for the organization (not the accrediation issuer's identifier)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A portion of the organization's name or alias",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "A code for the type pf organization",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "description": "Whether the organization record is active",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/Organization/{resourceId}": {
+      "get": {
+        "summary": "Retrieves a specific organization by Resource ID",
+        "tags": [
+          "Organization"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Organization Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Updates a specifc organization identified by the Resource ID",
+        "tags": [
+          "Organization"
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Organization Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/Practitioner": {
+      "post": {
+        "summary": "creates a practitioner",
+        "tags": [
+          "Practitioner"
+        ],
+        "requestBody": {
+          "description": "practitioner",
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "practitioner",
+                "$ref": "#/components/schemas/PractitionerR4"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PractitionerR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieves practitioner by multiple query params",
+        "tags": [
+          "Practitioner"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundlePractitionerR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "family",
+            "in": "query",
+            "description": "A portion of the family name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "given",
+            "in": "query",
+            "description": "A portion of the given name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_page",
+            "in": "query",
+            "description": "The page number of the search results to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "description": "Whether the practitioner record is active",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "A practitioner's identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/Practitioner/{resourceId}": {
+      "get": {
+        "summary": "Retrieves a specific practitioner by Resource ID",
+        "tags": [
+          "Practitioner"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PractitionerR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Practitioner Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Updates a specifc practitioner identified by the Resource ID",
+        "tags": [
+          "Practitioner"
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PractitionerR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Practitioner Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/PractitionerRole": {
+      "post": {
+        "summary": "creates a practitioner role",
+        "tags": [
+          "Practitioner Role"
+        ],
+        "requestBody": {
+          "description": "practitioner role",
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "practitioner role",
+                "$ref": "#/components/schemas/PractitionerRoleR4"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PractitionerRoleR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieves practitioner role by multiple query params",
+        "tags": [
+          "Practitioner Role"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundlePractitionerRoleR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "_page",
+            "in": "query",
+            "description": "The page number of the search results to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "description": "Whether the practitioner's record is in active use",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "organization",
+            "in": "query",
+            "description": "The identity of the organization the practitioner represents/acts on behalf of",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parentOrganizarion",
+            "in": "query",
+            "description": "The resource ID of the parent organization",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parentPractitioner",
+            "in": "query",
+            "description": "The resource ID of the parent practitioner",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "practitioner",
+            "in": "query",
+            "description": "Practitioner that is able to provide the defined services for the organization",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "description": "The practitioner can perform this role at for the organization",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "specialty",
+            "in": "query",
+            "description": "The practitioner has this specialty at an organization",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/PractitionerRole/{resourceId}": {
+      "get": {
+        "summary": "Retrieves a specific practitioner role by Resource ID",
+        "tags": [
+          "Practitioner Role"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PractitionerRoleR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "PractitionerRole Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Updates a specifc practitioner role identified by the Resource ID",
+        "tags": [
+          "Practitioner Role"
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PractitionerRoleR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Practitioner Role Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/HealthcareService": {
+      "post": {
+        "summary": "creates a health care service",
+        "tags": [
+          "Healthcare Service"
+        ],
+        "requestBody": {
+          "description": "practitioner role",
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "practitioner role",
+                "$ref": "#/components/schemas/PractitionerRoleR4"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PractitionerRoleR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/r4/HealthcareService/{resourceId}": {
+      "get": {
+        "summary": "Retrieves a specific healthcare service by Resource ID",
+        "tags": [
+          "Healthcare Service"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PractitionerRoleR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Healthcare Service Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Updates a specifc healthcare service identified by the Resource ID",
+        "tags": [
+          "Healthcare Service"
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PractitionerRoleR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Healthcare Service Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/Claim": {
+      "get": {
+        "summary": "Searches for Claim resources by query parameters",
+        "tags": [
+          "Claim"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleClaimR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "The identifier to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Patient identifier or reference to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "provider",
+            "in": "query",
+            "description": "Provider identifier or reference to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "care-team",
+            "in": "query",
+            "description": "Care-team identifier or reference to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_revinclude",
+            "in": "query",
+            "description": "Search result data to reverse include",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "post": {
+        "summary": "creates a claim",
+        "tags": [
+          "Claim"
+        ],
+        "requestBody": {
+          "description": "claim",
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "claim",
+                "$ref": "#/components/schemas/BundleClaimR4"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleClaimR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/r4/Claim/{resourceId}": {
+      "get": {
+        "summary": "Retrieves a specific Claim by Resource ID",
+        "tags": [
+          "Claim"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Claim Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/r4/ClaimResponse/{resourceId}": {
+      "get": {
+        "summary": "Retrieves a specific ClaimResponse by Resource ID",
+        "tags": [
+          "ClaimResponse"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimResponseR4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "Claim Resource Id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BundleR4": {
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          }
+        }
+      },
+      "BundleClaimR4": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BundleR4"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "entry": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BundleEntryClaimR4"
+            }
+          }
+        }
+      },
+      "BundleEntryClaimR4": {
+        "type": "object",
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/ClaimR4"
+          }
+        }
+      },
+      "ClaimResponseR4": {
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "use": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "outcome": {
+            "type": "string"
+          },
+          "insurer": {
+            "$ref": "#/components/schemas/ReferenceR4"
+          },
+          "request": {
+            "$ref": "#/components/schemas/ReferenceR4"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/ReferenceR4"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "item": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClaimResponseItemR4"
+            }
+          },
+          "processNote": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProcessNoteR4"
+            }
+          }
+        }
+      },
+      "ProcessNoteR4": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "integer"
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      },
+      "ClaimR4": {
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "subType": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "use": {
+            "type": "string"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "related": {
+            "$ref": "#/components/schemas/RelatedClaimR4"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/ReferenceR4"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/ReferenceR4"
+          },
+          "diagnosis": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiagnosisR4"
+            }
+          },
+          "procedure": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProcedureR4"
+            }
+          },
+          "insurance": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsuranceR4"
+            }
+          },
+          "careTeam": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CareTeamR4"
+            }
+          },
+          "supportingInfo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SupportingInfoR4"
+            }
+          },
+          "item": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClaimItemR4"
+            }
+          },
+          "extension": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionR4"
+            }
+          }
+        }
+      },
+      "RelatedClaimR4": {
+        "type": "object",
+        "properties": {
+          "claim": {
+            "$ref": "#/components/schemas/ReferenceR4"
+          }
+        }
+      },
+      "InsuranceR4": {
+        "type": "object",
+        "properties": {
+          "sequence": {
+            "type": "integer"
+          },
+          "focal": {
+            "type": "boolean"
+          },
+          "coverage": {
+            "$ref": "#/components/schemas/ReferenceR4"
+          }
+        }
+      },
+      "ExtensionR4": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "valueDateTime": {
+            "type": "string"
+          }
+        }
+      },
+      "ClaimItemR4": {
+        "type": "object",
+        "properties": {
+          "sequence": {
+            "type": "integer"
+          },
+          "procedureSequence": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "servicedPeriod": {
+            "$ref": "#/components/schemas/PeriodR4"
+          },
+          "revenue": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "quantity": {
+            "$ref": "#/components/schemas/QuantityR4"
+          },
+          "extension": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionR4"
+            }
+          }
+        }
+      },
+      "ClaimResponseItemR4": {
+        "type": "object",
+        "properties": {
+          "itemSequence": {
+            "type": "integer"
+          },
+          "noteNumber": {
+            "type": "integer"
+          },
+          "adjudication": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdjudicationR4"
+            }
+          },
+          "extension": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionR4"
+            }
+          }
+        }
+      },
+      "AdjudicationR4": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "extension": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionR4"
+            }
+          }
+        }
+      },
+      "QuantityR4": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "code": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "system": {
+            "type": "string"
+          }
+        }
+      },
+      "SupportingInfoR4": {
+        "type": "object",
+        "properties": {
+          "sequence": {
+            "type": "integer"
+          },
+          "category": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "valueString": {
+            "type": "string"
+          },
+          "valueAttachment": {
+            "$ref": "#/components/schemas/AttachmentR4"
+          }
+        }
+      },
+      "AccidentR4": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "locationAddress": {
+            "$ref": "#/components/schemas/AddressR4"
+          }
+        }
+      },
+      "AttachmentR4": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "DiagnosisR4": {
+        "type": "object",
+        "properties": {
+          "sequence": {
+            "type": "integer"
+          },
+          "diagnosisCodeableConcept": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "type": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "extension": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionR4"
+            }
+          }
+        }
+      },
+      "ProcedureR4": {
+        "type": "object",
+        "properties": {
+          "sequence": {
+            "type": "integer"
+          },
+          "procedureCodeableConcept": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          }
+        }
+      },
+      "CareTeamR4": {
+        "type": "object",
+        "properties": {
+          "sequence": {
+            "type": "integer"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/ReferenceR4"
+          },
+          "role": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          }
+        }
+      },
+      "ReferenceR4": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string"
+          }
+        }
+      },
+      "BundlePatientR4": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BundleR4"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "entry": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BundleEntryPatientR4"
+            }
+          }
+        }
+      },
+      "BundleEntryPatientR4": {
+        "type": "object",
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/PatientR4"
+          }
+        }
+      },
+      "BundlePractitionerR4": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BundleR4"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "entry": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BundleEntryPractitionerR4"
+            }
+          }
+        }
+      },
+      "BundleEntryPractitionerR4": {
+        "type": "object",
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/PractitionerR4"
+          }
+        }
+      },
+      "BundlePractitionerRoleR4": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BundleR4"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "entry": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BundleEntryPractitionerRoleR4"
+            }
+          }
+        }
+      },
+      "BundleEntryPractitionerRoleR4": {
+        "type": "object",
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/PractitionerRoleR4"
+          }
+        }
+      },
+      "BundleOrganizationR4": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BundleR4"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "entry": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BundleEntryOrganizationR4"
+            }
+          }
+        }
+      },
+      "BundleEntryOrganizationR4": {
+        "type": "object",
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/OrganizationR4"
+          }
+        }
+      },
+      "BundleLocationR4": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BundleR4"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "entry": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BundleEntryLocationR4"
+            }
+          }
+        }
+      },
+      "BundleEntryLocationR4": {
+        "type": "object",
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/LocationR4"
+          }
+        }
+      },
+      "BundleCoverageR4": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BundleR4"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "entry": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BundleEntryCoverageR4"
+            }
+          }
+        }
+      },
+      "BundleEntryCoverageR4": {
+        "type": "object",
+        "properties": {
+          "resource": {
+            "$ref": "#/components/schemas/CoverageR4"
+          }
+        }
+      },
+      "PractitionerRoleR4": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentifierR4"
+            }
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "sourceId": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string"
+          },
+          "managingOrganizationId": {
+            "type": "integer"
+          },
+          "practitionerId": {
+            "type": "integer"
+          },
+          "locationId": {
+            "type": "integer"
+          },
+          "code": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeableConceptR4"
+            }
+          },
+          "telecom": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactPointR4"
+            }
+          },
+          "specialty": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeableConceptR4"
+            }
+          }
+        }
+      },
+      "CoverageR4": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "subscriberId": {
+            "type": "string"
+          },
+          "beneficiaryId": {
+            "type": "string"
+          },
+          "relationship": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "period": {
+            "$ref": "#/components/schemas/PeriodR4"
+          },
+          "sourceId": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "identifier": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentifierR4"
+            }
+          },
+          "waitingPeriod": {
+            "type": "integer"
+          },
+          "coordinationofBenefits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CoordinationofBenefitsR4"
+            }
+          },
+          "class": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClassR4"
+            }
+          }
+        }
+      },
+      "CoordinationofBenefitsR4": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentifierR4"
+            }
+          },
+          "sequence": {
+            "type": "string"
+          },
+          "groupOrPolicy": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "date": {
+            "$ref": "#/components/schemas/PeriodR4"
+          },
+          "serviceType": {
+            "$ref": "#/components/schemas/CodingR4"
+          },
+          "sourceId": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string"
+          }
+        }
+      },
+      "PractitionerR4": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentifierR4"
+            }
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HumanNameR4"
+            }
+          },
+          "telecom": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactPointR4"
+            }
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeableConceptR4"
+            }
+          },
+          "address": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressR4"
+            }
+          },
+          "setCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeableConceptR4"
+            }
+          },
+          "customfield": {
+            "$ref": "#/components/schemas/CustomFieldR4"
+          },
+          "qualifications": {
+            "$ref": "#/components/schemas/QualificationR4"
+          },
+          "sourceId": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string"
+          },
+          "primarySpecialtyTaxonomy": {
+            "$ref": "#/components/schemas/CodingR4"
+          },
+          "primarySpecialtyAnalytics": {
+            "$ref": "#/components/schemas/CodingR4"
+          },
+          "primarySpecialtyMedicare": {
+            "$ref": "#/components/schemas/CodingR4"
+          },
+          "communication": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommunicationR4"
+            }
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "other",
+              "unknown"
+            ]
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "OrganizationR4": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentifierR4"
+            }
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "telecom": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactPointR4"
+            }
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeableConceptR4"
+            }
+          },
+          "address": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressR4"
+            }
+          },
+          "setCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeableConceptR4"
+            }
+          },
+          "customfield": {
+            "$ref": "#/components/schemas/CustomFieldR4"
+          },
+          "qualifications": {
+            "$ref": "#/components/schemas/QualificationR4"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "sourceId": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string"
+          },
+          "primarySpecialtyTaxonomy": {
+            "$ref": "#/components/schemas/CodingR4"
+          },
+          "primarySpecialtyAnalytics": {
+            "$ref": "#/components/schemas/CodingR4"
+          },
+          "primarySpecialtyMedicare": {
+            "$ref": "#/components/schemas/CodingR4"
+          }
+        }
+      },
+      "LocationR4": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentifierR4"
+            }
+          },
+          "status": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "telecom": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactPointR4"
+            }
+          },
+          "type": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeableConceptR4"
+            }
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressR4"
+          },
+          "physicalType": {
+            "$ref": "#/components/schemas/CodingR4"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "sourceId": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string"
+          },
+          "managingOrganizationId": {
+            "type": "integer"
+          }
+        }
+      },
+      "QualificationR4": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/CodingR4"
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentifierR4"
+            }
+          },
+          "issuerId": {
+            "type": "number"
+          },
+          "period": {
+            "$ref": "#/components/schemas/PeriodR4"
+          }
+        }
+      },
+      "PeriodR4": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "PatientR4": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentifierR4"
+            }
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "name": {
+            "$ref": "#/components/schemas/HumanNameR4"
+          },
+          "telecom": {
+            "$ref": "#/components/schemas/ContactPointR4"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "other",
+              "unknown"
+            ]
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date"
+          },
+          "deceased": {
+            "$ref": "#/components/schemas/DeceasedR4"
+          },
+          "address": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressR4"
+            }
+          },
+          "maritalStatus": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "multipleBirth": {
+            "$ref": "#/components/schemas/MultipleBirthR4"
+          },
+          "contact": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactR4"
+            }
+          },
+          "communication": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommunicationR4"
+            }
+          },
+          "managingOrganization": {
+            "type": "integer"
+          },
+          "businessClientCode": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "disability": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "benefitStatus": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "medicarePlan": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "medicareReason": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "race": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "alerts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeableConceptR4"
+            }
+          },
+          "sourceId": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string"
+          },
+          "dataAccess": {
+            "type": "string"
+          },
+          "subscriberEmpStatus": {
+            "type": "string"
+          },
+          "disabilityFlag": {
+            "type": "string"
+          },
+          "externalRiskScore": {
+            "type": "string"
+          },
+          "customfield": {
+            "$ref": "#/components/schemas/CustomFieldR4"
+          }
+        }
+      },
+      "CustomFieldR4": {
+        "type": "object",
+        "properties": {
+          "fieldType": {
+            "type": "string"
+          },
+          "fieldId": {
+            "type": "string"
+          },
+          "entryValue": {
+            "type": "string"
+          },
+          "selections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeableConceptR4"
+            }
+          }
+        }
+      },
+      "ContactPointR4": {
+        "type": "object",
+        "properties": {
+          "telecomRank": {
+            "type": "string"
+          },
+          "telecomSystem": {
+            "type": "string"
+          },
+          "telecomUse": {
+            "type": "string"
+          },
+          "telecomValue": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string"
+          }
+        }
+      },
+      "CommunicationR4": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "preferred": {
+            "type": "boolean"
+          },
+          "usage": {
+            "type": "string"
+          }
+        }
+      },
+      "HumanNameR4": {
+        "type": "object",
+        "properties": {
+          "prefix": {
+            "type": "string"
+          },
+          "suffix": {
+            "type": "string"
+          },
+          "familyName": {
+            "type": "string"
+          },
+          "givenName1": {
+            "type": "string"
+          },
+          "givenName2": {
+            "type": "string"
+          }
+        }
+      },
+      "ContactR4": {
+        "type": "object",
+        "properties": {
+          "relationship": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "name": {
+            "$ref": "#/components/schemas/HumanNameR4"
+          },
+          "telecom": {
+            "$ref": "#/components/schemas/ContactPointR4"
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressR4"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "other",
+              "unknown"
+            ]
+          }
+        }
+      },
+      "MultipleBirthR4": {
+        "type": "object",
+        "properties": {
+          "multipleBirthInteger": {
+            "type": "integer"
+          }
+        }
+      },
+      "DeceasedR4": {
+        "type": "object",
+        "properties": {
+          "deceasedDateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CodeableConceptR4": {
+        "type": "object",
+        "properties": {
+          "coding": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodingR4"
+            }
+          }
+        }
+      },
+      "CodingR4": {
+        "type": "object",
+        "properties": {
+          "system": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "display": {
+            "type": "string"
+          }
+        }
+      },
+      "AddressR4": {
+        "type": "object",
+        "properties": {
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "district": {
+            "type": "string"
+          },
+          "line1": {
+            "type": "string"
+          },
+          "line2": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "use": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string"
+          }
+        }
+      },
+      "IdentifierR4": {
+        "type": "object",
+        "properties": {
+          "identifierSystem": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string"
+          },
+          "identifierValue": {
+            "type": "string"
+          },
+          "Type": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          }
+        }
+      },
+      "ClassR4": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CodeableConceptR4"
+          },
+          "value": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

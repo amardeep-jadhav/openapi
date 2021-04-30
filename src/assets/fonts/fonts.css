@@ -1,0 +1,89 @@
+
+@font-face {
+    font-family: 'museosans_500webfont';
+    src: url('museosans_500webfont.eot');
+    src: url('museosans_500webfont.eot') format('embedded-opentype'),
+         url('museosans_500webfont.woff2') format('woff2'),
+         url('museosans_500webfont.woff') format('woff'),
+         url('museosans_500webfont.ttf') format('truetype'),
+         url('museosans_500webfont.svg#museosans_500webfont') format('svg');
+}
+
+@font-face {
+    font-family: 'MuseoSans900';
+    src: url('MuseoSans900.eot');
+    src: url('MuseoSans900.eot') format('embedded-opentype'),
+         url('MuseoSans900.woff2') format('woff2'),
+         url('MuseoSans900.woff') format('woff'),
+         url('MuseoSans900.ttf') format('truetype'),
+         url('MuseoSans900.svg#MuseoSans900') format('svg');
+}
+
+
+@font-face {
+    font-family: 'MuseoSans700';
+    src: url('MuseoSans700.eot');
+    src: url('MuseoSans700.eot') format('embedded-opentype'),
+         url('MuseoSans700.woff2') format('woff2'),
+         url('MuseoSans700.woff') format('woff'),
+         url('MuseoSans700.ttf') format('truetype'),
+         url('MuseoSans700.svg#MuseoSans700') format('svg');
+}
+
+@font-face {
+    font-family: 'museosans300';
+    src: url('museosans300.eot');
+    src: url('museosans300.eot') format('embedded-opentype'),
+         url('museosans300.woff2') format('woff2'),
+         url('museosans300.woff') format('woff'),
+         url('museosans300.ttf') format('truetype'),
+         url('museosans300.svg#museosans300') format('svg');
+}
+@font-face {
+    font-family: 'museo300webfont';
+    src: url('museo300webfont.eot');
+    src: url('museo300webfont.eot') format('embedded-opentype'),
+         url('museo300webfont.woff2') format('woff2'),
+         url('museo300webfont.woff') format('woff'),
+         url('museo300webfont.ttf') format('truetype'),
+         url('museo300webfont.svg#museo300webfont') format('svg');
+}
+
+@font-face {
+    font-family: 'museo700webfont';
+    src: url('museo700webfont.eot');
+    src: url('museo700webfont.eot') format('embedded-opentype'),
+         url('museo700webfont.woff2') format('woff2'),
+         url('museo700webfont.woff') format('woff'),
+         url('museo700webfont.ttf') format('truetype'),
+         url('museo700webfont.svg#museo700webfont') format('svg');
+}
+@font-face {
+    font-family: 'museoslab700';
+    src: url('museoslab700.eot');
+    src: url('museoslab700.eot') format('embedded-opentype'),
+         url('museoslab700.woff2') format('woff2'),
+         url('museoslab700.woff') format('woff'),
+         url('museoslab700.ttf') format('truetype'),
+         url('museoslab700.svg#museoslab700') format('svg');
+}
+@font-face {
+    font-family: 'MuseoSans100';
+    src: url('MuseoSans100.eot');
+    src: url('MuseoSans100.eot') format('embedded-opentype'),
+         url('MuseoSans100.woff2') format('woff2'),
+         url('MuseoSans100.woff') format('woff'),
+         url('MuseoSans100.ttf') format('truetype'),
+         url('MuseoSans100.svg#MuseoSans100') format('svg');
+}
+
+@font-face {
+    font-family: 'CourierNewRegular';
+    src: url('CourierNewRegular.eot');
+    src: url('CourierNewRegular.eot?#iefix') format('embedded-opentype'),
+        url('CourierNewRegular.woff2') format('woff2'),
+        url('CourierNewRegular.woff') format('woff'),
+        url('CourierNewRegular.svg#CourierNewRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

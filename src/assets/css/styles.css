@@ -1,0 +1,604 @@
+@import '../fonts/fonts.css';
+@import 'variables.css';
+
+/* Page & Common Styles */
+
+/* Font Styles - Start */
+
+.M_700_24px {
+  font-family: "museo700webfont" !important;
+  font-size: 24px !important;
+}
+.M_700_15px {
+  font-family: "museo700webfont" !important;
+  font-size: 15px !important;
+}
+.M_700_34px {
+  font-size: 34px !important;
+  font-family: "museo700webfont" !important;
+}
+.M_700_36px {
+  font-size: 36px !important;
+  font-family: "museo700webfont" !important;
+}
+.M_700_48px {
+  font-family: 'MuseoSans700' !important;
+  font-size: 48px !important;
+  line-height: 1;
+}
+.MS_100_12px {
+  font-size: 12px !important;
+  font-family: "MuseoSans100" !important;
+}
+.MS_100_14px {
+  font-size: 14px !important;
+  font-family: "MuseoSans100" !important;
+}
+.MS_100_18px {
+  font-family: "MuseoSans100" !important;
+  font-size: 18px !important;
+  letter-spacing: 3px !important;
+  line-height: 19px !important;
+}
+.MS_100_24px {
+  font-family: "MuseoSans100" !important;
+  font-size: 24px !important;
+  letter-spacing: 2px;
+  line-height: 19px;
+}
+.MS_300_18px {
+  font-size: 18px !important;
+  font-family: "museosans300" !important;
+}
+.MS_300_13px {
+  font-size: 13px !important;
+  font-family: "museosans300" !important;
+}
+.M_300_24px {
+  font-family: "museo300webfont" !important;
+  font-size: 24px !important;
+}
+.MS_300_14px {
+  font-family: "museosans300" !important;
+  font-size: 14px !important;
+}
+.MS_500_11px {
+  font-size: 11px !important;
+  font-family: "museosans_500webfont" !important;
+}
+.MS_500_12px {
+  font-size: 12px !important;
+  font-family: "museosans_500webfont" !important;
+}
+.MS_500_14px {
+  font-size: 14px !important;
+  font-family: "museosans_500webfont" !important;
+}
+.MS_500_15px {
+  font-size: 15px !important;
+  font-family: "museosans_500webfont" !important;
+}
+.MS_500_16px {
+  font-size: 16px !important;
+  font-family: "museosans_500webfont" !important;
+}
+.MS_500_18px {
+  font-size: 18px !important;
+  font-family: "museosans_500webfont" !important;
+}
+.MS_500_34px {
+  font-size: 34px !important;
+  font-family: "museosans_500webfont" !important;
+}
+.MS_700_12px {
+  font-size: 12px !important;
+  font-family: "MuseoSans700" !important;
+}
+.MS_700_14px {
+  font-family: "MuseoSans700" !important;
+  font-size: 14px !important;
+}
+.MS_700_24px {
+  font-family: "MuseoSans700" !important;
+  font-size: 24px !important;
+}
+.MS_700_72px {
+  font-family: "MuseoSans700" !important;
+  font-size: 72px !important;
+  line-height: 1;
+}
+.MS_900_18px {
+  font-family: "MuseoSans900" !important;
+  font-size: 18px !important;
+}
+.MS_500_13px {
+  font-size: 13px !important;
+  font-family: "museosans_500webfont" !important;
+}
+.MS_500_24px {
+  font-size: 24px !important;
+  font-family: "museosans_500webfont" !important;
+}
+.MSlab_700_48px {
+  font-family: "museoslab700" !important;
+  font-size: 47px !important;
+}
+.MSlab_700_34px {
+  font-family: "museoslab700" !important;
+  font-size: 34px !important;
+}
+.MSlab_700_24px {
+  font-family: "museoslab700" !important;
+  font-size: 24px !important;
+}
+.MS_300_24px {
+  font-family: 'museosans300' !important;
+  font-size: 24px !important;
+}
+.MS_300_16px {
+  font-family: "museosans300" !important;
+  font-size: 16px !important;
+}
+.M_700_30px {
+  font-size: 30px !important;
+  font-family: "museo700webfont" !important;
+}
+.MS_300_30px {
+  font-size: 30px !important;
+  font-family: "museosans300" !important;
+}
+.MS_300_36px {
+  font-size: 36px !important;
+  font-family: "museosans300" !important;
+}
+.MS_300_12px {
+  font-size: 12px !important;
+  font-family: "museosans300" !important;
+}
+.MS_300_16px {
+  font-size: 16px !important;
+  font-family: "museosans300" !important;
+}
+.M_300_72px {
+  font-family: "museo300webfont" !important;
+  font-size: 72px !important;
+}
+.M_300_30px {
+  font-family: "museo300webfont" !important;
+  font-size: 30px !important;
+}
+.Courier_New_14px {
+  font-family: 'CourierNewRegular' !important;
+  font-size: 14px !important;
+}
+
+/* Font Styles - End */
+/* Leftnavapi  start*/
+
+/* Leftnavapi end*/
+body .v-application .darkGrey {
+  background-color: #58585A !important;
+}
+.mt-35px {
+  margin-top: 35px !important;
+}
+/* Custom Letter spacing & Line-height Classes - Start */
+.ls_023px {
+  letter-spacing: 0.23px !important;
+}
+.opacity074 {
+  opacity: 0.74;
+}
+.lh-1 {
+  line-height: 1;
+}
+.lh-12 {
+  line-height: 1.2 !important;
+}
+.lh-2-5rem {
+  line-height: 2.5rem !important;
+}
+.ls_-004 {
+  letter-spacing: -0.04px;
+}
+.ls_-002 {
+  letter-spacing: -0.02px !important;
+}
+.ls_13 {
+  letter-spacing: 1.3px !important;
+}
+/* Custom Letter spacing & Line-height Classes - End */
+
+.bg-color-white {
+  background-color: #fff !important;
+}
+.login-bg-image {
+  background-image: url("../../assets/images/bg3c.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.signUp-bg-image {
+  background: url("../../assets/images/bg1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+}
+.signUp label.v-label.theme--light {
+  font-size: 16px !important;
+  font-family: "museosans_500webfont";
+  letter-spacing: 0px;
+  color: #525253;
+}
+.boxShadow-none {
+  box-shadow: none !important;
+}
+.p-absolute-align{
+  position: absolute;
+  top:8px;
+  left:16px;
+  padding-top:2px;
+}
+/* Width & Height Custom Classes - Start */
+.w-50 {
+  width: 50%;
+}
+.w-66 {
+  width: 66px;
+}
+.w-75 {
+  width: 75%;
+}
+.w-100 {
+  width: 100%;
+}
+
+.w-126px {
+  width: 126px;
+}
+.w-330px {
+  width: 330px;
+}
+.mw-240px {
+  max-width: 240px !important;
+}
+/* .w-150px {
+  width: 150px !important;
+} */
+
+.w-50px {
+  width: 50px !important;
+}
+.w-25px {
+  width: 25px;
+}
+.w-392px {
+  width: 392px;
+}
+.w-422px {
+  width: 422px;
+}
+.w-119px {
+  width: 119px;
+}
+.mx-w-706 {
+  max-width: 706px;
+}
+.mx-w-660 {
+  max-width: 660px;
+}
+.mx-w-925 {
+  max-width: 925px;
+}
+.mx-w-100{
+  max-width: 100px;
+}
+.mx-h-500 {
+  max-height: 500px;
+}
+.h-500px {
+  height: 500px;
+}
+.h-50px {
+  height: 50px !important;
+}
+.h-24px {
+  height: 24px;
+}
+.h-36px {
+  height: 36px !important;
+}
+
+/* Width & height Custom Classes - End */
+
+/* Custom Border Sizes - Start */
+.borderRadius12 {
+  border-radius: 12px !important;
+}
+.borderRadius20 {
+  border-radius: 20px !important;
+}
+.borderRadius20-tb-right {
+  border-radius: 0px 20px 20px 0px;
+}
+.borderRadius20-tb-left {
+  border-radius: 20px 0px 0px 20px;
+}
+
+/* Custom Border Sizes - Ends */
+
+/* Custom Margin Sizes - Start */
+.mt-50px {
+  margin-top: 50px !important;
+}
+.mb-76px {
+  margin-bottom: 76px !important;
+}
+.mt-14px {
+  margin-top: 14px !important;
+}
+.mt-9px {
+  margin-top: 9px !important;
+}
+
+.mr-82px {
+  margin-right: 82px;
+}
+.mt-15px {
+  margin-top: 15px !important;
+}
+.ml-23px {
+  margin-left: 23px !important;
+}
+.mr-22px {
+  margin-right: 22px !important;
+}
+.ml-51px {
+  margin-left: 51px !important;
+}
+.ml-27px {
+  margin-left: 27px !important;
+}
+
+/* Custom Margin Sizes - Ends */
+
+/* Custom padding Sizes - Start */
+.pt-110px {
+  padding-top: 110px !important;
+}
+.pt-78px {
+  padding-top: 78px;
+}
+.pt-84px {
+  padding-top: 84px;
+}
+.pt-90px {
+  padding-top: 90px;
+}
+.pt-26px {
+  padding-top: 26px;
+}
+.pr-100 {
+  padding-right: 100px;
+}
+.pl-115 {
+  padding-left: 115px !important;
+}
+.pl-71px {
+  padding-left: 71px !important;
+}
+.pb-22px {
+  padding-bottom: 22px;
+}
+
+/* Custom padding Sizes - Ends */
+
+/* Homepage Code start */
+.top-bar .v-btn {
+  letter-spacing: 0.8px;
+}
+.support-bar,
+.top-bar,
+.bottom-section,
+.HomePage .v-divider {
+  max-width: 1170px;
+}
+.support-bar .v-btn {
+  letter-spacing: -0.02px;
+  height: 28px!important;
+}
+.welcome-bold {
+  letter-spacing: -0.11px;
+  line-height: 30px;
+}
+.welcome-text {
+  letter-spacing: 3.6px;
+  line-height: 30px;
+}
+.welcome-paragraph {
+  max-width: 413px;
+  line-height: 30px;
+}
+.free-btn {
+  background-color: transparent !important;
+  text-transform: none;
+  letter-spacing: 0.23px;
+  border: 1px solid #fff;
+  width: 164px;
+}
+.home-bottom-img {
+  background-image: url("../../assets/images/homepage-2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bottom-small-text {
+  letter-spacing: 0px;
+  line-height: 30px;
+  width: 626px;
+}
+
+.home-bg-image {
+  background-image: url("../../assets/images/homepage.png");
+  min-height: 670px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.home-bg-image img {
+  width: 100%;
+}
+.v-application.HomePage .v-application--wrap {
+  min-height: fit-content !important;
+}
+
+/* Homepage Code End */
+
+/* Dashboard Code Start */
+.quote {
+  background: -moz-linear-gradient(left,
+      #d9117e 0%,
+      #8f2f90 48%,
+      #474fa2 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(left,
+      #d9117e 0%,
+      #8f2f90 48%,
+      #474fa2 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right,
+      #d9117e 0%,
+      #8f2f90 48%,
+      #474fa2 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  font-family: "museosans_500webfont";
+  line-height: 1.3;
+  letter-spacing: 0.24px;
+  font-size: 33px;
+}
+
+.quick-start h4 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+}
+.Dashboard ul {
+  list-style: none;
+}
+.Dashboard ul li::before {
+  content: "\2022";
+  color: #eb3296 !important;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+/* Dashboard Code End  */
+
+.registerButton {
+  height: 50px !important;
+  width: 250px !important;
+}
+.formActionButton {
+  height: 50px !important;
+  width: 126px !important;
+  letter-spacing: 0.23px;
+}
+p.loginAuthSectionTitle {
+  max-width: 210px;
+}
+h1.loginAuthEventTitle {
+  margin: 0 auto;
+  max-width: 750px;
+}
+.api-login-btn,
+.api-login-btn::before {
+  text-transform: initial;
+  width: 90px !important;
+  height: 28px !important;
+  letter-spacing: 0.14px;
+}
+/* leftnav */
+.down-arrow .v-expansion-panel-header__icon{
+  display: none;
+}
+
+.v-navigation-drawer .v-expansion-panel-content__wrap {
+  padding: 0!important; 
+}
+/* leftnav */
+
+/* customize style for scrollbar */
+.v-navigation-drawer ::-webkit-scrollbar {
+  width: 6px;
+}
+ 
+.v-navigation-drawer ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px #7f717d; 
+}
+ 
+.v-navigation-drawer ::-webkit-scrollbar-thumb {
+  background: #7f717d; 
+}
+
+/* customize style for scrollbar */
+.openapi .theme--light.v-expansion-panels .v-expansion-panel:not(:first-child)::after {
+  border-color: transparent;
+}
+.v-main .openapi .v-main{
+  padding: 70px 0 0 0!important;
+  }
+  .openapi {
+  position: relative;
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  }
+  .mdi-chevron-left {
+    position: absolute;
+    right: -4px;
+}
+
+body .v-application #post_color{
+  color: #10B33E!important;
+}
+body .v-application #put_color{
+  color: #ff9800!important;
+}
+body .v-application #patch_color{
+  color: #E26901!important;
+}
+body .v-application #get_color{
+  color: #2196f3!important;
+}
+body .v-application #delete_color{
+  color: #FF4B4B!important;
+}
+body .v-application #options_color{
+/* color: #f44336!important;*/
+}
+
+body .v-application #post_Bgcolor{
+  background-color: #10B33E!important;
+}
+body .v-application #put_Bgcolor{
+  background-color: #ff9800!important;
+}
+body .v-application #patch_Bgcolor{
+  background-color: #E26901!important;
+}
+body .v-application #get_Bgcolor{
+  background-color: #2196f3!important;
+}
+body .v-application #delete_Bgcolor{
+  background-color: #FF4B4B!important;
+}
+body .v-application #options_Bgcolor{
+/* background-color: #f44336!important;*/
+}

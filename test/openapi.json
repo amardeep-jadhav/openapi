@@ -1,0 +1,5056 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Aerial API Documentation",
+    "description": "Aerial API Documentation",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/api/v1/category_classifications/": {
+      "post": {
+        "tags": [
+          "CategoryClassification"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "description": "Create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryClassification"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_category_classification_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/category_classifications/{id}": {
+      "get": {
+        "tags": [
+          "CategoryClassification"
+        ],
+        "summary": "Show",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of CategoryClassification",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_category_classification_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CategoryClassification"
+        ],
+        "summary": "Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of CategoryClassification",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryClassification"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/update_category_classification_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "CategoryClassification"
+        ],
+        "summary": "Destroy",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of CategoryClassification",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/destroy_category_classification_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/category_classifications": {
+      "get": {
+        "tags": [
+          "CategoryClassification"
+        ],
+        "summary": "Index",
+        "parameters": [
+          {
+            "name": "record_type",
+            "in": "query",
+            "description": "Record type to filter by",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "record_id",
+            "in": "query",
+            "description": "Record Id to filter by",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Start to for paging, defaults to 0",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit to for paging, defaults to 25",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_category_classifications_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/categories/": {
+      "post": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "description": "Create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategory"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_category_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/categories/{id}": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Show",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of Category",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_category_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of Category",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategory"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/update_category_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Destroy",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of Category",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/destroy_category_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/categories": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Index",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "JSON string of date to control sorting {\"property\":\"description\", \"direction\":\"ASC\", \"limit\": 25, \"start\": 0}",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query_filter",
+            "in": "query",
+            "description": "JSON string of data to filter by",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parent_id",
+            "in": "query",
+            "description": "Id of parent category to filter by",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Start to for paging, defaults to 0",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit to for paging, defaults to 25",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_categories_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/contact_purposes/{id}": {
+      "get": {
+        "tags": [
+          "ContactPurpose"
+        ],
+        "summary": "Show",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of ContactPurpose",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_contact_purpose_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/contact_purposes": {
+      "get": {
+        "tags": [
+          "ContactPurpose"
+        ],
+        "summary": "Index",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Array of ids to filter by",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_contact_purposes_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/email_addresses": {
+      "get": {
+        "tags": [
+          "EmailAddress"
+        ],
+        "summary": "Index",
+        "parameters": [
+          {
+            "name": "contact_purposes",
+            "in": "query",
+            "description": "Comma delimitted string of ContactPurpose internal identifiers to filter by.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Start to for paging, defaults to 0",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit to for paging, defaults to 25",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_email_addresses_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "EmailAddress"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "description": "Create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEmailAddress"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_email_address_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/email_addresses/{id}": {
+      "get": {
+        "tags": [
+          "EmailAddress"
+        ],
+        "summary": "Show",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of Email Address to get",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_email_address_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EmailAddress"
+        ],
+        "summary": "Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of Email Address to update.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEmailAddress"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/update_email_address_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "EmailAddress"
+        ],
+        "summary": "Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of Email Address to get.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/delete_email_address_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/facilities": {
+      "get": {
+        "tags": [
+          "Facility"
+        ],
+        "summary": "Index",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_facilities_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/geo_countries": {
+      "get": {
+        "tags": [
+          "GeoCountry"
+        ],
+        "summary": "Index",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_geo_countries_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/geo_zones": {
+      "get": {
+        "tags": [
+          "GeoZone"
+        ],
+        "summary": "Index",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_get_zones_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notes": {
+      "get": {
+        "tags": [
+          "Note"
+        ],
+        "summary": "Index",
+        "parameters": [
+          {
+            "name": "query_filter",
+            "in": "query",
+            "description": "Query filter is the search keyword to filter records",
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "query_filter.note_type_id",
+            "in": "query",
+            "description": "Note type id to filter records",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query_filter.noted_record_type",
+            "in": "query",
+            "description": "Noted record type to filter records",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query_filter.noted_record_id",
+            "in": "query",
+            "description": "Noted record id to filter records",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_notes_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Note"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "description": "Create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNote"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_note_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/note_types": {
+      "get": {
+        "tags": [
+          "NoteType"
+        ],
+        "summary": "Index",
+        "parameters": [
+          {
+            "name": "iids",
+            "in": "query",
+            "description": "Filter by passed list of Internal Identifiers.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Filter by passed  list of Ids.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parent_id",
+            "in": "query",
+            "description": "Get all note type for Parent Id.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "is_parent",
+            "in": "query",
+            "description": "Get all parent note types .",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_note_types_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "NoteType"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "description": "Create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNoteType"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/note_type"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/note_types/{id}": {
+      "get": {
+        "tags": [
+          "NoteType"
+        ],
+        "summary": "Show",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of NoteType",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_note_type_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NoteType"
+        ],
+        "summary": "Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "for Note Type",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNoteType"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/note_type"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/parties": {
+      "get": {
+        "tags": [
+          "Party"
+        ],
+        "summary": "Index",
+        "parameters": [
+          {
+            "name": "role_types",
+            "in": "query",
+            "description": "Comma delimitted string of RoleTypes to filter by",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id of a particular party to filter by",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "include_child_roles",
+            "in": "query",
+            "description": "True to include child RoleTypes when filtering by RoleTypes",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "include_descendants",
+            "in": "query",
+            "description": "True to include parties that are related to a parent DBA Organization in the result set",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "query_filter",
+            "in": "query",
+            "description": "JSON encoded query filters. Example \"{\"query\":\"John\", \"role_types\": \"customer,employee\"}\"  \n                                           avalable options  \n                                           query: Will do a wildcard search in description and enterprise_identiifer   \n                                           role_types: Comma seperated list of RoleType internal identifiers to filter by   \n                                           include_child_roles: If true will include child RoleTypes of the passed role_types  \n                                           enterprise_identifier: Will do a wildcard search based on enterprise_identifier  \n                                           email_address: Filter by email address  \n                                           phone_number: Filter by phone number  \n                                           postal_address: Filter by postal address, a JSON object should be passed such as {\"address_line_1\": \"123 Way Lane\", \"city\": \"Clermont\" ...}  \n                                           to_party_id: Filter parties based on their party relationship to this party on the from side  \n                                           from_party_id: Filter parties based on their party relationship to this party on the to side  \n                                           to_role_type: Filter parties to only pull parties that have a matching relationship with the passed role type as the to role type  \n                                           from_role_type: Filter parties to only pull parties that have a matching relationship with the passed role type as the from role type ",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_parties_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Party"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "description": "Create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateParty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_party_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/parties/{id}": {
+      "get": {
+        "tags": [
+          "Party"
+        ],
+        "summary": "Show",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of Party",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_party_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Party"
+        ],
+        "summary": "Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of Party",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateParty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/update_party_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Party"
+        ],
+        "summary": "Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of Party",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/delete_party_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/parties/{id}/update_roles": {
+      "put": {
+        "tags": [
+          "Party"
+        ],
+        "summary": "Update Roles",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of Party",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update Roles",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePartyRoles"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/update_party_roles_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/phone_numbers": {
+      "get": {
+        "tags": [
+          "PhoneNumber"
+        ],
+        "summary": "Index",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_phone_numbers_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PhoneNumber"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "description": "Create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePhoneNumber"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_phone_number_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/phone_numbers/{id}": {
+      "get": {
+        "tags": [
+          "PhoneNumber"
+        ],
+        "summary": "Show",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of PhoneNumber",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_phone_number_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PhoneNumber"
+        ],
+        "summary": "Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of PhoneNumber",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePhoneNumber"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/update_phone_number_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "PhoneNumber"
+        ],
+        "summary": "Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of PhoneNumber",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/delete_phone_number_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/postal_addresses": {
+      "get": {
+        "tags": [
+          "PostalAddress"
+        ],
+        "summary": "Index",
+        "parameters": [
+          {
+            "name": "contact_purposes",
+            "in": "query",
+            "description": "Comma delimited string of ContactPurpose internal identifiers to filter by",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query to search description by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_postal_addresses_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PostalAddress"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "description": "Create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePostalAddress"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_postal_address_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/postal_addresses/{id}": {
+      "get": {
+        "tags": [
+          "PostalAddress"
+        ],
+        "summary": "Show",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of PostalAddress",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_postal_address_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PostalAddress"
+        ],
+        "summary": "Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of PostalAddress",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePostalAddress"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/update_postal_address_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "PostalAddress"
+        ],
+        "summary": "Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of PostalAddress",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/delete_postal_address_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/role_types": {
+      "get": {
+        "tags": [
+          "RoleType"
+        ],
+        "summary": "Index",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_role_types_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "RoleType"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "description": "Create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoleType"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_role_type_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/role_types/{id}": {
+      "get": {
+        "tags": [
+          "RoleType"
+        ],
+        "summary": "Show",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of RoleType",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_role_type_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth_token_valid": {
+      "get": {
+        "tags": [
+          "Security"
+        ],
+        "summary": "Auth Token Valid",
+        "parameters": [
+          {
+            "name": "auth_token",
+            "in": "query",
+            "description": "Auth Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auth_token_valid_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/authenticate": {
+      "post": {
+        "tags": [
+          "Security"
+        ],
+        "summary": "Authenticate",
+        "requestBody": {
+          "description": "Authenticate",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Authenticate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authenticate_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/generate_auth_token": {
+      "post": {
+        "tags": [
+          "Security"
+        ],
+        "summary": "Generate Auth Token",
+        "requestBody": {
+          "description": "Generate Auth Token",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateAuthToken"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/generate_auth_token_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/generate_jwt": {
+      "post": {
+        "tags": [
+          "Security"
+        ],
+        "summary": "Generate JWT",
+        "requestBody": {
+          "description": "Generate JWT",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateJWT"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/generate_jwt_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/get_auth_token": {
+      "post": {
+        "tags": [
+          "Security"
+        ],
+        "summary": "Get Auth Token",
+        "requestBody": {
+          "description": "Get Auth Token",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAuthToken"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_auth_token_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/jwt_valid": {
+      "get": {
+        "tags": [
+          "Security"
+        ],
+        "summary": "JWT Valid",
+        "parameters": [
+          {
+            "name": "jwt",
+            "in": "query",
+            "description": "JWT to check",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/generate_jwt_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/logout": {
+      "get": {
+        "tags": [
+          "Security"
+        ],
+        "summary": "Logout user",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/logout_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/revoke_auth_token": {
+      "delete": {
+        "tags": [
+          "Security"
+        ],
+        "summary": "Revoke Auth Token",
+        "parameters": [
+          {
+            "name": "auth_token",
+            "in": "query",
+            "description": "Auth Token to revoke",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/revoke_auth_token_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status_applications/{id}": {
+      "get": {
+        "tags": [
+          "StatusApplication"
+        ],
+        "summary": "Show",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of StatusApplication",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_status_application_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status_applications": {
+      "get": {
+        "tags": [
+          "StatusApplication"
+        ],
+        "summary": "Index",
+        "parameters": [
+          {
+            "name": "record_id",
+            "in": "query",
+            "description": "Id of Record to filter by",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "record_type",
+            "in": "query",
+            "description": "Type of Record to filter by (WorkEffort, OrderTxn)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_status_applications_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tracked_status_types": {
+      "get": {
+        "tags": [
+          "TrackedStatusType"
+        ],
+        "summary": "Index",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_tracked_status_types_response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TrackedStatusType"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "description": "Create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTrackedStatusType"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_tracked_status_type_response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/tracked_status_types/{id}": {
+      "get": {
+        "tags": [
+          "TrackedStatusType"
+        ],
+        "summary": "Show",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id or Internal Identifier of TrackedStatusType",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/get_tracked_status_type_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/unit_of_measurements": {
+      "get": {
+        "tags": [
+          "UnitOfMeasurement"
+        ],
+        "summary": "Index",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUnitOfMeasurements"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateCategoryClassification": {
+        "required": [
+          "category",
+          "record_id",
+          "record_type"
+        ],
+        "type": "object",
+        "properties": {
+          "record_type": {
+            "type": "string",
+            "description": "Record type to set"
+          },
+          "record_id": {
+            "type": "integer",
+            "description": "Record Id to set"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category Internal Identifier"
+          }
+        }
+      },
+      "create_category_classification_response": {
+        "required": [
+          "category_classification",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "category_classification": {
+            "$ref": "#/components/schemas/create_category_classification_response.category_classification"
+          }
+        }
+      },
+      "create_category_classification_response.category_classification": {
+        "required": [
+          "classification_id",
+          "classification_type",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of CategoryClassification"
+          },
+          "classification_type": {
+            "type": "string",
+            "description": "Type of CategoryClassification"
+          },
+          "classification_id": {
+            "type": "number",
+            "description": "Id of CategoryClassification"
+          }
+        }
+      },
+      "destroy_category_classification_response": {
+        "required": [
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          }
+        }
+      },
+      "get_category_classification_response": {
+        "required": [
+          "category_classification",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "category_classification": {
+            "$ref": "#/components/schemas/get_category_classification_response.category_classification"
+          }
+        }
+      },
+      "get_category_classification_response.category_classification": {
+        "required": [
+          "classification_id",
+          "classification_type",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of CategoryClassification"
+          },
+          "classification_type": {
+            "type": "string",
+            "description": "Type of CategoryClassification"
+          },
+          "classification_id": {
+            "type": "number",
+            "description": "Id of CategoryClassification"
+          }
+        }
+      },
+      "UpdateCategoryClassification": {
+        "required": [
+          "category",
+          "record_id",
+          "record_type"
+        ],
+        "type": "object",
+        "properties": {
+          "record_type": {
+            "type": "string",
+            "description": "Record type to set"
+          },
+          "record_id": {
+            "type": "integer",
+            "description": "Record Id to set"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category Internal Identifier"
+          }
+        }
+      },
+      "update_category_classification_response": {
+        "required": [
+          "category_classification",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "category_classification": {
+            "$ref": "#/components/schemas/update_category_classification_response.category_classification"
+          }
+        }
+      },
+      "update_category_classification_response.category_classification": {
+        "required": [
+          "classification_id",
+          "classification_type",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of CategoryClassification"
+          },
+          "classification_type": {
+            "type": "string",
+            "description": "Type of CategoryClassification"
+          },
+          "classification_id": {
+            "type": "number",
+            "description": "Id of CategoryClassification"
+          }
+        }
+      },
+      "get_category_classifications_response": {
+        "required": [
+          "category_classifications",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of ProductType records"
+          },
+          "category_classifications": {
+            "type": "array",
+            "description": "Array of CategoryClassification records",
+            "items": {
+              "$ref": "#/components/schemas/get_category_classifications_response.category_classifications"
+            }
+          }
+        }
+      },
+      "get_category_classifications_response.category_classifications": {
+        "required": [
+          "classification_id",
+          "classification_type",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of CategoryClassification"
+          },
+          "classification_type": {
+            "type": "string",
+            "description": "Type of CategoryClassification"
+          },
+          "classification_id": {
+            "type": "number",
+            "description": "Id of CategoryClassification"
+          }
+        }
+      },
+      "CreateCategory": {
+        "required": [
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "parent_id": {
+            "type": "integer",
+            "description": "Id of Parent Category"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal Identifier for the category, if one is not passed one will be generated"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description Category"
+          }
+        }
+      },
+      "create_category_response": {
+        "required": [
+          "category",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "category": {
+            "$ref": "#/components/schemas/create_category_response.category"
+          }
+        }
+      },
+      "create_category_response.category": {
+        "required": [
+          "description",
+          "id",
+          "image_url",
+          "internal_identifier",
+          "long_description"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Category"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "long_description": {
+            "type": "string",
+            "description": "Long Description"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal Identifier"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image URL"
+          }
+        }
+      },
+      "destroy_category_response": {
+        "required": [
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          }
+        }
+      },
+      "get_category_response": {
+        "required": [
+          "category",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "category": {
+            "$ref": "#/components/schemas/get_category_response.category"
+          }
+        }
+      },
+      "get_category_response.category": {
+        "required": [
+          "description",
+          "id",
+          "image_url",
+          "internal_identifier",
+          "long_description"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Category"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "long_description": {
+            "type": "string",
+            "description": "Long Description"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal Identifier"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image URL"
+          }
+        }
+      },
+      "UpdateCategory": {
+        "type": "object",
+        "properties": {
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal Identifier to set for the Category."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description to set for the Category"
+          }
+        }
+      },
+      "update_category_response": {
+        "required": [
+          "category",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "category": {
+            "$ref": "#/components/schemas/update_category_response.category"
+          }
+        }
+      },
+      "update_category_response.category": {
+        "required": [
+          "description",
+          "id",
+          "image_url",
+          "internal_identifier",
+          "long_description"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Category"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "long_description": {
+            "type": "string",
+            "description": "Long Description"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal Identifier"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image URL"
+          }
+        }
+      },
+      "get_categories_response": {
+        "required": [
+          "categories",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of ProductType records"
+          },
+          "categories": {
+            "type": "array",
+            "description": "Array of Category records",
+            "items": {
+              "$ref": "#/components/schemas/get_categories_response.categories"
+            }
+          }
+        }
+      },
+      "get_categories_response.categories": {
+        "required": [
+          "description",
+          "id",
+          "image_url",
+          "internal_identifier",
+          "long_description"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Category"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "long_description": {
+            "type": "string",
+            "description": "Long Description"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal Identifier"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image URL"
+          }
+        }
+      },
+      "get_contact_purpose_response": {
+        "required": [
+          "contact_purpose",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "contact_purpose": {
+            "type": "array",
+            "description": "List of ContactPurpose record.",
+            "items": {
+              "$ref": "#/components/schemas/get_contact_purpose_response.contact_purpose"
+            }
+          }
+        }
+      },
+      "get_contact_purpose_response.contact_purpose": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier",
+          "leaf"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of ContactPurpose."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of ContactPurpose."
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of ContactPurpose."
+          },
+          "leaf": {
+            "type": "boolean",
+            "description": "Where leaf node or not"
+          }
+        }
+      },
+      "get_contact_purposes_response": {
+        "required": [
+          "contact_purposes",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied."
+          },
+          "contact_purposes": {
+            "type": "array",
+            "description": "List of ContactPurpose records.",
+            "items": {
+              "$ref": "#/components/schemas/get_contact_purposes_response.contact_purposes"
+            }
+          }
+        }
+      },
+      "get_contact_purposes_response.contact_purposes": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier",
+          "leaf"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of ContactPurpose."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of ContactPurpose."
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of ContactPurpose."
+          },
+          "leaf": {
+            "type": "boolean",
+            "description": "Where leaf node or not"
+          }
+        }
+      },
+      "CreateEmailAddress": {
+        "required": [
+          "description",
+          "email_address"
+        ],
+        "type": "object",
+        "properties": {
+          "contact_purposes": {
+            "type": "string",
+            "description": "Comma delimitted string of ContactPurpose internal identifiers to filter by."
+          },
+          "email_address": {
+            "type": "string",
+            "description": "Email Address."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Email Address."
+          }
+        }
+      },
+      "create_email_address_response": {
+        "required": [
+          "email_address",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "email_address": {
+            "$ref": "#/components/schemas/create_email_address_response.email_address"
+          }
+        }
+      },
+      "create_email_address_response.email_address": {
+        "required": [
+          "description",
+          "email_address",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description."
+          },
+          "email_address": {
+            "type": "string",
+            "description": "Email Address."
+          }
+        }
+      },
+      "get_email_addresses_response": {
+        "required": [
+          "email_addresses",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied"
+          },
+          "email_addresses": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "$ref": "#/components/schemas/get_email_addresses_response.email_addresses"
+            }
+          }
+        }
+      },
+      "get_email_addresses_response.email_addresses": {
+        "required": [
+          "description",
+          "email_address",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description."
+          },
+          "email_address": {
+            "type": "string",
+            "description": "Email Address."
+          }
+        }
+      },
+      "delete_email_address_response": {
+        "required": [
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          }
+        }
+      },
+      "get_email_address_response": {
+        "required": [
+          "email_address",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "email_address": {
+            "$ref": "#/components/schemas/get_email_address_response.email_address"
+          }
+        }
+      },
+      "get_email_address_response.email_address": {
+        "required": [
+          "description",
+          "email_address",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description."
+          },
+          "email_address": {
+            "type": "string",
+            "description": "Email Address."
+          }
+        }
+      },
+      "UpdateEmailAddress": {
+        "type": "object",
+        "properties": {
+          "contact_purposes": {
+            "type": "string",
+            "description": "Comma delimitted string of ContactPurpose internal identifiers to filter by."
+          },
+          "email_address": {
+            "type": "string",
+            "description": "Email Address."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Email Address."
+          }
+        }
+      },
+      "update_email_address_response": {
+        "required": [
+          "email_address",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "email_address": {
+            "$ref": "#/components/schemas/update_email_address_response.email_address"
+          }
+        }
+      },
+      "update_email_address_response.email_address": {
+        "required": [
+          "description",
+          "email_address",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description."
+          },
+          "email_address": {
+            "type": "string",
+            "description": "Email Address."
+          }
+        }
+      },
+      "get_facilities_response": {
+        "required": [
+          "facilities",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied"
+          },
+          "facilities": {
+            "type": "array",
+            "description": "Facility records",
+            "items": {
+              "$ref": "#/components/schemas/get_facilities_response.facilities"
+            }
+          }
+        }
+      },
+      "get_facilities_response.facilities": {
+        "required": [
+          "description",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Facility"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Facility"
+          }
+        }
+      },
+      "get_geo_countries_response": {
+        "required": [
+          "geo_countries",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied"
+          },
+          "geo_countries": {
+            "type": "array",
+            "description": "GeoCountry records",
+            "items": {
+              "$ref": "#/components/schemas/get_geo_countries_response.geo_countries"
+            }
+          }
+        }
+      },
+      "get_geo_countries_response.geo_countries": {
+        "required": [
+          "display",
+          "external_id",
+          "id",
+          "iso_code_2",
+          "iso_code_3",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of GeoCountry"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of GeoCountry"
+          },
+          "iso_code_2": {
+            "type": "string",
+            "description": "iso code 2 of GeoCountry"
+          },
+          "iso_code_3": {
+            "type": "string",
+            "description": "iso code 3 of GeoCountry"
+          },
+          "display": {
+            "type": "boolean",
+            "description": "Whether to display it or not"
+          },
+          "external_id": {
+            "type": "number",
+            "description": "External id"
+          }
+        }
+      },
+      "get_get_zones_response": {
+        "required": [
+          "geo_zones",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied"
+          },
+          "geo_zones": {
+            "type": "array",
+            "description": "GeoZone records",
+            "items": {
+              "$ref": "#/components/schemas/get_get_zones_response.geo_zones"
+            }
+          }
+        }
+      },
+      "get_get_zones_response.geo_zones": {
+        "required": [
+          "geo_country_id",
+          "id",
+          "zone_code",
+          "zone_name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of GeoZone"
+          },
+          "geo_country_id": {
+            "type": "number",
+            "description": "Geo country id of GeoZone"
+          },
+          "zone_code": {
+            "type": "string",
+            "description": "Zone code of GeoZone"
+          },
+          "zone_name": {
+            "type": "string",
+            "description": "Zone name of GeoZone"
+          }
+        }
+      },
+      "CreateNote": {
+        "required": [
+          "application",
+          "auth_token",
+          "available_for_correspondence",
+          "content",
+          "external_record_id",
+          "external_record_type",
+          "member_id",
+          "note_type_iid"
+        ],
+        "type": "object",
+        "properties": {
+          "auth_token": {
+            "type": "string",
+            "description": "Authenticity token"
+          },
+          "note_type_iid": {
+            "type": "string",
+            "description": "Note type Iid"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content for Note record"
+          },
+          "application": {
+            "type": "string",
+            "description": "Application name for Note record"
+          },
+          "external_record_id": {
+            "type": "string",
+            "description": "External record id for Note record"
+          },
+          "external_record_type": {
+            "type": "string",
+            "description": "External record type for Note record"
+          },
+          "member_id": {
+            "type": "string",
+            "description": "MemberId for the Note record"
+          },
+          "available_for_correspondence": {
+            "type": "boolean",
+            "description": "Include note in correspondence management letter"
+          }
+        }
+      },
+      "create_note_response": {
+        "required": [
+          "note",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "note": {
+            "type": "array",
+            "description": "Note record",
+            "items": {
+              "$ref": "#/components/schemas/create_note_response.note"
+            }
+          }
+        }
+      },
+      "create_note_response.note": {
+        "required": [
+          "content",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Note"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content of Note"
+          }
+        }
+      },
+      "create_note_response.notes": {
+        "required": [
+          "created_by",
+          "note_type",
+          "updated_by"
+        ],
+        "type": "object",
+        "properties": {
+          "note_type": {
+            "$ref": "#/components/schemas/create_note_response.notes.note_type"
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/create_note_response.notes.created_by"
+          },
+          "updated_by": {
+            "$ref": "#/components/schemas/create_note_response.notes.updated_by"
+          }
+        }
+      },
+      "create_note_response.notes.note_type": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier",
+          "template"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Note Type record"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Note Type record"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of Note Type record"
+          },
+          "template": {
+            "type": "string",
+            "description": "Template date of Note Type record"
+          }
+        }
+      },
+      "create_note_response.notes.created_by": {
+        "required": [
+          "business_party_type",
+          "description",
+          "enterprise_identifier",
+          "first_name",
+          "gender",
+          "id",
+          "initials",
+          "last_name",
+          "middle_name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Created by party record"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Created by party record"
+          },
+          "initials": {
+            "type": "string",
+            "description": "Initials of Created by party record"
+          },
+          "enterprise_identifier": {
+            "type": "string",
+            "description": "Enterprise identifier of Created by party record"
+          },
+          "business_party_type": {
+            "type": "string",
+            "description": "Business party type of Created by party record"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "First name of Created by party record"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Last name of Created by party record"
+          },
+          "middle_name": {
+            "type": "string",
+            "description": "Middle name of Created by party record"
+          },
+          "gender": {
+            "type": "string",
+            "description": "Gender of Created by party record"
+          }
+        }
+      },
+      "create_note_response.notes.updated_by": {
+        "required": [
+          "business_party_type",
+          "description",
+          "enterprise_identifier",
+          "first_name",
+          "gender",
+          "id",
+          "initials",
+          "last_name",
+          "middle_name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Updated by party record"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Updated by party record"
+          },
+          "initials": {
+            "type": "string",
+            "description": "Initials of Updated by party record"
+          },
+          "enterprise_identifier": {
+            "type": "string",
+            "description": "Enterprise identifier of Updated by party record"
+          },
+          "business_party_type": {
+            "type": "string",
+            "description": "Business party type of Updated by party record"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "First name of Updated by party record"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Last name of Updated by party record"
+          },
+          "middle_name": {
+            "type": "string",
+            "description": "Middle name of Updated by party record"
+          },
+          "gender": {
+            "type": "string",
+            "description": "Gender of Updated by party record"
+          }
+        }
+      },
+      "get_notes_response": {
+        "required": [
+          "notes",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied"
+          },
+          "notes": {
+            "type": "array",
+            "description": "Note records",
+            "items": {
+              "$ref": "#/components/schemas/get_notes_response.notes"
+            }
+          }
+        }
+      },
+      "get_notes_response.notes": {
+        "required": [
+          "content",
+          "created_by",
+          "id",
+          "note_type",
+          "updated_by"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Note"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content of Note"
+          },
+          "note_type": {
+            "$ref": "#/components/schemas/get_notes_response.notes.note_type"
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/get_notes_response.notes.created_by"
+          },
+          "updated_by": {
+            "$ref": "#/components/schemas/get_notes_response.notes.updated_by"
+          }
+        }
+      },
+      "get_notes_response.notes.note_type": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier",
+          "template"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Note Type record"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Note Type record"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of Note Type record"
+          },
+          "template": {
+            "type": "string",
+            "description": "Template date of Note Type record"
+          }
+        }
+      },
+      "get_notes_response.notes.created_by": {
+        "required": [
+          "business_party_type",
+          "description",
+          "enterprise_identifier",
+          "first_name",
+          "gender",
+          "id",
+          "initials",
+          "last_name",
+          "middle_name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Created by party record"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Created by party record"
+          },
+          "initials": {
+            "type": "string",
+            "description": "Initials of Created by party record"
+          },
+          "enterprise_identifier": {
+            "type": "string",
+            "description": "Enterprise identifier of Created by party record"
+          },
+          "business_party_type": {
+            "type": "string",
+            "description": "Business party type of Created by party record"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "First name of Created by party record"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Last name of Created by party record"
+          },
+          "middle_name": {
+            "type": "string",
+            "description": "Middle name of Created by party record"
+          },
+          "gender": {
+            "type": "string",
+            "description": "Gender of Created by party record"
+          }
+        }
+      },
+      "get_notes_response.notes.updated_by": {
+        "required": [
+          "business_party_type",
+          "description",
+          "enterprise_identifier",
+          "first_name",
+          "gender",
+          "id",
+          "initials",
+          "last_name",
+          "middle_name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Updated by party record"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Updated by party record"
+          },
+          "initials": {
+            "type": "string",
+            "description": "Initials of Updated by party record"
+          },
+          "enterprise_identifier": {
+            "type": "string",
+            "description": "Enterprise identifier of Updated by party record"
+          },
+          "business_party_type": {
+            "type": "string",
+            "description": "Business party type of Updated by party record"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "First name of Updated by party record"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Last name of Updated by party record"
+          },
+          "middle_name": {
+            "type": "string",
+            "description": "Middle name of Updated by party record"
+          },
+          "gender": {
+            "type": "string",
+            "description": "Gender of Updated by party record"
+          }
+        }
+      },
+      "CreateNoteType": {
+        "required": [
+          "description",
+          "internal_identifier",
+          "note_template_id",
+          "parent_id",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "parent_id": {
+            "type": "integer",
+            "description": "note type parent id"
+          },
+          "description": {
+            "type": "string",
+            "description": "description for Note Type"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier for Note Type"
+          },
+          "note_template_id": {
+            "type": "integer",
+            "description": "Id for the Note Template"
+          },
+          "status": {
+            "type": "boolean",
+            "description": "for the Note Type"
+          }
+        }
+      },
+      "note_type": {
+        "required": [
+          "description",
+          "internal_identifier",
+          "patent_id",
+          "status",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "description": {
+            "type": "string",
+            "description": "description for NoteType"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "internal_identifier of NoteType"
+          },
+          "patent_id": {
+            "type": "string",
+            "description": "patent_id of NoteType"
+          },
+          "status": {
+            "type": "boolean",
+            "description": "Status of the NoteType"
+          }
+        }
+      },
+      "get_note_types_response": {
+        "required": [
+          "note_types",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied"
+          },
+          "note_types": {
+            "type": "array",
+            "description": "NoteType records",
+            "items": {
+              "$ref": "#/components/schemas/get_note_types_response.note_types"
+            }
+          }
+        }
+      },
+      "get_note_types_response.note_types": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of NoteType"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of NoteType"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of NoteType"
+          }
+        }
+      },
+      "get_note_type_response": {
+        "required": [
+          "note_types",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "note_types": {
+            "type": "array",
+            "description": "NoteType records",
+            "items": {
+              "$ref": "#/components/schemas/get_note_type_response.note_types"
+            }
+          }
+        }
+      },
+      "get_note_type_response.note_types": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of NoteType"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of NoteType"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of NoteType"
+          }
+        }
+      },
+      "UpdateNoteType": {
+        "required": [
+          "description",
+          "internal_identifier",
+          "note_template_id",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "description for Note Type"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier for Note Type"
+          },
+          "note_template_id": {
+            "type": "integer",
+            "description": "Id for the Note Template"
+          },
+          "status": {
+            "type": "boolean",
+            "description": "for the Note Type"
+          }
+        }
+      },
+      "CreateParty": {
+        "required": [
+          "business_party",
+          "description",
+          "first_name",
+          "last_name"
+        ],
+        "type": "object",
+        "properties": {
+          "role_types": {
+            "type": "string",
+            "description": "Comma seperated list of RoleType Internal Identifiers to apply to this Party"
+          },
+          "business_party": {
+            "type": "string",
+            "description": "Type of Party to create Organization | Individual"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Party"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "First name of Party"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Last name of Party"
+          }
+        }
+      },
+      "create_party_response": {
+        "required": [
+          "party",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "party": {
+            "$ref": "#/components/schemas/create_party_response.party"
+          }
+        }
+      },
+      "create_party_response.party": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id"
+          }
+        }
+      },
+      "get_parties_response": {
+        "required": [
+          "parties",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of Party records based on any filters applied"
+          },
+          "parties": {
+            "type": "array",
+            "description": "List of Party records",
+            "items": {
+              "$ref": "#/components/schemas/get_parties_response.parties"
+            }
+          }
+        }
+      },
+      "get_parties_response.parties": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Party"
+          }
+        }
+      },
+      "update_party_response": {
+        "required": [
+          "party",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "party": {
+            "$ref": "#/components/schemas/update_party_response.party"
+          }
+        }
+      },
+      "update_party_response.party": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id"
+          }
+        }
+      },
+      "delete_party_response": {
+        "required": [
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          }
+        }
+      },
+      "get_party_response": {
+        "required": [
+          "party",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "party": {
+            "$ref": "#/components/schemas/get_party_response.party"
+          }
+        }
+      },
+      "get_party_response.party": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id"
+          }
+        }
+      },
+      "UpdatePartyRoles": {
+        "type": "object",
+        "properties": {
+          "role_type_iids": {
+            "type": "string",
+            "description": "Comma seperated list of RoleType Internal Identifiers to apply to this Party"
+          }
+        }
+      },
+      "update_party_roles_response": {
+        "required": [
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          }
+        }
+      },
+      "CreatePhoneNumber": {
+        "required": [
+          "description",
+          "phone_number"
+        ],
+        "type": "object",
+        "properties": {
+          "contact_purposes": {
+            "type": "string",
+            "description": "Comma delimitted string of ContactPurpose internal identifiers to filter by"
+          },
+          "phone_number": {
+            "type": "string",
+            "description": "Email Address"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Email Address"
+          }
+        }
+      },
+      "create_phone_number_response": {
+        "required": [
+          "phone_number",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/create_phone_number_response.phone_number"
+          }
+        }
+      },
+      "create_phone_number_response.phone_number": {
+        "required": [
+          "description",
+          "id",
+          "is_primary",
+          "phone_number"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of PhoneNumber"
+          },
+          "phone_number": {
+            "type": "string",
+            "description": "Phone number"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "is_primary": {
+            "type": "boolean",
+            "description": "Is is primary number"
+          }
+        }
+      },
+      "get_phone_numbers_response": {
+        "required": [
+          "phone_numbers",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied"
+          },
+          "phone_numbers": {
+            "type": "array",
+            "description": "List of PhoneNumber records",
+            "items": {
+              "$ref": "#/components/schemas/get_phone_numbers_response.phone_numbers"
+            }
+          }
+        }
+      },
+      "get_phone_numbers_response.phone_numbers": {
+        "required": [
+          "description",
+          "id",
+          "is_primary",
+          "phone_number"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of PhoneNumber"
+          },
+          "phone_number": {
+            "type": "string",
+            "description": "Phone number"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "is_primary": {
+            "type": "boolean",
+            "description": "Is is primary number"
+          }
+        }
+      },
+      "delete_phone_number_response": {
+        "required": [
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          }
+        }
+      },
+      "get_phone_number_response": {
+        "required": [
+          "phone_number",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied"
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/get_phone_number_response.phone_number"
+          }
+        }
+      },
+      "GetPhoneNumbers": {
+        "required": [
+          "get_phone_number_response/success"
+        ],
+        "type": "object",
+        "properties": {
+          "get_phone_number_response/success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          }
+        }
+      },
+      "get_phone_number_response.phone_number": {
+        "required": [
+          "description",
+          "id",
+          "is_primary",
+          "phone_number"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of PhoneNumber"
+          },
+          "phone_number": {
+            "type": "string",
+            "description": "Phone number"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "is_primary": {
+            "type": "boolean",
+            "description": "Is is primary number"
+          }
+        }
+      },
+      "UpdatePhoneNumber": {
+        "type": "object",
+        "properties": {
+          "contact_purposes": {
+            "type": "string",
+            "description": "Comma delimitted string of ContactPurpose internal identifiers to filter by"
+          },
+          "phone_number": {
+            "type": "string",
+            "description": "Email Address"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Email Address"
+          }
+        }
+      },
+      "update_phone_number_response": {
+        "required": [
+          "phone_number",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/update_phone_number_response.phone_number"
+          }
+        }
+      },
+      "update_phone_number_response.phone_number": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of PhoneNumber"
+          }
+        }
+      },
+      "CreatePostalAddress": {
+        "required": [
+          "address_line_1",
+          "city",
+          "country",
+          "description",
+          "state",
+          "zip"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Description of Postal Address"
+          },
+          "contact_purposes": {
+            "type": "string",
+            "description": "Comma delimitted string of ContactPurpose internal identifiers to filter by"
+          },
+          "address_line_1": {
+            "type": "string",
+            "description": "Address Line 1"
+          },
+          "city": {
+            "type": "string",
+            "description": "City"
+          },
+          "state": {
+            "type": "string",
+            "description": "State"
+          },
+          "zip": {
+            "type": "string",
+            "description": "Zip"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country"
+          }
+        }
+      },
+      "create_postal_address_response": {
+        "required": [
+          "postal_address",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "postal_address": {
+            "$ref": "#/components/schemas/create_postal_address_response.postal_address"
+          }
+        }
+      },
+      "create_postal_address_response.postal_address": {
+        "required": [
+          "address_line_1",
+          "address_line_2",
+          "city",
+          "country",
+          "description",
+          "geo_locate",
+          "geofence",
+          "id",
+          "is_primary",
+          "name",
+          "state",
+          "zip"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of PostalAddress"
+          },
+          "address_line_1": {
+            "type": "string",
+            "description": "Address line1 of PostalAddress"
+          },
+          "address_line_2": {
+            "type": "string",
+            "description": "Address line2 of PostalAddress"
+          },
+          "city": {
+            "type": "string",
+            "description": "City of PostalAddress"
+          },
+          "state": {
+            "type": "string",
+            "description": "State of PostalAddress"
+          },
+          "zip": {
+            "type": "string",
+            "description": "Zip of PostalAddress"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country for PostalAddress"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description for PostalAddress"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name for PostalAddress"
+          },
+          "is_primary": {
+            "type": "string",
+            "description": "Is it a primary number or not"
+          },
+          "geo_locate": {
+            "type": "string",
+            "description": "Geo locate has value yes or no"
+          },
+          "geofence": {
+            "type": "string",
+            "description": "Geofence has value yes or no"
+          }
+        }
+      },
+      "get_postal_addresses_response": {
+        "required": [
+          "postal_addresses",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied"
+          },
+          "postal_addresses": {
+            "type": "array",
+            "description": "List of PostalAddress records",
+            "items": {
+              "$ref": "#/components/schemas/get_postal_addresses_response.postal_addresses"
+            }
+          }
+        }
+      },
+      "get_postal_addresses_response.postal_addresses": {
+        "required": [
+          "address_line_1",
+          "address_line_2",
+          "city",
+          "country",
+          "description",
+          "geo_locate",
+          "geofence",
+          "id",
+          "is_primary",
+          "name",
+          "state",
+          "zip"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of PostalAddress"
+          },
+          "address_line_1": {
+            "type": "string",
+            "description": "Address line1 of PostalAddress"
+          },
+          "address_line_2": {
+            "type": "string",
+            "description": "Address line2 of PostalAddress"
+          },
+          "city": {
+            "type": "string",
+            "description": "City of PostalAddress"
+          },
+          "state": {
+            "type": "string",
+            "description": "State of PostalAddress"
+          },
+          "zip": {
+            "type": "string",
+            "description": "Zip of PostalAddress"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country for PostalAddress"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description for PostalAddress"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name for PostalAddress"
+          },
+          "is_primary": {
+            "type": "string",
+            "description": "Is it a primary number or not"
+          },
+          "geo_locate": {
+            "type": "string",
+            "description": "Geo locate has value yes or no"
+          },
+          "geofence": {
+            "type": "string",
+            "description": "Geofence has value yes or no"
+          }
+        }
+      },
+      "delete_postal_address_response": {
+        "required": [
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          }
+        }
+      },
+      "get_postal_address_response": {
+        "required": [
+          "postal_address",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied"
+          },
+          "postal_address": {
+            "$ref": "#/components/schemas/get_postal_address_response.postal_address"
+          }
+        }
+      },
+      "get_postal_address_response.postal_address": {
+        "required": [
+          "address_line_1",
+          "address_line_2",
+          "city",
+          "country",
+          "description",
+          "geo_locate",
+          "geofence",
+          "id",
+          "is_primary",
+          "name",
+          "state",
+          "zip"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of PostalAddress"
+          },
+          "address_line_1": {
+            "type": "string",
+            "description": "Address line1 of PostalAddress"
+          },
+          "address_line_2": {
+            "type": "string",
+            "description": "Address line2 of PostalAddress"
+          },
+          "city": {
+            "type": "string",
+            "description": "City of PostalAddress"
+          },
+          "state": {
+            "type": "string",
+            "description": "State of PostalAddress"
+          },
+          "zip": {
+            "type": "string",
+            "description": "Zip of PostalAddress"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country for PostalAddress"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description for PostalAddress"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name for PostalAddress"
+          },
+          "is_primary": {
+            "type": "string",
+            "description": "Is it a primary number or not"
+          },
+          "geo_locate": {
+            "type": "string",
+            "description": "Geo locate has value yes or no"
+          },
+          "geofence": {
+            "type": "string",
+            "description": "Geofence has value yes or no"
+          }
+        }
+      },
+      "UpdatePostalAddress": {
+        "type": "object",
+        "properties": {
+          "contact_purposes": {
+            "type": "string",
+            "description": "Comma delimitted string of ContactPurpose internal identifiers to filter by"
+          },
+          "address_line_1": {
+            "type": "string",
+            "description": "Address line 1"
+          },
+          "address_line_2": {
+            "type": "string",
+            "description": "Address line 2"
+          },
+          "city": {
+            "type": "string",
+            "description": "City"
+          },
+          "state": {
+            "type": "string",
+            "description": "State"
+          },
+          "zip": {
+            "type": "string",
+            "description": "Zip"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Postal Address"
+          }
+        }
+      },
+      "update_postal_address_response": {
+        "required": [
+          "postal_address",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "postal_address": {
+            "$ref": "#/components/schemas/update_postal_address_response.postal_address"
+          }
+        }
+      },
+      "update_postal_address_response.postal_address": {
+        "required": [
+          "address_line_1",
+          "address_line_2",
+          "city",
+          "country",
+          "description",
+          "geo_locate",
+          "geofence",
+          "id",
+          "is_primary",
+          "name",
+          "state",
+          "zip"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of PostalAddress"
+          },
+          "address_line_1": {
+            "type": "string",
+            "description": "Address line1 of PostalAddress"
+          },
+          "address_line_2": {
+            "type": "string",
+            "description": "Address line2 of PostalAddress"
+          },
+          "city": {
+            "type": "string",
+            "description": "City of PostalAddress"
+          },
+          "state": {
+            "type": "string",
+            "description": "State of PostalAddress"
+          },
+          "zip": {
+            "type": "string",
+            "description": "Zip of PostalAddress"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country for PostalAddress"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description for PostalAddress"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name for PostalAddress"
+          },
+          "is_primary": {
+            "type": "string",
+            "description": "Is it a primary number or not"
+          },
+          "geo_locate": {
+            "type": "string",
+            "description": "Geo locate has value yes or no"
+          },
+          "geofence": {
+            "type": "string",
+            "description": "Geofence has value yes or no"
+          }
+        }
+      },
+      "CreateRoleType": {
+        "required": [
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "parent": {
+            "type": "string",
+            "description": "If parent is sent and it is not 'No Parent' then it will be set as the parent of the new RoleType"
+          },
+          "default_parent": {
+            "type": "string",
+            "description": "If default_parent is sent it will be set as the parent of the new RoleType"
+          }
+        }
+      },
+      "create_role_type_response": {
+        "required": [
+          "role_type",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "role_type": {
+            "type": "array",
+            "description": "RoleType record.",
+            "items": {
+              "$ref": "#/components/schemas/create_role_type_response.role_type"
+            }
+          }
+        }
+      },
+      "create_role_type_response.role_type": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of RoleType."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of RoleType."
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of RoleType."
+          }
+        }
+      },
+      "get_role_types_response": {
+        "required": [
+          "role_types",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied."
+          },
+          "role_types": {
+            "type": "array",
+            "description": "List of RoleType records.",
+            "items": {
+              "$ref": "#/components/schemas/get_role_types_response.role_types"
+            }
+          }
+        }
+      },
+      "get_role_types_response.role_types": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of RoleType."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of RoleType."
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of RoleType."
+          }
+        }
+      },
+      "get_role_type_response": {
+        "required": [
+          "role_type",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "role_type": {
+            "type": "array",
+            "description": "List of RoleType records.",
+            "items": {
+              "$ref": "#/components/schemas/get_role_type_response.role_type"
+            }
+          }
+        }
+      },
+      "get_role_type_response.role_type": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of RoleType."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of RoleType."
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of RoleType."
+          }
+        }
+      },
+      "auth_token_valid_response": {
+        "required": [
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True Auth Token is valid"
+          }
+        }
+      },
+      "Authenticate": {
+        "required": [
+          "login",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "login": {
+            "type": "string",
+            "description": "Login for user"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password for user"
+          }
+        }
+      },
+      "authenticate_response": {
+        "required": [
+          "jwt",
+          "success",
+          "user_id"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "Id of user that was authenticated"
+          },
+          "jwt": {
+            "type": "string",
+            "description": "JWT if requested"
+          }
+        }
+      },
+      "GenerateAuthToken": {
+        "required": [
+          "password",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Username"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password"
+          }
+        }
+      },
+      "generate_auth_token_response": {
+        "required": [
+          "auth_token",
+          "success",
+          "user_id"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "Id of user"
+          },
+          "auth_token": {
+            "type": "integer",
+            "description": "Auth Token"
+          }
+        }
+      },
+      "GenerateJWT": {
+        "required": [
+          "password",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Username"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password"
+          }
+        }
+      },
+      "generate_jwt_response": {
+        "required": [
+          "jwt",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if JWT is valid"
+          },
+          "jwt": {
+            "type": "integer",
+            "description": "Generated JWT"
+          }
+        }
+      },
+      "GetAuthToken": {
+        "required": [
+          "password",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Username"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password"
+          }
+        }
+      },
+      "get_auth_token_response": {
+        "required": [
+          "success",
+          "user_id"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "Id of user"
+          }
+        }
+      },
+      "logout_response": {
+        "required": [
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          }
+        }
+      },
+      "revoke_auth_token_response": {
+        "required": [
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True Auth Token is valid"
+          }
+        }
+      },
+      "get_status_application_response": {
+        "required": [
+          "status_application",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "status_application": {
+            "type": "array",
+            "description": "StatusApplication records",
+            "items": {
+              "$ref": "#/components/schemas/get_status_application_response.status_application"
+            }
+          }
+        }
+      },
+      "get_status_application_response.status_application": {
+        "required": [
+          "id",
+          "tracked_status_type",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of StatusApplication."
+          },
+          "username": {
+            "type": "string",
+            "description": "Username for StatusApplication."
+          },
+          "tracked_status_type": {
+            "$ref": "#/components/schemas/get_status_application_response.status_application.tracked_status_type"
+          }
+        }
+      },
+      "get_status_application_response.status_application.tracked_status_type": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Tracked status type"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Tracked status type"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of Tracked status type"
+          }
+        }
+      },
+      "get_status_applications_response": {
+        "required": [
+          "status_applications",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied."
+          },
+          "status_applications": {
+            "type": "array",
+            "description": "List of StatusApplication records.",
+            "items": {
+              "$ref": "#/components/schemas/get_status_applications_response.status_applications"
+            }
+          }
+        }
+      },
+      "get_status_applications_response.status_applications": {
+        "required": [
+          "id",
+          "tracked_status_type",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of StatusApplication."
+          },
+          "username": {
+            "type": "string",
+            "description": "Username for StatusApplication."
+          },
+          "tracked_status_type": {
+            "$ref": "#/components/schemas/get_status_applications_response.status_applications.tracked_status_type"
+          }
+        }
+      },
+      "get_status_applications_response.status_applications.tracked_status_type": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of Tracked status type"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of Tracked status type"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of Tracked status type"
+          }
+        }
+      },
+      "CreateTrackedStatusType": {
+        "required": [
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "parent": {
+            "type": "string",
+            "description": "If parent is sent and it is not 'No Parent' then it will be set as the parent of the new TrackedStatusType"
+          },
+          "default_parent": {
+            "type": "string",
+            "description": "If default_parent is sent it will be set as the parent of the new TrackedStatusType"
+          }
+        }
+      },
+      "create_tracked_status_type_response": {
+        "required": [
+          "role_type",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "role_type": {
+            "type": "array",
+            "description": "TrackedStatusType record.",
+            "items": {
+              "$ref": "#/components/schemas/create_tracked_status_type_response.role_type"
+            }
+          }
+        }
+      },
+      "create_tracked_status_type_response.role_type": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of TrackedStatusType."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of TrackedStatusType."
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of TrackedStatusType."
+          }
+        }
+      },
+      "get_tracked_status_types_response": {
+        "required": [
+          "role_types",
+          "success",
+          "total_count"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied."
+          },
+          "role_types": {
+            "type": "array",
+            "description": "List of TrackedStatusType records.",
+            "items": {
+              "$ref": "#/components/schemas/get_tracked_status_types_response.role_types"
+            }
+          }
+        }
+      },
+      "get_tracked_status_types_response.role_types": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of TrackedStatusType."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of TrackedStatusType."
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of TrackedStatusType."
+          }
+        }
+      },
+      "get_tracked_status_type_response": {
+        "required": [
+          "role_type",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful."
+          },
+          "role_type": {
+            "type": "array",
+            "description": "TrackedStatusType record.",
+            "items": {
+              "$ref": "#/components/schemas/get_tracked_status_type_response.role_type"
+            }
+          }
+        }
+      },
+      "get_tracked_status_type_response.role_type": {
+        "required": [
+          "description",
+          "id",
+          "internal_identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of TrackedStatusType."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of TrackedStatusType."
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of TrackedStatusType."
+          }
+        }
+      },
+      "GetUnitOfMeasurements": {
+        "required": [
+          "success",
+          "total_count",
+          "unit_of_measurements"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "True if the request was successful"
+          },
+          "total_count": {
+            "type": "number",
+            "description": "Total count of records based on any filters applied"
+          },
+          "unit_of_measurements": {
+            "type": "array",
+            "description": "List of UnitOfMeasurement records",
+            "items": {
+              "$ref": "#/components/schemas/unit_of_measurements"
+            }
+          }
+        }
+      },
+      "unit_of_measurements": {
+        "required": [
+          "comments",
+          "created_at",
+          "description",
+          "domain",
+          "external_id_source",
+          "external_identifier",
+          "id",
+          "internal_identifier",
+          "updated_at"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Id of UnitOfMeasurement"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of UnitOfMeasurement"
+          },
+          "domain": {
+            "type": "string",
+            "description": "Domain of UnitOfMeasurement"
+          },
+          "internal_identifier": {
+            "type": "string",
+            "description": "Internal identifier of UnitOfMeasurement"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Comments of UnitOfMeasurement"
+          },
+          "external_identifier": {
+            "type": "string",
+            "description": "External identifier of UnitOfMeasurement"
+          },
+          "external_id_source": {
+            "type": "string",
+            "description": "External id source of UnitOfMeasurement"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "Created at for UnitOfMeasurement"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "Updated at for UnitOfMeasurement"
+          }
+        }
+      }
+    }
+  }
+}
