@@ -8,7 +8,7 @@
       <v-expansion-panel class="stone-gray-dark pl-0 pt-1 pb-n2 clearfix"
         v-for="(entry, i) in modifiedTags"
         :key="i"
-        @click.native="select(entry)"
+        @click.native
         style="cursor: pointer;"
       >
       <h5 class="px-4 py-1 text-body-2 float-left d-block clsEntryMethod text-center" :id="setColor(entry.method)">{{
@@ -51,11 +51,11 @@ export default {
     }
   },
   methods: {  
-    select(entry) {
-    //   this.reset(entry);
-    //   this.selectedEntry = entry;
-      this.$emit("onSelectEntry", entry);
-    },   
+    // select(entry) {
+    // //  this.reset(entry);
+    // //  this.selectedEntry = entry;
+    // //  this.$emit("onSelectEntry", entry);
+    // },
     setColor(method_name){
       return method_name+"_color"
     },

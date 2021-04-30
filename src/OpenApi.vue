@@ -168,7 +168,7 @@
         <v-container fluid class="pa-0">
           <v-row class="fill-height no-gutters">
             <v-col cols="12" class="col-md-8 pt-0 pb-0">          
-              <ApiContent :api="api" :tags="tags" :selectedEntry="selectedEntry"></ApiContent>
+              <ApiContent :api="api" :tags="tags" :selectedEntry="selectedEntry" @onSelectEntry="select"></ApiContent>
             </v-col>
 
             <v-col cols="12" class="col-md-4 pt-0 pb-0 mt-4 clsEndPointSection">
