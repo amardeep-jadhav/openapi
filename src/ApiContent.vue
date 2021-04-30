@@ -129,7 +129,7 @@
             </hds-dialog>
             <!---- Dialog Implementation Ends here ---->
             <hds-btn
-              @click.native="request"
+              @click.native="emitEntry(selectedEntry)"
               v-bind:href="'#'+ selectedEntry.summary + '_tryItHere'"
               class="text-uppercase"
               color="fuchsia"
@@ -361,6 +361,7 @@ export default {
       if (this.currentResponse) {
         this.currentResponse = null;
       }
+      this.request();
     }
   },
   methods: {
@@ -519,10 +520,19 @@ export default {
 
       this.httpRequest = httpRequest;
     },
+    emitEntry(entry){
+      if (this.selectedEntry) {
+        if (entry.path == this.selectedEntry.path && entry.method == this.selectedEntry.method) {
+          this.request();
+        } else {
+          this.$emit("onSelectEntry", entry);
+        }
+      } else {
+        this.$emit("onSelectEntry", entry);
+      }
+    },
     request() {
       if (!this.isLoggedIn) {
-        // var fullpath = "/Login?"+this.apiVerb
-        // this.$router.push(fullpath);
         this.modal = true;
       } else {
         // window.scrollTo(110, document.body.scrollHeight);
