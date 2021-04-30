@@ -1,5 +1,20 @@
 <template>
-  <div class="px-6 clsOpenSwaggerAPI">
+  <div id="goTop" class="px-6 clsOpenSwaggerAPI">
+    <hds-btn
+            v-scroll="onScroll"
+            v-show="fab"
+            fab
+            dark
+            fixed
+            bottom
+            right
+            color="primary"
+            @click="toTop"
+            title="Go Top"
+          >
+            <v-icon class="white--text">keyboard_arrow_up</v-icon>
+      </hds-btn>
+
     <v-row>
       <v-col cols="12" sm="12" md="12">
         <h2 class="text-h2-alt stone-gray--text">
@@ -13,7 +28,7 @@
           <div v-for="(selectedEntry, i) in modifiedTags"
             :key="i">
             <div
-              class="text-h5 d-inline-block stone-gray--text"
+              class="text-h5 d-inline stone-gray--text"
               v-if="selectedEntry"
             >
             <p v-if="selectedEntry.description">
@@ -115,6 +130,7 @@
             <!---- Dialog Implementation Ends here ---->
             <hds-btn
               @click.native="request"
+              v-bind:href="'#'+ selectedEntry.summary + '_tryItHere'"
               class="text-uppercase"
               color="fuchsia"
               large
@@ -206,7 +222,7 @@
                             </v-card-text>
                           </v-card> -->
                       
-                    <div v-if="checkCurrentRequest(selectedEntry)">
+                    <div v-if="checkCurrentRequest(selectedEntry)" :id="selectedEntry.summary + '_tryItHere'" class="tryItButtonClick">
                         <hds-card
                           class="mb-4 elevation-2"
                           :icon="{
@@ -226,9 +242,9 @@
                         </hds-card>
                     </div>
 
-                    <div v-else>
+                    <div v-else :id="selectedEntry.summary + '_tryItHere'" class="tryItButtonClick">
                       <hds-card
-                          class="mb-4 elevation-2"
+                          class="mb-4 elevation-2 tryItButtonClick"
                           :icon="{
                             icon: 'mdi-code-json',
                             color: 'stone-gray'
@@ -316,7 +332,8 @@ export default {
     //tags: {},
     httpRequest: null,
     modifiedTags: null,
-    apiVerb: ""
+    apiVerb: "",
+    fab: false
   }),
   mounted: function() {
     // if (this.$refs.menu.$children.length)
@@ -352,6 +369,17 @@ export default {
       if (this.selectedEntry) {
         return (selectedEntry.path == this.selectedEntry.path && selectedEntry.method == this.selectedEntry.method)
       }
+    },
+    scrollToTop() {
+        window.scrollTo(0,0);
+    },
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset ||   e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    toTop () {
+      this.$vuetify.goTo(0)
     },
     stringify,
     // reset(entry) {
@@ -676,4 +704,10 @@ async function getTags(api) {
   margin-top: -95px;
   scroll-behavior: smooth;
 }
+.tryItButtonClick{
+  padding-top: 95px;
+  margin-top: -95px;
+  scroll-behavior: smooth;
+}
+
 </style>
