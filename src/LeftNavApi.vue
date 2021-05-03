@@ -1,7 +1,7 @@
   
 <template>
-  <v-expansion-panels class="md-dense stone-gray-dark" ref="menu">
-    <v-expansion-panel class="stone-gray-dark py-4 px-2 contentOverflow"
+  <v-expansion-panels class="md-dense stone-gray-dark p-0" ref="menu">
+    <v-expansion-panel class="stone-gray-dark py-4 px-0 contentOverflow"
       v-for="(entries, tag) in tags" v-if="tag === apiVerb"
       :key="tag"
     >
@@ -11,9 +11,9 @@
         @click.native
         style="cursor: pointer;"
       >
-      <h5 class="px-4 py-1 text-body-2 float-left d-block clsEntryMethod text-center" :id="setColor(entry.method)">{{
+      <span class="px-4 py-1 text-body-2 float-left d-block clsEntryMethod text-center" :id="setColor(entry.method)">{{
           entry.method.toUpperCase()
-        }}</h5>
+        }}</span>
         <a class="px-4 py-1 text-subtitle-2 d-block text-truncate clsEntryPath off-white--text"
           :class="{
             'text-subtitle-2': selectedEntry === entry,
@@ -45,8 +45,7 @@ export default {
       this.apiVerb = window.location.href.split('?')[1].split("=")[1]
       if (this.apiVerb.includes("#")){
         this.apiVerb = this.apiVerb.match(/.*#/)[0].slice(0, -1);
-      } 
-      console.log(this.apiVerb);   
+      }  
       this.modifiedTags = eval("this.tags.".concat(this.apiVerb))
     }
   },

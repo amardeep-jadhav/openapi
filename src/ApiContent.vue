@@ -692,32 +692,9 @@ async function getTags(api) {
     opacity: 0.2;
   }
 }
-. {
-  animation: animate-pulse 2s linear infinite;
-}
-.v-icon.:hover {
-  animation: none;
-}
-@keyframes animate-pulse {
-  0% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.7;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-.navActive{
+.navActive, .tryItButtonClick{
   padding-top: 95px;
   margin-top: -95px;
   scroll-behavior: smooth;
 }
-.tryItButtonClick{
-  padding-top: 95px;
-  margin-top: -95px;
-  scroll-behavior: smooth;
-}
-
 </style>

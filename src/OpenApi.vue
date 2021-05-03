@@ -167,11 +167,11 @@
         <!-- Provides the application the proper gutter -->
         <v-container fluid class="pa-0">
           <v-row class="fill-height no-gutters">
-            <v-col cols="12" class="col-md-8 pt-0 pb-0">          
+            <v-col cols="12" class="col-md-8 col-lg-8 col-xl-8 pt-0 pb-0 clsApiContentSection">          
               <ApiContent :api="api" :tags="tags" :selectedEntry="selectedEntry" @onSelectEntry="select"></ApiContent>
             </v-col>
 
-            <v-col cols="12" class="col-md-4 pt-0 pb-0 mt-4 clsEndPointSection">
+            <v-col cols="12" class="col-md-4 col-lg-4 col-xl-4 pt-0 pb-0 mt-4 clsEndPointListSection">
               <hds-card 
                 color="stone-gray-dark"
                 class="mb-4 mr-6 elevation-4 white--text clsEndPointSection p-fixed"
@@ -639,5 +639,16 @@ body > .v-application .theme--light .clsEndPointSection .v-list-item__content > 
 }
 .p-fixed {
   position:fixed;
+  width:500px !important;
+  max-width:500px !important;
+}
+.clsEndPointListSection{
+    max-width: 500px !important;
+    flex: 500px !important;
+}
+
+.clsApiContentSection{
+    max-width: calc(100% - 500px)!important;
+    flex: calc(100% - 500px)!important;
 }
 </style>
