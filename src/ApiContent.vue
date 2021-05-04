@@ -42,15 +42,6 @@
       <v-col cols="12" sm="12" md="12">
         <div class="navActive" :id="selectedEntry.summary" v-for="(selectedEntry, i) in modifiedTags"
         :key="i">
-        <!-- <div
-          class="text-h5 d-inline-block stone-gray--text"
-          v-if="!selectedEntry"
-        >
-        <p v-if="modifiedTags[0].description">
-          <div v-html="modifiedTags[0].description"></div>
-        </p>
-        </div> -->
-
         <div v-if="selectedEntry">
           <h2 class="text-h2-alt fuchsia--text pb-7">
             {{ selectedEntry.title || selectedEntry.summary }}
@@ -338,8 +329,6 @@ export default {
   mounted: function() {
     // if (this.$refs.menu.$children.length)
     //   this.$refs.menu.$children[0].toggleExpandList();
-    
-        //window.scrollTo(200, document.body.scrollHeight);
   },
   created() {},
   watch: {
@@ -347,15 +336,10 @@ export default {
       this.apiVerb = window.location.href.split("?")[1];
       if (this.apiVerb.includes("#")){
         this.apiVerb = this.apiVerb.match(/.*#/)[0].slice(0, -1);
-        //this.apiVerb = this.apiVerb.split("#")[0];
         console.log(this.apiVerb)
       } 
       this.exactVerb = this.apiVerb.split("=")[1]
       this.modifiedTags = eval("this.tags.".concat(this.exactVerb));
-      
-      // this.apiVerb = window.location.href.split('?')[1].split("=")[1]
-      // this.modifiedTags = eval("this.tags.".concat(this.apiVerb))
- 
     },
     selectedEntry: function(){
       if (this.currentResponse) {
@@ -535,7 +519,6 @@ export default {
       if (!this.isLoggedIn) {
         this.modal = true;
       } else {
-        // window.scrollTo(110, document.body.scrollHeight);
         document.getElementById("overlay").style.display = "block";
         this.prepareHTTPRequest();
         Vue.http(this.httpRequest).then(

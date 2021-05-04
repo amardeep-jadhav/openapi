@@ -49,18 +49,10 @@ export default {
       this.modifiedTags = eval("this.tags.".concat(this.apiVerb))
     }
   },
-  methods: {  
-    // select(entry) {
-    // //  this.reset(entry);
-    // //  this.selectedEntry = entry;
-    // //  this.$emit("onSelectEntry", entry);
-    // },
+  methods: {
     setColor(method_name){
       return method_name+"_color"
     },
-    // clickNavigate(summary){
-    //  return "#" + summary;
-    // }
   }
 };
 
