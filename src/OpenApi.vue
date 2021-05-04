@@ -639,8 +639,8 @@ body > .v-application .theme--light .clsEndPointSection .v-list-item__content > 
 }
 .p-fixed {
   position:fixed;
-  width:500px !important;
-  max-width:500px !important;
+  width:480px !important;
+  max-width:480px !important;
 }
 .clsEndPointListSection{
     max-width: 500px !important;
