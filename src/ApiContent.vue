@@ -128,7 +128,7 @@
             >
               <v-icon class="mr-2 white--text"
                 >mdi-hand-pointing-right</v-icon
-              >Try it here</hds-btn
+              >Try it Now</hds-btn
             >
 
             <a href="/files/swagger.json" class="ml-3" download>
