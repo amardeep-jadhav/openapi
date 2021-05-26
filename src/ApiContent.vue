@@ -122,13 +122,13 @@
             <hds-btn
               @click.native="emitEntry(selectedEntry)"
               v-bind:href="'#'+ selectedEntry.summary + '_tryItHere'"
-              class="text-uppercase"
+              class=""
               color="fuchsia"
               large
             >
               <v-icon class="mr-2 white--text"
                 >mdi-hand-pointing-right</v-icon
-              >Try it Now</hds-btn
+              >Try It Now</hds-btn
             >
 
             <a href="/files/swagger.json" class="ml-3" download>
