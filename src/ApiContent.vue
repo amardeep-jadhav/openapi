@@ -64,7 +64,7 @@
           
 
             <!-----Dailog Implementation Starts here----->
-            <hds-dialog v-model="modal" title="Authorize Now" modal>
+            <!-- <hds-dialog v-model="modal" title="Authorize Now" modal>
               <template #title>
                 <v-btn icon @click="modal = false">
                   <v-icon>$close</v-icon>
@@ -117,9 +117,9 @@
                   Authorize
                 </hds-btn>
               </template>
-            </hds-dialog>
+            </hds-dialog> -->
             <!---- Dialog Implementation Ends here ---->
-            <hds-btn
+            <!-- <hds-btn
               @click.native="emitEntry(selectedEntry)"
               v-bind:href="'#'+ selectedEntry.summary + '_tryItHere'"
               class=""
@@ -129,7 +129,7 @@
               <v-icon class="mr-2 white--text"
                 >mdi-hand-pointing-right</v-icon
               >Try It Now</hds-btn
-            >
+            > -->
 
             <a href="/files/swagger.json" class="ml-3" download>
               <hds-btn class="text-uppercase" color="grape" large>
@@ -194,15 +194,28 @@
                       icon: 'mdi-code-json',
                       color: 'stone-gray'
                     }"
-                    title="Body"
-                    centered
+                    title="Body"                   
                   >
+                    <span class="mb-3 clearfix">
+                    <hds-btn
+                      @click.native="emitEntry(selectedEntry)"
+                      v-bind:href="'#'+ selectedEntry.summary + '_tryItHere'"
+                      class="text-h5 white--text float-right tryItNowPlacement"
+                      color="fuchsia"
+                      large
+                    >
+                      <v-icon class="mr-2 white--text"
+                        >mdi-hand-pointing-right</v-icon
+                      >Try it Now</hds-btn> 
+                    </span> 
                     <template #indented>
+                      <div>
                       <request-form
                         ref="requestForm"
                         :selectedEntry="selectedEntry"
                         :currentRequest="currentRequest"
                       ></request-form>
+                      </div>
                     </template>
                   </hds-card>
 
@@ -504,7 +517,7 @@ export default {
 
       this.httpRequest = httpRequest;
     },
-    emitEntry(entry){
+    emitEntry(entry){     
       if (this.selectedEntry) {
         if (entry.path == this.selectedEntry.path && entry.method == this.selectedEntry.method) {
           this.request();
@@ -517,7 +530,7 @@ export default {
     },
     request() {
       if (!this.isLoggedIn) {
-        this.modal = true;
+        //this.modal = true;
       } else {
         document.getElementById("overlay").style.display = "block";
         this.prepareHTTPRequest();
@@ -679,5 +692,10 @@ async function getTags(api) {
   padding-top: 95px;
   margin-top: -95px;
   scroll-behavior: smooth;
+}
+.tryItNowPlacement{
+  position:absolute;
+  top:22px;
+  right:22px;
 }
 </style>
