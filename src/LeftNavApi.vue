@@ -11,9 +11,11 @@
         @click.native
         style="cursor: pointer;"
       >
-      <span class="px-4 py-1 text-body-2 float-left d-block clsEntryMethod text-center" :id="setColor(entry.method)">{{
-          entry.method.toUpperCase()
-        }}</span>
+        <a class="px-4 py-1 text-body-2 float-left d-block clsEntryMethod text-center"
+          v-bind:href="'#'+ entry.summary"
+          :id="setColor(entry.method)">{{
+            entry.method.toUpperCase()
+        }}</a>
         <a class="px-4 py-1 text-subtitle-2 d-block text-truncate clsEntryPath off-white--text"
           :class="{
             'text-subtitle-2': selectedEntry === entry,
