@@ -53,7 +53,7 @@
     <multipart-form ref="multipartForm" v-if="selectedEntry.requestBody && selectedEntry.requestBody.selectedType === 'multipart/form-data'" :request-body="selectedEntry.requestBody" />
     <v-container v-else-if="selectedEntry.requestBody">
       <label class="text-h5 d-inline-block grape--text" for="payload">Payload ({{selectedEntry.requestBody.selectedType}})</label>
-      <v-textarea name="payload" v-model="currentRequest.body" id="test"></v-textarea>
+      <v-textarea name="payload" v-model="currentRequest.body" id="test" rows="4"></v-textarea>
     </v-container>
   </form>
 </template>

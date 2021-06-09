@@ -202,7 +202,7 @@
                       v-bind:href="'#'+ selectedEntry.summary + '_tryItHere'"
                       class="text-h5 white--text float-right tryItNowPlacement"
                       color="fuchsia"
-                      large
+                      small
                     >
                       <v-icon class="mr-2 white--text"
                         >mdi-hand-pointing-right</v-icon
@@ -243,6 +243,59 @@
                               :response="currentResponse"
                             ></response-display>
                           </template>
+
+                          <template>
+                                    <hds-dialog
+                                      v-model="modal"
+                                      title="Response Sample"
+                                      modal
+                                      persistent
+                                    >
+                                      <template #activator="{ attrs, on }">
+                                        <div class="text-center">
+                                        <hds-btn
+                                          class="text-h5 white--text"
+                                          v-bind="attrs"
+                                          v-on="on"
+                                          small
+                                        >
+                                          <v-icon left class="mr-2 white--text">mdi-arrow-expand-all</v-icon>
+                                          Expand View
+                                        </hds-btn>
+                                        </div>
+                                      </template>
+
+                                      <template #title>
+                                        <v-btn
+                                          icon
+                                          @click="modal = false"
+                                        >
+                                          <v-icon>$close</v-icon>
+                                        </v-btn>
+                                      </template>
+
+                                      <template #text>
+                                        <v-responsive min-height="400">
+                                          <response-display
+                                            v-if="currentResponse"
+                                            :entry="selectedEntry"
+                                            :response="currentResponse"
+                                          ></response-display>
+                                        </v-responsive>
+                                      </template>
+
+                                      <template #actions>
+                                        <hds-btn
+                                          alt
+                                          small
+                                          color="grape"
+                                          @click="modal = false"
+                                        >
+                                          Cancel
+                                        </hds-btn>
+                                      </template>
+                                    </hds-dialog>
+                                  </template>
                         </hds-card>
                     </div>
 
@@ -411,13 +464,13 @@ export default {
     //   });
     //   this.currentRequest.security = newSecurity;
 
-    //   if (entry.requestBody) {
-    //     this.currentRequest.contentType = entry.requestBody.selectedType;
-    //     const example =
-    //       entry.requestBody.content[this.currentRequest.contentType].example;
-    //     this.currentRequest.body =
-    //       typeof example === "string" ? example : stringify(example, null, 2);
-    //   }
+      // if (entry.requestBody) {
+      //   this.currentRequest.contentType = entry.requestBody.selectedType;
+      //   const example =
+      //     entry.requestBody.content[this.currentRequest.contentType].example;
+      //   this.currentRequest.body =
+      //     typeof example === "string" ? example : stringify(example, null, 2);
+      // }
     // },
     // select(entry) {
     //   this.reset(entry);
@@ -695,7 +748,7 @@ async function getTags(api) {
 }
 .tryItNowPlacement{
   position:absolute;
-  top:22px;
+  top:28px;
   right:22px;
 }
 </style>

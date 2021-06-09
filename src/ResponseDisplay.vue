@@ -79,11 +79,16 @@ export default {
 }
 .response-display .container{
   min-height: 50px;
-max-height:270px;
-overflow-y:auto;
+  max-height:200px;
+  overflow-y:auto;
 }
 .vjs-tree {
     font-family: 'museo-sans';
     font-size: 1rem;
+}
+.v-dialog .response-display .container {
+    min-height: 50px;
+    max-height: none;
+    overflow-y: auto;
 }
 </style>

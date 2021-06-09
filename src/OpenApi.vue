@@ -651,4 +651,11 @@ body > .v-application .theme--light .clsEndPointSection .v-list-item__content > 
     max-width: calc(100% - 500px)!important;
     flex: calc(100% - 500px)!important;
 }
+/* .vjs-tree, #request-form .v-input {
+    font-size: 0.875rem !important;
+    font-weight: 500;
+    line-height: 1.375rem;
+    letter-spacing: 0.0071428571em !important;
+    font-family: "museo-sans", sans-serif !important;
+} */
 </style>
