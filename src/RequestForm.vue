@@ -80,15 +80,29 @@ export default {
     family: function () {
       this.currentRequest.params['family'] = this.family
       this.$forceUpdate();
+    },
+    claimResponseId: function(){
+      this.currentRequest.params['resourceId'] = this.claimResponseId
+      this.$forceUpdate();
+    },
+    beneficiary: function() {
+      this.currentRequest.params['beneficiary'] = this.beneficiary
+      this.$forceUpdate();
     }
   },
   updated: function() {
     if (this.family) {
       this.currentRequest.params['family'] = this.family
+    } else if(this.claimResponseId){
+      this.currentRequest.params['resourceId'] = this.claimResponseId
+    } else if(this.beneficiary){
+       this.currentRequest.params['beneficiary'] = this.beneficiary
     }
   },
   data: () => ({
-   family: ''
+   family: '',
+   beneficiary: '',
+   claimResponseId: ''
   }),
   methods: {
     stringify,
@@ -96,14 +110,28 @@ export default {
       return this.$refs.multipartForm && this.$refs.multipartForm.getFormData()
     },
     getDynamicExamples(){
-      if (this.selectedEntry.path.includes('/Patient')) {
-        if (this.selectedEntry.parameters.length != 0) {
-          return this.getPatientDynamicData();
-        }
-      }else{
-        return; 
+      var api = this.selectedEntry.path
+      switch(true) {
+        case api.includes('/Patient'):
+          if (this.selectedEntry.parameters.length != 0) {
+            return this.getPatientDynamicData();
+          }
+          break;
+        case api.includes('/Coverage'):
+          if (this.selectedEntry.parameters.length != 0) {
+            return this.getCoveragetDynamicData();
+          }
+          break;
+        case api.includes('/ClaimResponse'):
+          if (this.selectedEntry.parameters.length != 0) {
+            return this.getClaimResponseDynamicData();
+          }
+          break;
+        default:
+          console.log("in default.......")
       }
     },
+
     getPatientDynamicData(){
       Vue.http({"url": "https://kong-dev.medecision.cloud/Patient?family=1002L"}).then(
         response => {
@@ -111,6 +139,58 @@ export default {
         }
       );
     },
+
+    getCoveragetDynamicData(){
+      Vue.http({"url": "https://kong-dev.medecision.cloud/Coverage/1"}).then(
+        response => {
+          this.setCoverageExamples(response)
+        }
+      );
+    },
+
+    getClaimResponseDynamicData(){
+      this.selectedEntry.parameters[0]['example'] = "For Example: "
+      this.claimResponseId = 11509;
+      Vue.http({"url": "https://kong-dev.medecision.cloud/ClaimResponse/11509"}).then(response => {
+          console.log(response);
+          this.setClaimResponseExamples(response)
+      }).catch(e => {
+          console.log(e);
+      });
+    },
+
+    setClaimResponseExamples(response){
+      var parameters = this.selectedEntry.parameters;
+      for (var key in parameters) {
+          var res = this.lookup(response.body, parameters[key].name)
+          var finalExample = this.parseClaimResponse(res)
+          parameters[key]['example'] = "For Example: "+ finalExample
+          // this.claimResponseId = finalExample;
+      }
+    },
+
+    setCoverageExamples(response){
+      var parameters = this.selectedEntry.parameters;
+      for (var key in parameters) {
+        if ( ["_page"].includes( parameters[key].name)) {
+           parameters[key]['example'] = this.setStaticExamples(parameters[key].name)
+        }else{
+          if (parameters[key].name === 'beneficiary:identifier') {
+            var res = this.lookup(response.body, 'beneficiary')
+            var finalExample = this.parseCoverage(res, 'beneficiary:identifier')
+          }else if (parameters[key].name === 'beneficiary'){
+            var res = this.lookup(response.body, parameters[key].name)
+            var finalExample = this.parseCoverage(res);
+            this.beneficiary = finalExample;
+          }else {
+            var res = this.lookup(response.body, parameters[key].name)
+            var finalExample = this.parseCoverage(res);
+          }
+          parameters[key]['example'] = "For Example: "+ finalExample;
+        }
+      }
+    },
+
     setPatientExamples(response){
       var parameters = this.selectedEntry.parameters;
       for (var key in parameters) {
@@ -126,6 +206,7 @@ export default {
         }
       }
     },
+
     parseExample(res){
       if (Array.isArray(res)) {
         if (Array.isArray(res[1])) {
@@ -139,6 +220,40 @@ export default {
         }
       }
     },
+
+    parseCoverage(res, extraKey){
+      if (res!== null) {
+        if (res[0] === 'beneficiary') {
+          if (extraKey) {
+            return this.deepLookUp(res, 'system')+ "|" + this.deepLookUp(res, 'value')
+          }else{
+            return this.deepLookUp(res, 'reference')
+          }
+        }else if (res[0] == 'type') {
+          return this.deepLookUp(res, 'code')
+        }else if(res[0] === 'period'){
+          return res[1].start
+        }else{
+          return res[1]
+        }
+      }
+    },
+
+    parseClaimResponse(res){
+      if (res!== null) {
+        return res[1]
+      }
+    },
+
+    deepLookUp(res, value){
+      var _exp = this.lookup(res[1], value)
+        if (_exp) {
+          return _exp[1]
+        }else{
+          return 'No data'
+        }
+    },
+
     lookup(obj, k) {
       k = this.mapKey(k)
       for (var key in obj) {
@@ -159,11 +274,14 @@ export default {
       }
       return null;
     },
+
     mapKey(k){
       if (k === 'birthdate') {
         k = 'birthDate'
       }else if(k === 'resourceId'){
         k = 'id'
+      }else if(k === 'subscriberid'){
+        k = 'subscriberId'
       }
       return k;
     },
