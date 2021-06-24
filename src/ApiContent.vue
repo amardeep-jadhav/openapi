@@ -163,7 +163,7 @@
             </v-col>
             <v-col cols="12" sm="12" md="12">
               <div v-if="selectedEntry">
-                <div v-if="api.servers && api.servers.length">
+                <div v-if="api.servers && api.servers.length">              
                   <hds-card
                     class="mb-4 elevation-2"
                     :icon="{
@@ -172,12 +172,65 @@
                     }"
                     title="Body Sample"
                     centered
+                    v-if="selectedEntry.method.toUpperCase() !== 'GET' && selectedEntry.method.toUpperCase() !== 'DELETE'"
                   >
                     <template #indented>
                       <requestBody
                         :selectedEntry="selectedEntry"
                         :currentRequest="currentRequest"
                       ></requestBody>
+                    </template>
+
+                    <template>
+                      <hds-dialog
+                        v-model="bodySampleModal"
+                        title="Body Sample"
+                        modal
+                        persistent
+                      >
+                        <template #activator="{ attrs, on }">
+                          <div class="text-center">
+                          <hds-btn
+                            class="text-h5 white--text"
+                            v-bind="attrs"
+                            v-on="on"
+                            small
+                          >
+                            <v-icon left class="mr-2 white--text">mdi-arrow-expand-all</v-icon>
+                            Expand View
+                          </hds-btn>
+                          </div>
+                        </template>
+
+                        <template #title>
+                          <v-btn
+                            icon
+                            @click="bodySampleModal = false"
+                          >
+                            <v-icon>$close</v-icon>
+                          </v-btn>
+                        </template>
+
+                        <template #text>
+                          <v-responsive min-height="400">
+                            <requestBody
+                              :selectedEntry="selectedEntry"
+                              :currentRequest="currentRequest"
+                            ></requestBody>
+                          </v-responsive>
+                        </template>
+
+                        <template #actions>
+                          <hds-btn
+                            alt
+                            small
+                            color="grape"
+                            @click="bodySampleModal = false"
+                          >
+                            Cancel
+                          </hds-btn>
+                        </template>
+                      </hds-dialog>
                     </template>
                   </hds-card>
 
@@ -370,6 +423,7 @@ export default {
     apiVerb: null,
     exactVerb: null,
     accordion: false,
+    bodySampleModal: false,
     modal: false,
     mini: true,
     authID: "",
