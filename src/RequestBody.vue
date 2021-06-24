@@ -1,5 +1,5 @@
 <template lang="html">
-  <form novalidate @submit.stop.prevent="submit" v-if="selectedEntry" id="request-form">
+  <form novalidate @submit.stop.prevent="submit" v-if="selectedEntry" id="request-form" class="request-form">
     <v-container v-if="selectedEntry.requestBody">
      <vue-json-pretty
       :path="'res'"
@@ -95,12 +95,18 @@ pre{
 /* word-wrap: break-word; */
 overflow-x: auto;
 }
-#request-form .container{
-height:200px;
-overflow-y:auto;
+.request-form .container{
+  min-height: 50px;
+  max-height:200px;
+  overflow-y:auto;
 }
 .vjs-tree {
     font-family: 'museo-sans';
     font-size: 1rem;
+}
+.v-dialog .request-form .container {
+    min-height: 50px;
+    max-height: none;
+    overflow-y: auto;
 }
 </style>
