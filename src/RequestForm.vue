@@ -1,5 +1,5 @@
+
 <template lang="html">
-    
   <form novalidate @submit.stop.prevent="submit" v-if="selectedEntry" id="request-form">
     <h6 class="text-h6 d-inline-block" v-if="selectedEntry.security && selectedEntry.security.filter(s => s.scheme.in !== 'cookie').length">
       Security
@@ -17,8 +17,7 @@
     <div v-for="(parameter, i) in selectedEntry.parameters" :key="parameter.example">
       <v-container class="pa-0 pt-4" v-if="(parameter.schema.type === 'string' || parameter.schema.type === 'integer' || parameter.schema.type === 'number') && !parameter.schema.enum">
         <label class="text-h5 d-inline-block grape--text">{{parameter.name}}</label>
-        
-        <v-text-field  class="pa-0" v-model.lazy="currentRequest.params[parameter.name]" 
+        <v-text-field  class="pa-0" v-model.lazy.trim="currentRequest.params[parameter.name]" 
         :hint="parameter.example" persistent-hint
         :type="parameter.schema.type === 'string' ? 'text' : 'number'"></v-text-field>
       </v-container>
@@ -90,15 +89,16 @@ export default {
       this.$forceUpdate();
     }
   },
-  updated: function() {
-    if (this.family) {
-      this.currentRequest.params['family'] = this.family
-    } else if(this.claimResponseId){
-      this.currentRequest.params['resourceId'] = this.claimResponseId
-    } else if(this.beneficiary){
-       this.currentRequest.params['beneficiary'] = this.beneficiary
-    }
-  },
+  // updated: function() {
+  //   if (this.family) {
+  //     this.currentRequest.params['family'] = this.family
+  //   } else if(this.claimResponseId){
+  //     this.currentRequest.params['resourceId'] = this.claimResponseId
+  //   } else if(this.beneficiary){
+  //     console.log("in updated.......", this.beneficiary)
+  //      this.currentRequest.params['beneficiary'] = this.beneficiary
+  //   }
+  // },
   data: () => ({
    family: '',
    beneficiary: '',
@@ -141,6 +141,7 @@ export default {
     },
 
     getCoveragetDynamicData(){
+      document.getElementById("overlay").style.display = "block";
       Vue.http({"url": "https://kong-dev.medecision.cloud/Coverage/1"}).then(
         response => {
           this.setCoverageExamples(response)
@@ -186,9 +187,14 @@ export default {
             var res = this.lookup(response.body, parameters[key].name)
             var finalExample = this.parseCoverage(res);
           }
-          parameters[key]['example'] = "For Example: "+ finalExample;
+          if (res) {
+            parameters[key]['example'] = "For Example: "+ finalExample;
+          }else{
+            parameters[key]['example'] = "";
+          }
         }
       }
+      document.getElementById("overlay").style.display = "none";
     },
 
     setPatientExamples(response){
@@ -232,7 +238,7 @@ export default {
         }else if (res[0] == 'type') {
           return this.deepLookUp(res, 'code')
         }else if(res[0] === 'period'){
-          return res[1].start
+          return this.deepLookUp(res, 'start')
         }else{
           return res[1]
         }
@@ -318,3 +324,4 @@ textarea {
     padding: 4px;
 }
 </style>
+
