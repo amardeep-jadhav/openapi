@@ -57,7 +57,8 @@
     <multipart-form ref="multipartForm" v-if="selectedEntry.requestBody && selectedEntry.requestBody.selectedType === 'multipart/form-data'" :request-body="selectedEntry.requestBody" />
     <v-container v-else-if="selectedEntry.requestBody">
       <label class="text-h5 d-inline-block grape--text" for="payload">Payload ({{selectedEntry.requestBody.selectedType}})</label>
-      <v-textarea name="payload" v-model="currentRequest.body" id="test" rows="4"></v-textarea>
+      <v-textarea v-if="this.selectedEntry.method ==='post'" name="payload" v-model="currentRequest.body" id="test" rows="4"></v-textarea>
+     <v-textarea v-else name="payload" v-model="currentRequest.putBody" id="test" rows="4"></v-textarea>
     </v-container>
   </form>
 </template>
@@ -116,16 +117,26 @@ export default {
       switch(true) {
         case api.includes('/Patient'):
           if (this.selectedEntry.parameters.length != 0) {
+            if (this.selectedEntry.method ==='put') {
+              this.currentRequest.putBody = JSON.stringify(this.patientSampleBody, null, 4);
+            }
             return this.getPatientDynamicData();
           }if (this.selectedEntry.requestBody) {
-            this.currentRequest.body = JSON.stringify(this.patientSampleBody, null, 4);
+            const dummyPatientBody = { ...this.patientSampleBody };
+            delete dummyPatientBody.id
+            this.currentRequest.body = JSON.stringify(dummyPatientBody, null, 4);
           }
           break;
         case api.includes('/Coverage'):
           if (this.selectedEntry.parameters.length != 0) {
+            if (this.selectedEntry.method ==='put') {
+              this.currentRequest.putBody = JSON.stringify(this.coverageSampleBody, null, 4);
+            }
             return this.getCoveragetDynamicData();
           }if (this.selectedEntry.requestBody) {
-            this.currentRequest.body = JSON.stringify(this.coverageSampleBody, null, 4);
+            const dummyCoverageBody = { ...this.coverageSampleBody };
+            delete dummyCoverageBody.id
+            this.currentRequest.body = JSON.stringify(dummyCoverageBody, null, 4);
           }
           break;
         case api.includes('/ClaimResponse'):
@@ -338,4 +349,5 @@ textarea {
     padding: 4px;
 }
 </style>
+
 

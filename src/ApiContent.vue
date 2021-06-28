@@ -436,6 +436,7 @@ export default {
     currentRequest: {
       contentType: "",
       body: "",
+      putBody: "",
       params: {},
       security: {}
     },
@@ -618,7 +619,13 @@ export default {
         if (contentType === "multipart/form-data") {
           httpRequest.body = this.$refs.requestForm.getFormData();
         } else {
-          httpRequest.body = request.body;
+          if (entry.method === 'post') {
+            httpRequest.body = request.body;
+          }else if (entry.method === 'put') {
+            httpRequest.body = request.putBody;
+          }else {
+            httpRequest.body = request.body;
+          }
         }
       }
 
@@ -806,3 +813,4 @@ async function getTags(api) {
   right:22px;
 }
 </style>
+
