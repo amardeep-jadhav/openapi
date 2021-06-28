@@ -1,4 +1,3 @@
-
 <template lang="html">
   <form novalidate @submit.stop.prevent="submit" v-if="selectedEntry" id="request-form">
     <h6 class="text-h6 d-inline-block" v-if="selectedEntry.security && selectedEntry.security.filter(s => s.scheme.in !== 'cookie').length">
@@ -65,13 +64,15 @@
 
 <script>
 import Vue from "vue";
+import patientBody from "@/assets/patient_sample_body.json";
+import coverageBody from "@/assets/coverage_sample_body.json";
 import ParametersTableVue from 'vue-openapi/src/ParametersTable.vue'
 import MultipartForm from './MultipartForm.vue';
 import stringify from "json-stringify-pretty-compact";
 export default {
   components: {MultipartForm},
   props: ['selectedEntry', 'currentRequest'],
-  created: function() {
+  mounted: function() {
     this.getDynamicExamples()
     this.$forceUpdate();
   },
@@ -95,14 +96,15 @@ export default {
   //   } else if(this.claimResponseId){
   //     this.currentRequest.params['resourceId'] = this.claimResponseId
   //   } else if(this.beneficiary){
-  //     console.log("in updated.......", this.beneficiary)
   //      this.currentRequest.params['beneficiary'] = this.beneficiary
   //   }
   // },
   data: () => ({
    family: '',
    beneficiary: '',
-   claimResponseId: ''
+   claimResponseId: '',
+   patientSampleBody: patientBody,
+   coverageSampleBody: coverageBody,
   }),
   methods: {
     stringify,
@@ -115,11 +117,15 @@ export default {
         case api.includes('/Patient'):
           if (this.selectedEntry.parameters.length != 0) {
             return this.getPatientDynamicData();
+          }if (this.selectedEntry.requestBody) {
+            this.currentRequest.body = JSON.stringify(this.patientSampleBody, null, 4);
           }
           break;
         case api.includes('/Coverage'):
           if (this.selectedEntry.parameters.length != 0) {
             return this.getCoveragetDynamicData();
+          }if (this.selectedEntry.requestBody) {
+            this.currentRequest.body = JSON.stringify(this.coverageSampleBody, null, 4);
           }
           break;
         case api.includes('/ClaimResponse'):
@@ -133,11 +139,14 @@ export default {
     },
 
     getPatientDynamicData(){
-      Vue.http({"url": "https://kong-dev.medecision.cloud/Patient?family=1002L"}).then(
+      document.getElementById("overlay").style.display = "block";
+      Vue.http({"url": "https://kong-dev.medecision.cloud/Patient/12207"}).then(
         response => {
           this.setPatientExamples(response)
-        }
-      );
+        }).catch(e => {
+          console.log(e);
+          document.getElementById("overlay").style.display = "none";
+      });
     },
 
     getCoveragetDynamicData(){
@@ -145,18 +154,21 @@ export default {
       Vue.http({"url": "https://kong-dev.medecision.cloud/Coverage/1"}).then(
         response => {
           this.setCoverageExamples(response)
-        }
-      );
+        }).catch(e => {
+          console.log(e);
+          document.getElementById("overlay").style.display = "none";
+      });
     },
 
     getClaimResponseDynamicData(){
+      document.getElementById("overlay").style.display = "block";
       this.selectedEntry.parameters[0]['example'] = "For Example: "
       this.claimResponseId = 11509;
       Vue.http({"url": "https://kong-dev.medecision.cloud/ClaimResponse/11509"}).then(response => {
-          console.log(response);
           this.setClaimResponseExamples(response)
       }).catch(e => {
           console.log(e);
+          document.getElementById("overlay").style.display = "none";
       });
     },
 
@@ -168,6 +180,7 @@ export default {
           parameters[key]['example'] = "For Example: "+ finalExample
           // this.claimResponseId = finalExample;
       }
+       document.getElementById("overlay").style.display = "none";
     },
 
     setCoverageExamples(response){
@@ -190,7 +203,7 @@ export default {
           if (res) {
             parameters[key]['example'] = "For Example: "+ finalExample;
           }else{
-            parameters[key]['example'] = "";
+            parameters[key]['example'] = ""
           }
         }
       }
@@ -203,21 +216,22 @@ export default {
         if ( ["_has","_page","_format"].includes( parameters[key].name)) {
            parameters[key]['example'] = this.setStaticExamples(parameters[key].name)
         }else{
-          var res = this.lookup(response.body.entry, parameters[key].name)
-          var finalExample = this.parseExample(res)
+          var res = this.lookup(response.body, parameters[key].name)
+          var finalExample = this.parsePatient(res)
           parameters[key]['example'] = "For Example: "+ finalExample
           if (parameters[key].name === 'family') {
             this.family = finalExample
           }
         }
       }
+      document.getElementById("overlay").style.display = "none";
     },
 
-    parseExample(res){
+    parsePatient(res){
       if (Array.isArray(res)) {
         if (Array.isArray(res[1])) {
           if (res[0] === "identifier") {
-            return res[1][0].value
+            return this.deepLookUp(res, 'value')
           }else{
             return res[1][0]
           }
