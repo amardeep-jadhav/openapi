@@ -604,13 +604,12 @@ export default {
           this.api.servers.length &&
           this.api.servers[0].url +
             entry.path.replace(/{(\w*)}/g, (m, key) => {
-              return request.params[key];
+              return request.params[key]? request.params[key] : "";
             }),
         params,
         headers,
         credentials: true
       };
-
       const contentType =
         this.selectedEntry.requestBody &&
         this.selectedEntry.requestBody.selectedType;
@@ -813,4 +812,5 @@ async function getTags(api) {
   right:22px;
 }
 </style>
+
 

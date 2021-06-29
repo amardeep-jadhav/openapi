@@ -1,5 +1,5 @@
 <template lang="html">
-  <form novalidate @submit.stop.prevent="submit" v-if="selectedEntry" id="request-form">
+  <form @submit.stop.prevent="submit" v-if="selectedEntry" id="request-form">
     <h6 class="text-h6 d-inline-block" v-if="selectedEntry.security && selectedEntry.security.filter(s => s.scheme.in !== 'cookie').length">
       Security
     </h6>
@@ -18,7 +18,7 @@
         <label class="text-h5 d-inline-block grape--text">{{parameter.name}}</label>
         <v-text-field  class="pa-0" v-model.lazy.trim="currentRequest.params[parameter.name]" 
         :hint="parameter.example" persistent-hint
-        :type="parameter.schema.type === 'string' ? 'text' : 'number'"></v-text-field>
+        :type="parameter.schema.type === 'string' ? 'text' : 'text'"></v-text-field>
       </v-container>
 
       <v-container v-if="parameter.schema.enum">
@@ -349,5 +349,6 @@ textarea {
     padding: 4px;
 }
 </style>
+
 
 
