@@ -67,6 +67,7 @@
 import Vue from "vue";
 import patientBody from "@/assets/patient_sample_body.json";
 import coverageBody from "@/assets/coverage_sample_body.json";
+import locationBody from "@/assets/location_sample_body.json";
 import ParametersTableVue from 'vue-openapi/src/ParametersTable.vue'
 import MultipartForm from './MultipartForm.vue';
 import stringify from "json-stringify-pretty-compact";
@@ -89,6 +90,10 @@ export default {
     beneficiary: function() {
       this.currentRequest.params['beneficiary'] = this.beneficiary
       this.$forceUpdate();
+    },
+    locationIdentifier: function() {
+      this.currentRequest.params['identifier'] = this.locationIdentifier
+      this.$forceUpdate();
     }
   },
   // updated: function() {
@@ -104,8 +109,10 @@ export default {
    family: '',
    beneficiary: '',
    claimResponseId: '',
+   locationIdentifier: '',
    patientSampleBody: patientBody,
    coverageSampleBody: coverageBody,
+   locationSampleBody: locationBody,
   }),
   methods: {
     stringify,
@@ -116,36 +123,63 @@ export default {
       var api = this.selectedEntry.path
       switch(true) {
         case api.includes('/Patient'):
-          if (this.selectedEntry.parameters.length != 0) {
-            if (this.selectedEntry.method ==='put') {
-              this.currentRequest.putBody = JSON.stringify(this.patientSampleBody, null, 4);
-            }
-            return this.getPatientDynamicData();
-          }if (this.selectedEntry.requestBody) {
-            const dummyPatientBody = { ...this.patientSampleBody };
-            delete dummyPatientBody.id
-            this.currentRequest.body = JSON.stringify(dummyPatientBody, null, 4);
-          }
+          this.procesPatient();
           break;
         case api.includes('/Coverage'):
-          if (this.selectedEntry.parameters.length != 0) {
-            if (this.selectedEntry.method ==='put') {
-              this.currentRequest.putBody = JSON.stringify(this.coverageSampleBody, null, 4);
-            }
-            return this.getCoveragetDynamicData();
-          }if (this.selectedEntry.requestBody) {
-            const dummyCoverageBody = { ...this.coverageSampleBody };
-            delete dummyCoverageBody.id
-            this.currentRequest.body = JSON.stringify(dummyCoverageBody, null, 4);
-          }
+          this.procesCoverage();
           break;
         case api.includes('/ClaimResponse'):
-          if (this.selectedEntry.parameters.length != 0) {
-            return this.getClaimResponseDynamicData();
-          }
+          this.procesClaimResponse();
           break;
+        case api.includes('/Location'):
+          this.procesLocation();
+          break;  
         default:
           console.log("in default.......")
+      }
+    },
+
+    procesPatient(){
+      if (this.selectedEntry.parameters.length != 0) {
+        if (this.selectedEntry.method ==='put') {
+          this.currentRequest.putBody = JSON.stringify(this.patientSampleBody, null, 4);
+        }
+        return this.getPatientDynamicData();
+      }if (this.selectedEntry.requestBody) {
+        const dummyPatientBody = { ...this.patientSampleBody };
+        delete dummyPatientBody.id
+        this.currentRequest.body = JSON.stringify(dummyPatientBody, null, 4);
+      }
+    },
+    procesCoverage(){
+      if (this.selectedEntry.parameters.length != 0) {
+        if (this.selectedEntry.method ==='put') {
+          this.currentRequest.putBody = JSON.stringify(this.coverageSampleBody, null, 4);
+        }
+        return this.getCoveragetDynamicData();
+      }if (this.selectedEntry.requestBody) {
+        const dummyCoverageBody = { ...this.coverageSampleBody };
+        delete dummyCoverageBody.id
+        this.currentRequest.body = JSON.stringify(dummyCoverageBody, null, 4);
+      }
+    },
+
+    procesClaimResponse(){
+      if (this.selectedEntry.parameters.length != 0) {
+          return this.getClaimResponseDynamicData();
+      }
+    },
+
+    procesLocation(){
+      if (this.selectedEntry.parameters.length != 0) {
+        if (this.selectedEntry.method ==='put') {
+          this.currentRequest.putBody = JSON.stringify(this.locationSampleBody, null, 4);
+        }
+        return this.getLocationDynamicData();
+      }if (this.selectedEntry.requestBody) {
+        const dummyLocationeBody = { ...this.locationSampleBody };
+        delete dummyLocationeBody.id
+        this.currentRequest.body = JSON.stringify(dummyLocationeBody, null, 4);
       }
     },
 
@@ -156,6 +190,7 @@ export default {
           this.setPatientExamples(response)
         }).catch(e => {
           console.log(e);
+          this.clearExamples();
           document.getElementById("overlay").style.display = "none";
       });
     },
@@ -167,20 +202,61 @@ export default {
           this.setCoverageExamples(response)
         }).catch(e => {
           console.log(e);
+          this.clearExamples();
           document.getElementById("overlay").style.display = "none";
       });
     },
 
+    getLocationDynamicData(){
+      document.getElementById("overlay").style.display = "block";
+      Vue.http({"url": "https://kong-dev.medecision.cloud/Location/28952"}).then(
+        response => {
+          this.setLocationExamples(response)
+        }).catch(e => {
+          console.log(e);
+          this.clearExamples();
+          document.getElementById("overlay").style.display = "none";
+      });
+    },
+
+    clearExamples(){
+      this.currentRequest.params = {}
+      var parameters = this.selectedEntry.parameters;
+      for (var key in parameters) {
+        parameters[key]['example'] = "";
+      }
+    },
+
     getClaimResponseDynamicData(){
       document.getElementById("overlay").style.display = "block";
-      this.selectedEntry.parameters[0]['example'] = "For Example: "
-      this.claimResponseId = 11509;
-      Vue.http({"url": "https://kong-dev.medecision.cloud/ClaimResponse/11509"}).then(response => {
+      Vue.http({"url": "https://kong-dev.medecision.cloud/ClaimResponse/13094"}).then(response => {
           this.setClaimResponseExamples(response)
       }).catch(e => {
           console.log(e);
+          this.clearExamples();
           document.getElementById("overlay").style.display = "none";
       });
+    },
+
+    setLocationExamples(response){
+      var parameters = this.selectedEntry.parameters;
+      for (var key in parameters) {
+        var res = this.lookup(response.body, parameters[key].name)
+        var finalExample = this.parseLocation(res)
+        if ( ["_page"].includes( parameters[key].name)) {
+          parameters[key]['example'] = this.setStaticExamples(parameters[key].name)
+        }else{
+          if (res) {
+            if ((parameters[key].name === 'identifier')) {
+              this.locationIdentifier = finalExample;
+            }
+            parameters[key]['example'] = "For Example: "+ finalExample;
+          }else{
+            parameters[key]['example'] = ""
+          }
+        }  
+      }
+      document.getElementById("overlay").style.display = "none";
     },
 
     setClaimResponseExamples(response){
@@ -189,7 +265,7 @@ export default {
           var res = this.lookup(response.body, parameters[key].name)
           var finalExample = this.parseClaimResponse(res)
           parameters[key]['example'] = "For Example: "+ finalExample
-          // this.claimResponseId = finalExample;
+          this.claimResponseId = finalExample;
       }
        document.getElementById("overlay").style.display = "none";
     },
@@ -236,6 +312,20 @@ export default {
         }
       }
       document.getElementById("overlay").style.display = "none";
+    },
+
+    parseLocation(res){
+      if (res!== null) {
+        if (Array.isArray(res[1])) {
+          if (res[0] == "identifier") {
+            return res[1][0]['system'] + "|" + this.deepLookUp(res, 'value')
+          }else{
+          return res[1][0]
+          }
+        }else{
+          return res[1]
+        }
+      }
     },
 
     parsePatient(res){
@@ -313,6 +403,16 @@ export default {
         k = 'id'
       }else if(k === 'subscriberid'){
         k = 'subscriberId'
+      }else if(k === 'address-line1'){
+        k = 'line'
+      }else if(k === 'address-city'){
+        k ='city'
+      }else if(k === 'address-state'){
+        k ='state'
+      }else if(k === 'address-postalcode'){
+        k ='postalCode'
+      }else if(k === 'address-country'){
+        k ='country'
       }
       return k;
     },
@@ -349,6 +449,7 @@ textarea {
     padding: 4px;
 }
 </style>
+
 
 
 
