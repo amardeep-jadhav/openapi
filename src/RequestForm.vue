@@ -68,6 +68,7 @@ import Vue from "vue";
 import patientBody from "@/assets/patient_sample_body.json";
 import coverageBody from "@/assets/coverage_sample_body.json";
 import locationBody from "@/assets/location_sample_body.json";
+import practitionerBody  from "@/assets/practitioner_sample_body.json";
 import ParametersTableVue from 'vue-openapi/src/ParametersTable.vue'
 import MultipartForm from './MultipartForm.vue';
 import stringify from "json-stringify-pretty-compact";
@@ -94,6 +95,10 @@ export default {
     locationIdentifier: function() {
       this.currentRequest.params['identifier'] = this.locationIdentifier
       this.$forceUpdate();
+    },
+    practitionerIdentifier: function() {
+      this.currentRequest.params['identifier'] = this.practitionerIdentifier
+      this.$forceUpdate();
     }
   },
   // updated: function() {
@@ -110,9 +115,11 @@ export default {
    beneficiary: '',
    claimResponseId: '',
    locationIdentifier: '',
+   practitionerIdentifier: '',
    patientSampleBody: patientBody,
    coverageSampleBody: coverageBody,
    locationSampleBody: locationBody,
+   practitionerSampleBody: practitionerBody,
   }),
   methods: {
     stringify,
@@ -133,12 +140,16 @@ export default {
           break;
         case api.includes('/Location'):
           this.procesLocation();
+          break;
+        case api.includes('/Practitioner'):
+          this.procesPractitioner();
           break;  
         default:
           console.log("in default.......")
       }
     },
 
+    // #Fire request to "Patient resource" get result , parse it and and set as example 
     procesPatient(){
       if (this.selectedEntry.parameters.length != 0) {
         if (this.selectedEntry.method ==='put') {
@@ -149,37 +160,6 @@ export default {
         const dummyPatientBody = { ...this.patientSampleBody };
         delete dummyPatientBody.id
         this.currentRequest.body = JSON.stringify(dummyPatientBody, null, 4);
-      }
-    },
-    procesCoverage(){
-      if (this.selectedEntry.parameters.length != 0) {
-        if (this.selectedEntry.method ==='put') {
-          this.currentRequest.putBody = JSON.stringify(this.coverageSampleBody, null, 4);
-        }
-        return this.getCoveragetDynamicData();
-      }if (this.selectedEntry.requestBody) {
-        const dummyCoverageBody = { ...this.coverageSampleBody };
-        delete dummyCoverageBody.id
-        this.currentRequest.body = JSON.stringify(dummyCoverageBody, null, 4);
-      }
-    },
-
-    procesClaimResponse(){
-      if (this.selectedEntry.parameters.length != 0) {
-          return this.getClaimResponseDynamicData();
-      }
-    },
-
-    procesLocation(){
-      if (this.selectedEntry.parameters.length != 0) {
-        if (this.selectedEntry.method ==='put') {
-          this.currentRequest.putBody = JSON.stringify(this.locationSampleBody, null, 4);
-        }
-        return this.getLocationDynamicData();
-      }if (this.selectedEntry.requestBody) {
-        const dummyLocationeBody = { ...this.locationSampleBody };
-        delete dummyLocationeBody.id
-        this.currentRequest.body = JSON.stringify(dummyLocationeBody, null, 4);
       }
     },
 
@@ -195,6 +175,51 @@ export default {
       });
     },
 
+    setPatientExamples(response){
+      var parameters = this.selectedEntry.parameters;
+      for (var key in parameters) {
+        if ( ["_has","_page","_format"].includes( parameters[key].name)) {
+           parameters[key]['example'] = this.setStaticExamples(parameters[key].name)
+        }else{
+          var res = this.lookup(response.body, parameters[key].name)
+          var finalExample = this.parsePatient(res)
+          parameters[key]['example'] = "For Example: "+ finalExample
+          if (parameters[key].name === 'family') {
+            this.family = finalExample
+          }
+        }
+      }
+      document.getElementById("overlay").style.display = "none";
+    },
+
+    parsePatient(res){
+      if (Array.isArray(res)) {
+        if (Array.isArray(res[1])) {
+          if (res[0] === "identifier") {
+            return this.deepLookUp(res, 'value')
+          }else{
+            return res[1][0]
+          }
+        }else{
+          return res[1]
+        }
+      }
+    },
+
+    // #Fire request to "Coverage resource" get result , parse it and and set as example 
+    procesCoverage(){
+      if (this.selectedEntry.parameters.length != 0) {
+        if (this.selectedEntry.method ==='put') {
+          this.currentRequest.putBody = JSON.stringify(this.coverageSampleBody, null, 4);
+        }
+        return this.getCoveragetDynamicData();
+      }if (this.selectedEntry.requestBody) {
+        const dummyCoverageBody = { ...this.coverageSampleBody };
+        delete dummyCoverageBody.id
+        this.currentRequest.body = JSON.stringify(dummyCoverageBody, null, 4);
+      }
+    },
+
     getCoveragetDynamicData(){
       document.getElementById("overlay").style.display = "block";
       Vue.http({"url": "https://kong-dev.medecision.cloud/Coverage/1"}).then(
@@ -205,69 +230,6 @@ export default {
           this.clearExamples();
           document.getElementById("overlay").style.display = "none";
       });
-    },
-
-    getLocationDynamicData(){
-      document.getElementById("overlay").style.display = "block";
-      Vue.http({"url": "https://kong-dev.medecision.cloud/Location/28952"}).then(
-        response => {
-          this.setLocationExamples(response)
-        }).catch(e => {
-          console.log(e);
-          this.clearExamples();
-          document.getElementById("overlay").style.display = "none";
-      });
-    },
-
-    clearExamples(){
-      this.currentRequest.params = {}
-      var parameters = this.selectedEntry.parameters;
-      for (var key in parameters) {
-        parameters[key]['example'] = "";
-      }
-    },
-
-    getClaimResponseDynamicData(){
-      document.getElementById("overlay").style.display = "block";
-      Vue.http({"url": "https://kong-dev.medecision.cloud/ClaimResponse/13094"}).then(response => {
-          this.setClaimResponseExamples(response)
-      }).catch(e => {
-          console.log(e);
-          this.clearExamples();
-          document.getElementById("overlay").style.display = "none";
-      });
-    },
-
-    setLocationExamples(response){
-      var parameters = this.selectedEntry.parameters;
-      for (var key in parameters) {
-        var res = this.lookup(response.body, parameters[key].name)
-        var finalExample = this.parseLocation(res)
-        if ( ["_page"].includes( parameters[key].name)) {
-          parameters[key]['example'] = this.setStaticExamples(parameters[key].name)
-        }else{
-          if (res) {
-            if ((parameters[key].name === 'identifier')) {
-              this.locationIdentifier = finalExample;
-            }
-            parameters[key]['example'] = "For Example: "+ finalExample;
-          }else{
-            parameters[key]['example'] = ""
-          }
-        }  
-      }
-      document.getElementById("overlay").style.display = "none";
-    },
-
-    setClaimResponseExamples(response){
-      var parameters = this.selectedEntry.parameters;
-      for (var key in parameters) {
-          var res = this.lookup(response.body, parameters[key].name)
-          var finalExample = this.parseClaimResponse(res)
-          parameters[key]['example'] = "For Example: "+ finalExample
-          this.claimResponseId = finalExample;
-      }
-       document.getElementById("overlay").style.display = "none";
     },
 
     setCoverageExamples(response){
@@ -297,51 +259,6 @@ export default {
       document.getElementById("overlay").style.display = "none";
     },
 
-    setPatientExamples(response){
-      var parameters = this.selectedEntry.parameters;
-      for (var key in parameters) {
-        if ( ["_has","_page","_format"].includes( parameters[key].name)) {
-           parameters[key]['example'] = this.setStaticExamples(parameters[key].name)
-        }else{
-          var res = this.lookup(response.body, parameters[key].name)
-          var finalExample = this.parsePatient(res)
-          parameters[key]['example'] = "For Example: "+ finalExample
-          if (parameters[key].name === 'family') {
-            this.family = finalExample
-          }
-        }
-      }
-      document.getElementById("overlay").style.display = "none";
-    },
-
-    parseLocation(res){
-      if (res!== null) {
-        if (Array.isArray(res[1])) {
-          if (res[0] == "identifier") {
-            return res[1][0]['system'] + "|" + this.deepLookUp(res, 'value')
-          }else{
-          return res[1][0]
-          }
-        }else{
-          return res[1]
-        }
-      }
-    },
-
-    parsePatient(res){
-      if (Array.isArray(res)) {
-        if (Array.isArray(res[1])) {
-          if (res[0] === "identifier") {
-            return this.deepLookUp(res, 'value')
-          }else{
-            return res[1][0]
-          }
-        }else{
-          return res[1]
-        }
-      }
-    },
-
     parseCoverage(res, extraKey){
       if (res!== null) {
         if (res[0] === 'beneficiary') {
@@ -360,9 +277,169 @@ export default {
       }
     },
 
+    // #Fire request to "ClaimResponse resource" get result , parse it and and set as example 
+    procesClaimResponse(){
+      if (this.selectedEntry.parameters.length != 0) {
+          return this.getClaimResponseDynamicData();
+      }
+    },
+
+    getClaimResponseDynamicData(){
+      document.getElementById("overlay").style.display = "block";
+      Vue.http({"url": "https://kong-dev.medecision.cloud/ClaimResponse/13094"}).then(response => {
+          this.setClaimResponseExamples(response)
+      }).catch(e => {
+          console.log(e);
+          this.clearExamples();
+          document.getElementById("overlay").style.display = "none";
+      });
+    },
+
+    setClaimResponseExamples(response){
+      var parameters = this.selectedEntry.parameters;
+      for (var key in parameters) {
+          var res = this.lookup(response.body, parameters[key].name)
+          var finalExample = this.parseClaimResponse(res)
+          parameters[key]['example'] = "For Example: "+ finalExample
+          this.claimResponseId = finalExample;
+      }
+       document.getElementById("overlay").style.display = "none";
+    },
+
     parseClaimResponse(res){
       if (res!== null) {
         return res[1]
+      }
+    },
+
+   // #Fire request to "Location resource" get result , parse it and and set as example 
+    procesLocation(){
+      if (this.selectedEntry.parameters.length != 0) {
+        if (this.selectedEntry.method ==='put') {
+          this.currentRequest.putBody = JSON.stringify(this.locationSampleBody, null, 4);
+        }
+        return this.getLocationDynamicData();
+      }if (this.selectedEntry.requestBody) {
+        const dummyLocationeBody = { ...this.locationSampleBody };
+        delete dummyLocationeBody.id
+        this.currentRequest.body = JSON.stringify(dummyLocationeBody, null, 4);
+      }
+    },
+
+    getLocationDynamicData(){
+      document.getElementById("overlay").style.display = "block";
+      Vue.http({"url": "https://kong-dev.medecision.cloud/Location/28952"}).then(
+        response => {
+          this.setLocationExamples(response)
+        }).catch(e => {
+          console.log(e);
+          this.clearExamples();
+          document.getElementById("overlay").style.display = "none";
+      });
+    },
+
+    setLocationExamples(response){
+      var parameters = this.selectedEntry.parameters;
+      for (var key in parameters) {
+        var res = this.lookup(response.body, parameters[key].name)
+        var finalExample = this.parseLocation(res)
+        if ( ["_page"].includes( parameters[key].name)) {
+          parameters[key]['example'] = this.setStaticExamples(parameters[key].name)
+        }else{
+          if (res) {
+            if ((parameters[key].name === 'identifier')) {
+              this.locationIdentifier = finalExample;
+            }
+            parameters[key]['example'] = "For Example: "+ finalExample;
+          }else{
+            parameters[key]['example'] = ""
+          }
+        }  
+      }
+      document.getElementById("overlay").style.display = "none";
+    },
+
+    parseLocation(res){
+      if (res!== null) {
+        if (Array.isArray(res[1])) {
+          if (res[0] == "identifier") {
+            return res[1][0]['system'] + "|" + this.deepLookUp(res, 'value')
+          }else{
+          return res[1][0]
+          }
+        }else{
+          return res[1]
+        }
+      }
+    },
+
+   // #Fire request to "Practitioner resource" get result , parse it and and set as example 
+    procesPractitioner(){
+      if (this.selectedEntry.parameters.length != 0) {
+        if (this.selectedEntry.method ==='put') {
+          this.currentRequest.putBody = JSON.stringify(this.practitionerSampleBody, null, 4);
+        }
+        return this.getPractitionerDynamicData();
+      }if (this.selectedEntry.requestBody) {
+        const dummyPractitionerBody = { ...this.practitionerSampleBody };
+        delete dummyPractitionerBody.id
+        this.currentRequest.body = JSON.stringify(dummyPractitionerBody, null, 4);
+      }
+    },
+
+    getPractitionerDynamicData(){
+      document.getElementById("overlay").style.display = "block";
+      Vue.http({"url": "https://kong-dev.medecision.cloud/Practitioner/55543"}).then(
+        response => {
+          this.setPractitionerExamples(response)
+        }).catch(e => {
+          console.log(e);
+          this.clearExamples();
+          document.getElementById("overlay").style.display = "none";
+      });  
+    },
+
+    setPractitionerExamples(response){
+      var parameters = this.selectedEntry.parameters;
+      for (var key in parameters) {
+        var res = this.lookup(response.body, parameters[key].name)
+        var finalExample = this.parsePractitioner(res)
+        if ( ["_page"].includes( parameters[key].name)) {
+          parameters[key]['example'] = this.setStaticExamples(parameters[key].name)
+        }else{
+          if (res) {
+            if ((parameters[key].name === 'identifier')) {
+              this.practitionerIdentifier = finalExample;
+            }
+            parameters[key]['example'] = "For Example: "+ finalExample;
+          }else{
+            parameters[key]['example'] = ""
+          }
+        }  
+      }
+      document.getElementById("overlay").style.display = "none";
+    },
+
+    parsePractitioner(res){
+      if (res!== null) {
+        if (Array.isArray(res[1])) {
+          if (res[0] == "identifier") {
+            return res[1][0]['system'] + "|" + this.deepLookUp(res, 'value')
+          }else{
+            return res[1][0]
+          }
+        }else{
+          return res[1]
+        }
+      }
+    },
+
+  // Common method for Parsing Response hash(Lookup, DeepLookup) and mapping missing keys(mapKey)
+    clearExamples(){
+      this.currentRequest.params = {}
+      var parameters = this.selectedEntry.parameters;
+      for (var key in parameters) {
+        parameters[key]['example'] = "";
       }
     },
 
@@ -416,6 +493,7 @@ export default {
       }
       return k;
     },
+
     setStaticExamples(name){
       if (name === "_format" ) {
         return "For Example : JSON";
