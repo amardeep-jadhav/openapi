@@ -69,7 +69,7 @@ import patientBody from "@/assets/patient_sample_body.json";
 import coverageBody from "@/assets/coverage_sample_body.json";
 import locationBody from "@/assets/location_sample_body.json";
 import practitionerBody  from "@/assets/practitioner_sample_body.json";
-//import organizationBody  from "@/assets/organization_sample_body.json";
+import organizationBody  from "@/assets/organization_sample_body.json";
 import ParametersTableVue from 'vue-openapi/src/ParametersTable.vue'
 import MultipartForm from './MultipartForm.vue';
 import stringify from "json-stringify-pretty-compact";
@@ -101,10 +101,10 @@ export default {
       this.currentRequest.params['identifier'] = this.practitionerIdentifier
       this.$forceUpdate();
     },
-    // organizationIdentifier: function() {
-    //   this.currentRequest.params['identifier'] = this.organizationIdentifier
-    //   this.$forceUpdate();
-    // }
+    organizationIdentifier: function() {
+      this.currentRequest.params['identifier'] = this.organizationIdentifier
+      this.$forceUpdate();
+    }
   },
   // updated: function() {
   //   if (this.family) {
@@ -121,12 +121,12 @@ export default {
    claimResponseId: '',
    locationIdentifier: '',
    practitionerIdentifier: '',
-   //organizationIdentifier: '',
+   organizationIdentifier: '',
    patientSampleBody: patientBody,
    coverageSampleBody: coverageBody,
    locationSampleBody: locationBody,
    practitionerSampleBody: practitionerBody,
-   //organizationSampleBody: organizationBody,
+   organizationSampleBody: organizationBody,
   }),
   methods: {
     stringify,
@@ -151,9 +151,9 @@ export default {
         case api.includes('/Practitioner'):
           this.procesPractitioner();
           break;
-        // case api.includes('/Organization'):
-        //   this.procesOrganization();
-        //   break;
+        case api.includes('/Organization'):
+          this.procesOrganization();
+          break;
         default:
           console.log("in default.......")
       }
@@ -445,66 +445,66 @@ export default {
     },
 
   // #Fire request to "organization resource" get result , parse it and and set as example 
-    // procesOrganization(){
-    //   if (this.selectedEntry.parameters.length != 0) {
-    //     if (this.selectedEntry.method ==='put') {
-    //       this.currentRequest.putBody = JSON.stringify(this.organizationSampleBody, null, 4);
-    //     }
-    //     return this.getOrganizationDynamicData();
-    //   }if (this.selectedEntry.requestBody) {
-    //     const dummyOrganizationBody = { ...this.organizationSampleBody };
-    //     delete dummyOrganizationBody.id
-    //     this.currentRequest.body = JSON.stringify(dummyOrganizationBody, null, 4);
-    //   }
-    // },
-    // getOrganizationDynamicData(){
-    //   document.getElementById("overlay").style.display = "block";
-    //   Vue.http({"url": "https://kong-dev.medecision.cloud/Organization/50959"}).then(
-    //     response => {
-    //       this.setOrganizationExamples(response)
-    //     }).catch(e => {
-    //       console.log(e);
-    //       this.clearExamples();
-    //       document.getElementById("overlay").style.display = "none";
-    //   });
-    // },
+    procesOrganization(){
+      if (this.selectedEntry.parameters.length != 0) {
+        if (this.selectedEntry.method ==='put') {
+          this.currentRequest.putBody = JSON.stringify(this.organizationSampleBody, null, 4);
+        }
+        return this.getOrganizationDynamicData();
+      }if (this.selectedEntry.requestBody) {
+        const dummyOrganizationBody = { ...this.organizationSampleBody };
+        delete dummyOrganizationBody.id
+        this.currentRequest.body = JSON.stringify(dummyOrganizationBody, null, 4);
+      }
+    },
+    getOrganizationDynamicData(){
+      document.getElementById("overlay").style.display = "block";
+      Vue.http({"url": "https://kong-dev.medecision.cloud/Organization/50959"}).then(
+        response => {
+          this.setOrganizationExamples(response)
+        }).catch(e => {
+          console.log(e);
+          this.clearExamples();
+          document.getElementById("overlay").style.display = "none";
+      });
+    },
 
-    // setOrganizationExamples(response){
-    //   var parameters = this.selectedEntry.parameters;
-    //   for (var key in parameters) {
-    //     var res = this.lookup(response.body, parameters[key].name)
-    //     var finalExample = this.parseOrganisation(res)
-    //     if ( ["_page"].includes( parameters[key].name)) {
-    //       parameters[key]['example'] = this.setStaticExamples(parameters[key].name)
-    //     }else{
-    //       if (res) {
-    //         if ((parameters[key].name === 'identifier')) {
-    //           this.organizationIdentifier = finalExample;
-    //         }
-    //         parameters[key]['example'] = "For Example: "+ finalExample;
-    //       }else{
-    //         parameters[key]['example'] = ""
-    //       }
-    //     }  
-    //   }
-    //   document.getElementById("overlay").style.display = "none";
-    // },
+    setOrganizationExamples(response){
+      var parameters = this.selectedEntry.parameters;
+      for (var key in parameters) {
+        var res = this.lookup(response.body, parameters[key].name)
+        var finalExample = this.parseOrganisation(res)
+        if ( ["_page"].includes( parameters[key].name)) {
+          parameters[key]['example'] = this.setStaticExamples(parameters[key].name)
+        }else{
+          if (res) {
+            if ((parameters[key].name === 'identifier')) {
+              this.organizationIdentifier = finalExample;
+            }
+            parameters[key]['example'] = "For Example: "+ finalExample;
+          }else{
+            parameters[key]['example'] = ""
+          }
+        }  
+      }
+      document.getElementById("overlay").style.display = "none";
+    },
 
-    // parseOrganisation(res){
-    //   if (res!== null) {
-    //     if (Array.isArray(res[1])) {
-    //       if (res[0] == "identifier") {
-    //         return res[1][0]['system'] + "|" + this.deepLookUp(res, 'value')
-    //       }if (res[0] == "type"){
-    //         return this.deepLookUp(res, 'code')
-    //       }else{
-    //         return res[1][0]
-    //       }
-    //     }else{
-    //       return res[1]
-    //     }
-    //   }
-    // },
+    parseOrganisation(res){
+      if (res!== null) {
+        if (Array.isArray(res[1])) {
+          if (res[0] == "identifier") {
+            return res[1][0]['system'] + "|" + this.deepLookUp(res, 'value')
+          }if (res[0] == "type"){
+            return this.deepLookUp(res, 'code')
+          }else{
+            return res[1][0]
+          }
+        }else{
+          return res[1]
+        }
+      }
+    },
 
   // Common method for Parsing Response hash(Lookup, DeepLookup) and mapping missing keys(mapKey)
     clearExamples(){
