@@ -606,11 +606,13 @@ export default {
           }
         });
 
+        
       const httpRequest = {
         method: entry.method,
         url:
           this.api.servers.length &&
-          this.api.servers[0].url +
+          //this.api.servers[0].url +
+          process.env.VUE_APP_KONG_URL +  
             entry.path.replace(/{(\w*)}/g, (m, key) => {
               return request.params[key]? request.params[key] : "";
             }),
@@ -820,5 +822,6 @@ async function getTags(api) {
   right:22px;
 }
 </style>
+
 
 
