@@ -68,65 +68,7 @@
           <div class="mx-2">
             <p class="entry-description" v-if="selectedEntry.summary" v-html="marked(selectedEntry.summary || '')"></p>
           </div>
-          <div v-if="api.servers && api.servers.length" class="mb-3 d-flex">
-          
-
-            <!-----Dailog Implementation Starts here----->
-            <!-- <hds-dialog v-model="modal" title="Authorize Now" modal>
-              <template #title>
-                <v-btn icon @click="modal = false">
-                  <v-icon>$close</v-icon>
-                </v-btn>
-              </template>
-              <template #text>
-                <v-responsive min-height="300" class="my-5">
-                  <form @submit.prevent="submit" id="check-auth-form">
-                    <h2 class="text-h6 stone-gray--text mb-2">
-                      Using Account ID and Secret
-                    </h2>
-                    <h5 class="text-subtitle-2 stone-gray--text mb-5">
-                      Recommended for longer working session, as we will store
-                      this information in your session, until you sign out or
-                      close the broswer window.
-                    </h5>
-                    <hds-text-field
-                      label="Authorize ID"
-                      value="Input text"
-                      outlined
-                      color="grape"
-                      v-model="authID"
-                    />
-                    <hds-text-field
-                      :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                      :type="show ? 'text' : 'password'"
-                      label="API Key"
-                      v-model="apiKey"
-                      @click:append="show = !show"
-                      outlined
-                      color="grape"
-                    ></hds-text-field>
-                  </form>
-                </v-responsive>
-              </template>
-              <template #actions>
-                <hds-btn alt small @click="modal = false">
-                  Close
-                </hds-btn>
-
-                <hds-btn
-                  class="ml-2"
-                  color="primary"
-                  min-width="96"
-                  small
-                  @click="modal = false"
-                  type="submit"
-                  form="check-auth-form"
-                >
-                  Authorize
-                </hds-btn>
-              </template>
-            </hds-dialog> -->
-            <!---- Dialog Implementation Ends here ---->
+          <div v-if="api.servers && api.servers.length" class="mb-3 d-flex">           
             <!-- <hds-btn
               @click.native="emitEntry(selectedEntry)"
               v-bind:href="'#'+ selectedEntry.summary + '_tryItHere'"
@@ -302,40 +244,26 @@
                         <v-responsive min-height="300" class="my-5">
                           <form v-model="isFormValid"
                             @submit.prevent="clickAuthorize" id="check-auth-form">
-                            <!-- <h2 class="text-h6 stone-gray--text mb-2">
-                              Using Account ID and Secret
-                            </h2> -->
-                            <!-- <h5 class="text-subtitle-2 stone-gray--text mb-5">
-                              Recommended for longer working session, as we will store
-                              this information in your session, until you sign out or
-                              close the broswer window.
-                            </h5> -->
                             <hds-text-field
                               outlined
                               color="grape"
-                              :append-icon="showApiKey ? 'mdi-eye' : 'mdi-eye-off'"
-                              :type="showApiKey ? 'text' : 'password'"
                               label="API Key"
                               v-model="apiKey"
                               required
                               @input="$v.apiKey.$touch()"
                               @blur="$v.apiKey.$touch()"
                               :error-messages="apiKeyErrors"
-                              @click:append="showApiKey = !showApiKey"
                               class="mt-5"
                             ></hds-text-field>
                             <hds-text-field
                               outlined
-                              color="grape"
-                              :append-icon="showSecretKey ? 'mdi-eye' : 'mdi-eye-off'"
-                              :type="showSecretKey ? 'text' : 'password'"                           
+                              color="grape"                          
                               label="Secret Key"
                               v-model="secretKey"
                               required
                               @input="$v.secretKey.$touch()"
                               @blur="$v.secretKey.$touch()"
-                              :error-messages="secretKeyErrors"  
-                              @click:append="showSecretKey = !showSecretKey"                            
+                              :error-messages="secretKeyErrors"                              
                             />                            
                           </form>
                         </v-responsive>
@@ -540,8 +468,6 @@ export default {
     secretKey: "",
     apiKey: "",
     show: false,
-    showSecretKey: false,
-    showApiKey: false,
     //selectedEntry: null,
     currentSchema: " ",
     currentExamples: {},
@@ -608,8 +534,6 @@ export default {
         return;
       }
       this.$v.$reset();
-      this.secretKey = "";
-      this.apiKey = "";
       this.tryItNowModal = false;
       console.log(this.tryItNowModal);
       this.emitEntry(entry);
@@ -734,7 +658,8 @@ export default {
                 : request.params[p.name]
           }))
       );
-
+      headers['API_Key'] = this.apiKey;
+      headers['Secret_Key'] = this.secretKey;
       entry.security
         .filter(s => !!request.security[s.scheme.name])
         .forEach(s => {
@@ -795,6 +720,7 @@ export default {
       } else {
         document.getElementById("overlay").style.display = "block";
         this.prepareHTTPRequest();
+        debugger;//eslint-disable-line
         Vue.http(this.httpRequest).then(
           res => {
             this.currentResponse = res;
