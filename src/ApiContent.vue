@@ -88,6 +88,84 @@
                 >Try In Postman</hds-btn
               >
             </a>
+            <template>
+                      <hds-dialog
+                        v-model="authorizeModal[i]"
+                        title="Authorize Now" 
+                        modal
+                        persistent
+                        :retain-focus = false
+                        >
+
+                        <template #activator="{ attrs, on }">
+                          <span class="mb-3 clearfix">
+                          <hds-btn
+                            v-bind="attrs"
+                            v-on="on"
+                            color="fuchsia"
+                            large
+                            class="ml-3 text-h5 white--text"
+                          >
+                            Authorize
+                          </hds-btn>
+                          </span>
+                        </template>
+
+                        <template #title>
+                          <v-btn icon @click="authorizeModalClose(i)">
+                            <v-icon>$close</v-icon>
+                          </v-btn>
+                        </template>
+
+                        <template #text>
+                        <v-responsive min-height="300" class="my-5">
+                          <form v-model="isFormValid"
+                            @submit.prevent="clickAuthorize" id="check-auth-form">
+                            <hds-text-field
+                              outlined
+                              color="grape"
+                              label="API Key"
+                              v-model="apiKey"
+                              required
+                              @input="$v.apiKey.$touch()"
+                              @blur="$v.apiKey.$touch()"
+                              :error-messages="apiKeyErrors"
+                              class="mt-5"
+                            ></hds-text-field>
+                            <hds-text-field
+                              outlined
+                              color="grape"                          
+                              label="Secret Key"
+                              v-model="secretKey"
+                              required
+                              @input="$v.secretKey.$touch()"
+                              @blur="$v.secretKey.$touch()"
+                              :error-messages="secretKeyErrors"                              
+                            />                            
+                          </form>
+                        </v-responsive>
+                      </template>
+
+                        <template #actions>
+                        <hds-btn alt small @click="authorizeModalClose(i)">
+                          Close
+                        </hds-btn>
+
+                        <hds-btn
+                          color="primary"
+                          min-width="96"
+                          small
+                          type="submit"
+                          form="check-auth-form"                          
+                          class="ml-2 text-h5 white--text"
+                          :disabled="$v.$invalid"
+                           @click="clickAuthorize(i)"
+                        >
+                          Authorize
+                        </hds-btn>
+                      </template>
+                      </hds-dialog>
+                    </template>
           </div>
           <v-row class="pt-3">
             <v-col cols="12" sm="12" md="12" class="py-1">
@@ -201,7 +279,7 @@
                     }"
                     title="Body"                   
                   >
-                    <!-- <hds-btn
+                    <hds-btn
                       @click.native="emitEntry(selectedEntry)"
                       v-bind:href="'#'+ selectedEntry.summary + '_tryItHere'"
                       class="text-h5 white--text float-right tryItNowPlacement"
@@ -210,86 +288,7 @@
                     >
                       <v-icon class="mr-2 white--text"
                         >mdi-hand-pointing-right</v-icon
-                      >Try it Now</hds-btn>  -->
-                    <template>
-                      <hds-dialog
-                        v-model="tryItNowModal"
-                        title="Authorize Now" 
-                        modal
-                        persistent
-                        :retain-focus = false
-                        >
-
-                        <template #activator="{ attrs, on }">
-                          <span class="mb-3 clearfix">
-                          <hds-btn
-                            v-bind="attrs"
-                            v-on="on"
-                            color="fuchsia"
-                            small
-                            class="text-h5 white--text float-right tryItNowPlacement"
-                          >
-                            Try it Now
-                          </hds-btn>
-                          </span>
-                        </template>
-
-                        <template #title>
-                          <v-btn icon @click="tryItNowModal = false">
-                            <v-icon>$close</v-icon>
-                          </v-btn>
-                        </template>
-
-                        <template #text>
-                        <v-responsive min-height="300" class="my-5">
-                          <form v-model="isFormValid"
-                            @submit.prevent="clickAuthorize" id="check-auth-form">
-                            <hds-text-field
-                              outlined
-                              color="grape"
-                              label="API Key"
-                              v-model="apiKey"
-                              required
-                              @input="$v.apiKey.$touch()"
-                              @blur="$v.apiKey.$touch()"
-                              :error-messages="apiKeyErrors"
-                              class="mt-5"
-                            ></hds-text-field>
-                            <hds-text-field
-                              outlined
-                              color="grape"                          
-                              label="Secret Key"
-                              v-model="secretKey"
-                              required
-                              @input="$v.secretKey.$touch()"
-                              @blur="$v.secretKey.$touch()"
-                              :error-messages="secretKeyErrors"                              
-                            />                            
-                          </form>
-                        </v-responsive>
-                      </template>
-
-                        <template #actions>
-                        <hds-btn alt small @click="tryItNowModal = false">
-                          Close
-                        </hds-btn>
-
-                        <hds-btn
-                          color="primary"
-                          min-width="96"
-                          small
-                          type="submit"
-                          form="check-auth-form"                          
-                          class="ml-2 text-h5 white--text"
-                          :disabled="$v.$invalid"
-                           @click="clickAuthorize(selectedEntry)"
-                          v-bind:href="'#'+ selectedEntry.summary + '_tryItHere'"
-                        >
-                          Authorize
-                        </hds-btn>
-                      </template>
-                      </hds-dialog>
-                    </template>
+                      >Try it Now</hds-btn>                     
 
                     <template #indented>
                       <div>
@@ -462,7 +461,7 @@ export default {
     accordion: false,
     bodySampleModal: false,
     modal: false,
-    tryItNowModal: false,
+    authorizeModal: {},
     isFormValid: false,
     mini: true,
     secretKey: "",
@@ -527,16 +526,20 @@ export default {
     },
   },
   methods: {
-    clickAuthorize(entry) {
-      //e.preventDefault();
+    clickAuthorize(i) {
       this.$v.$touch();
       if (this.$v.$invalid) {
         return;
       }
+      this.authorizeModalClose(i);
+      console.log(i);
+      //this.emitEntry(entry);
+    },
+    authorizeModalClose(i){
       this.$v.$reset();
-      this.tryItNowModal = false;
-      console.log(this.tryItNowModal);
-      this.emitEntry(entry);
+      this.apiKey = "";
+      this.secretKey = "";
+      this.authorizeModal[i] = false;
     },
     bodySampleClick(){
       //document.getElementsByClassName('v-dialog--active')[0].scrollTop = 0
