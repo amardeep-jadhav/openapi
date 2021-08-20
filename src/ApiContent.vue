@@ -195,6 +195,8 @@
                         title="Body Sample"
                         modal
                         persistent
+                        :retain-focus = false
+                        @click="bodySampleClick()"
                       >
                         <template #activator="{ attrs, on }">
                           <div class="text-center">
@@ -257,8 +259,7 @@
                     }"
                     title="Body"                   
                   >
-                    <span class="mb-3 clearfix">
-                    <hds-btn
+                    <!-- <hds-btn
                       @click.native="emitEntry(selectedEntry)"
                       v-bind:href="'#'+ selectedEntry.summary + '_tryItHere'"
                       class="text-h5 white--text float-right tryItNowPlacement"
@@ -267,8 +268,101 @@
                     >
                       <v-icon class="mr-2 white--text"
                         >mdi-hand-pointing-right</v-icon
-                      >Try it Now</hds-btn> 
-                    </span> 
+                      >Try it Now</hds-btn>  -->
+                    <template>
+                      <hds-dialog
+                        v-model="tryItNowModal"
+                        title="Authorize Now" 
+                        modal
+                        persistent
+                        :retain-focus = false
+                        >
+
+                        <template #activator="{ attrs, on }">
+                          <span class="mb-3 clearfix">
+                          <hds-btn
+                            v-bind="attrs"
+                            v-on="on"
+                            color="fuchsia"
+                            small
+                            class="text-h5 white--text float-right tryItNowPlacement"
+                          >
+                            Try it Now
+                          </hds-btn>
+                          </span>
+                        </template>
+
+                        <template #title>
+                          <v-btn icon @click="tryItNowModal = false">
+                            <v-icon>$close</v-icon>
+                          </v-btn>
+                        </template>
+
+                        <template #text>
+                        <v-responsive min-height="300" class="my-5">
+                          <form v-model="isFormValid"
+                            @submit.prevent="clickAuthorize" id="check-auth-form">
+                            <!-- <h2 class="text-h6 stone-gray--text mb-2">
+                              Using Account ID and Secret
+                            </h2> -->
+                            <!-- <h5 class="text-subtitle-2 stone-gray--text mb-5">
+                              Recommended for longer working session, as we will store
+                              this information in your session, until you sign out or
+                              close the broswer window.
+                            </h5> -->
+                            <hds-text-field
+                              outlined
+                              color="grape"
+                              :append-icon="showApiKey ? 'mdi-eye' : 'mdi-eye-off'"
+                              :type="showApiKey ? 'text' : 'password'"
+                              label="API Key"
+                              v-model="apiKey"
+                              required
+                              @input="$v.apiKey.$touch()"
+                              @blur="$v.apiKey.$touch()"
+                              :error-messages="apiKeyErrors"
+                              @click:append="showApiKey = !showApiKey"
+                              class="mt-5"
+                            ></hds-text-field>
+                            <hds-text-field
+                              outlined
+                              color="grape"
+                              :append-icon="showSecretKey ? 'mdi-eye' : 'mdi-eye-off'"
+                              :type="showSecretKey ? 'text' : 'password'"                           
+                              label="Secret Key"
+                              v-model="secretKey"
+                              required
+                              @input="$v.secretKey.$touch()"
+                              @blur="$v.secretKey.$touch()"
+                              :error-messages="secretKeyErrors"  
+                              @click:append="showSecretKey = !showSecretKey"                            
+                            />                            
+                          </form>
+                        </v-responsive>
+                      </template>
+
+                        <template #actions>
+                        <hds-btn alt small @click="tryItNowModal = false">
+                          Close
+                        </hds-btn>
+
+                        <hds-btn
+                          color="primary"
+                          min-width="96"
+                          small
+                          type="submit"
+                          form="check-auth-form"                          
+                          class="ml-2 text-h5 white--text"
+                          :disabled="$v.$invalid"
+                           @click="clickAuthorize(selectedEntry)"
+                          v-bind:href="'#'+ selectedEntry.summary + '_tryItHere'"
+                        >
+                          Authorize
+                        </hds-btn>
+                      </template>
+                      </hds-dialog>
+                    </template>
+
                     <template #indented>
                       <div>
                       <request-form
@@ -407,6 +501,8 @@ import stringify from "json-stringify-pretty-compact";
 import VueResource from "vue-resource";
 import LeftNavApi from "./LeftNavApi.vue";
 import ApiContent from "./ApiContent.vue";
+import { validationMixin } from "vuelidate";
+import { required, email } from "vuelidate/lib/validators";
 
 Vue.use(VueMaterial);
 Vue.use(VueResource);
@@ -423,6 +519,11 @@ export default {
     ParametersTable,
     SchemaView
   },
+  mixins: [validationMixin],
+  validations: {
+    secretKey: { required },
+    apiKey: { required }
+  },
   props: ["api", "headers", "queryParams", "tags", "selectedEntry"],
   data: () => ({
     drawer: true,
@@ -433,10 +534,14 @@ export default {
     accordion: false,
     bodySampleModal: false,
     modal: false,
+    tryItNowModal: false,
+    isFormValid: false,
     mini: true,
-    authID: "",
+    secretKey: "",
     apiKey: "",
     show: false,
+    showSecretKey: false,
+    showApiKey: false,
     //selectedEntry: null,
     currentSchema: " ",
     currentExamples: {},
@@ -459,7 +564,7 @@ export default {
     // if (this.$refs.menu.$children.length)
     //   this.$refs.menu.$children[0].toggleExpandList();
   },
-  created() {},
+  created() { },
   watch: {
     tags: function() {
       this.apiVerb = window.location.href.split("?")[1];
@@ -477,7 +582,41 @@ export default {
       this.request();
     }
   },
+  destroyed() {
+  //  this.bodySampleModal();
+  //  this.$el.scrollTop = 0;
+  },
+  computed: { 
+    secretKeyErrors() {
+      const errors = [];
+      if (!this.$v.secretKey.$dirty) return errors;
+      !this.$v.secretKey.required && errors.push("Required Field");
+      return errors;
+    },
+    apiKeyErrors() {
+      const errors = [];
+      if (!this.$v.apiKey.$dirty) return errors;
+      !this.$v.apiKey.required && errors.push("Required Field");
+      return errors;
+    },
+  },
   methods: {
+    clickAuthorize(entry) {
+      //e.preventDefault();
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return;
+      }
+      this.$v.$reset();
+      this.secretKey = "";
+      this.apiKey = "";
+      this.tryItNowModal = false;
+      console.log(this.tryItNowModal);
+      this.emitEntry(entry);
+    },
+    bodySampleClick(){
+      //document.getElementsByClassName('v-dialog--active')[0].scrollTop = 0
+    },
     marked,
     checkCurrentRequest(selectedEntry){
       if (this.selectedEntry) {
@@ -606,7 +745,6 @@ export default {
           }
         });
 
-        
       const httpRequest = {
         method: entry.method,
         url:
@@ -640,7 +778,7 @@ export default {
 
       this.httpRequest = httpRequest;
     },
-    emitEntry(entry){     
+    emitEntry(entry){
       if (this.selectedEntry) {
         if (entry.path == this.selectedEntry.path && entry.method == this.selectedEntry.method) {
           this.request();
@@ -822,6 +960,5 @@ async function getTags(api) {
   right:22px;
 }
 </style>
-
 
 
