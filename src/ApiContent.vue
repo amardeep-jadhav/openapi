@@ -69,18 +69,6 @@
             <p class="entry-description" v-if="selectedEntry.summary" v-html="marked(selectedEntry.summary || '')"></p>
           </div>
           <div v-if="api.servers && api.servers.length" class="mb-3 d-flex">           
-            <!-- <hds-btn
-              @click.native="emitEntry(selectedEntry)"
-              v-bind:href="'#'+ selectedEntry.summary + '_tryItHere'"
-              class=""
-              color="fuchsia"
-              large
-            >
-              <v-icon class="mr-2 white--text"
-                >mdi-hand-pointing-right</v-icon
-              >Try It Now</hds-btn
-            > -->
-
             <a href="/files/swagger.json" class="ml-3" download>
               <hds-btn class="text-uppercase" color="grape" large>
                 <v-icon class="mr-2 white--text download-animate"
@@ -119,8 +107,7 @@
 
                         <template #text>
                         <v-responsive min-height="300" class="my-5">
-                          <form v-model="isFormValid"
-                            @submit.prevent="clickAuthorize" id="check-auth-form">
+                          <form v-model="isFormValid" @submit.prevent="" id="check-auth-form">
                             <hds-text-field
                               outlined
                               color="grape"
@@ -140,8 +127,8 @@
                               required
                               @input="$v.secretKey.$touch()"
                               @blur="$v.secretKey.$touch()"
-                              :error-messages="secretKeyErrors"                              
-                            />                            
+                              :error-messages="secretKeyErrors"                         
+                            />              
                           </form>
                         </v-responsive>
                       </template>
@@ -454,8 +441,8 @@ export default {
   props: ["api", "headers", "queryParams", "tags", "selectedEntry"],
   data: () => ({
     drawer: true,
+    validKeys: false,
     modifiedTags: null,
-    isLoggedIn: localStorage.getItem("jwt") != null,
     apiVerb: null,
     exactVerb: null,
     accordion: false,
@@ -486,8 +473,11 @@ export default {
     fab: false
   }),
   mounted: function() {
-    // if (this.$refs.menu.$children.length)
-    //   this.$refs.menu.$children[0].toggleExpandList();
+    if (this.$store.state.apiKey && this.$store.state.apiSecret) {
+      this.validKeys = true;
+    }else{
+      this.validKeys = false;
+    }
   },
   created() { },
   watch: {
@@ -531,14 +521,12 @@ export default {
       if (this.$v.$invalid) {
         return;
       }
-      this.authorizeModalClose(i);
       console.log(i);
-      //this.emitEntry(entry);
+      this.authorizeModalClose(i);
+      this.validateAuthorize();
     },
     authorizeModalClose(i){
       this.$v.$reset();
-      this.apiKey = "";
-      this.secretKey = "";
       this.authorizeModal[i] = false;
     },
     bodySampleClick(){
@@ -661,8 +649,8 @@ export default {
                 : request.params[p.name]
           }))
       );
-      headers['API_Key'] = this.apiKey;
-      headers['Secret_Key'] = this.secretKey;
+      headers['API_Key'] = this.$store.state.apiKey
+      headers['Secret_Key'] = this.$store.state.apiSecret
       entry.security
         .filter(s => !!request.security[s.scheme.name])
         .forEach(s => {
@@ -706,6 +694,7 @@ export default {
 
       this.httpRequest = httpRequest;
     },
+
     emitEntry(entry){
       if (this.selectedEntry) {
         if (entry.path == this.selectedEntry.path && entry.method == this.selectedEntry.method) {
@@ -717,13 +706,11 @@ export default {
         this.$emit("onSelectEntry", entry);
       }
     },
+
     request() {
-      if (!this.isLoggedIn) {
-        //this.modal = true;
-      } else {
+      this.prepareHTTPRequest();
+      if (this.checkHeadersForValidKeys(this.httpRequest)) {
         document.getElementById("overlay").style.display = "block";
-        this.prepareHTTPRequest();
-        debugger;//eslint-disable-line
         Vue.http(this.httpRequest).then(
           res => {
             this.currentResponse = res;
@@ -734,7 +721,73 @@ export default {
             document.getElementById("overlay").style.display = "none";
           }
         );
+      } else {
+        this.$notify({
+        group: "foo",
+        type: "error",
+        title: "error",
+        text: "Please authorize before making api call!"
+        }, 3000 );
       }
+    },
+
+    checkHeadersForValidKeys(request){
+      return request.headers.API_Key && request.headers.Secret_Key && this.validKeys ? true : false
+    },
+
+    validateAuthorize() {
+      document.getElementById("overlay").style.display = "block";
+      let url = window.API_URL + "/api/v1/projects";
+      let params = { scope_by_user: true, apiKey: this.apiKey, apiSecret: this.secretKey};
+      this.$http
+        .get(url, { params: params })
+        .then(response => this.verifySuccess(response))
+        .catch(error => this.verifyFailed(error));
+    },
+
+    verifySuccess(response) {
+      if (response.body.project.length !== 0){
+        this.validKeys = true
+        this.$store.dispatch("setApiKey", this.apiKey);
+        this.$store.dispatch("setSecretKey", this.secretKey);
+        this.$notify({
+          group: "foo",
+          type: "success",
+          title: "Success",
+          text: "You have authorized sueessfully, now you can make api call using Try It Now...!"
+        },3000 );
+      }else{
+        this.validKeys = false;
+        this.$store.dispatch("setApiKey", '');
+        this.$store.dispatch("setSecretKey", '');
+        this.$notify({
+          group: "foo",
+          type: "error",
+          title: "error",
+          text: "Please make sure you have entred correct api key and secret key.!"
+        },3000 );
+      }
+      document.getElementById("overlay").style.display = "none";
+      this.clearAuthorizeForm();
+    },
+
+    verifyFailed(error) {
+      document.getElementById("overlay").style.display = "none";
+      this.validKeys = false
+      this.$notify(
+        {
+          group: "foo",
+          type: "error",
+          title: "error",
+          text: error
+        },
+        3000
+      );
+      this.clearAuthorizeForm();
+    },
+    clearAuthorizeForm(){
+      this.apiKey = ''
+      this.secretKey = ''
     }
   }
 };
@@ -889,5 +942,6 @@ async function getTags(api) {
   right:22px;
 }
 </style>
+
 
 
