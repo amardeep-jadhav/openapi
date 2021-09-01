@@ -1,13 +1,18 @@
 <template lang="html">
   <form novalidate @submit.stop.prevent="submit" v-if="selectedEntry" id="request-form" class="request-form">
-    <v-container v-if="selectedEntry.requestBody">
-     <vue-json-pretty
-      :path="'res'"
-      :data= this.getValidJson(selectedEntry.requestBody.content[selectedEntry.requestBody.selectedType].schema)
-      :showLength="true"
-      @click="populateSampleData(getValidJson(selectedEntry.requestBody.content[selectedEntry.requestBody.selectedType].schema))"
-      > 
-    </vue-json-pretty>
+    <v-container v-if="selectedEntry.requestBody && this.selectedEntry.requestBody.selectedType =='text/xml'">
+      <pre> 
+        {{this.formatXML(this.selectedEntry.requestBody.content[selectedEntry.requestBody.selectedType].schema.example)}}
+      </pre>
+    </v-container>
+    <v-container v-else>
+      <vue-json-pretty
+        :path="'res'"
+        :data= this.getValidJson(selectedEntry.requestBody.content[selectedEntry.requestBody.selectedType].schema)
+        :showLength="true"
+        @click="populateSampleData(getValidJson(selectedEntry.requestBody.content[selectedEntry.requestBody.selectedType].schema))"
+        > 
+      </vue-json-pretty>
     </v-container>
   </form>
 </template>
@@ -22,6 +27,14 @@ export default {
   filters: {
   },
   methods: {
+    formatXML(data){
+      var format = require('xml-formatter');
+      return format(data);
+    },
+    copyXMLDtaa(){
+      let data = JSON.parse(JSON.stringify(this.selectedEntry.requestBody.content))["text/xml"]["example"] 
+      this.currentRequest.body = this.formatXML(data)
+    },
     stringify,
     // getBodySample(){
     //  let json = this.selectedEntry.requestBody;

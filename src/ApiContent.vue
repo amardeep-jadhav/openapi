@@ -746,7 +746,7 @@ export default {
     },
 
     verifySuccess(response) {
-      if (response.body.project.length !== 0){
+      if (response.body.projects.length !== 0){
         this.validKeys = true
         this.$store.dispatch("setApiKey", this.apiKey);
         this.$store.dispatch("setSecretKey", this.secretKey);
@@ -754,7 +754,7 @@ export default {
           group: "foo",
           type: "success",
           title: "Success",
-          text: "You have authorized sueessfully, now you can make api call using Try It Now...!"
+          text: "You have authorized Successfully, now you can make api call using Try It Now...!"
         },3000 );
       }else{
         this.validKeys = false;
@@ -764,7 +764,7 @@ export default {
           group: "foo",
           type: "error",
           title: "error",
-          text: "Please make sure you have entred correct api key and secret key.!"
+          text: "Please make sure you have entered correct api key and secret key.!"
         },3000 );
       }
       document.getElementById("overlay").style.display = "none";
