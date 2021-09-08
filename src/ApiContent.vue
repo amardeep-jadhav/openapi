@@ -683,7 +683,8 @@ export default {
           httpRequest.body = this.$refs.requestForm.getFormData();
         } else {
           if (entry.method === 'post') {
-            httpRequest.body = request.body;
+            //httpRequest.body = request.body;
+            httpRequest.body = request[entry.operationId]
           }else if (entry.method === 'put') {
             httpRequest.body = request.putBody;
           }else {
@@ -691,7 +692,6 @@ export default {
           }
         }
       }
-
       this.httpRequest = httpRequest;
     },
 

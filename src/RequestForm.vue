@@ -1,14 +1,14 @@
 <template lang="html">
   <form @submit.stop.prevent="submit" v-if="selectedEntry" id="request-form">
-    <h6 class="text-h6 d-inline-block" v-if="selectedEntry.security && selectedEntry.security.filter(s => s.scheme.in !== 'cookie').length">
+    <!-- <h6 class="text-h6 d-inline-block" v-if="selectedEntry.security && selectedEntry.security.filter(s => s.scheme.in !== 'cookie').length">
       Security
-    </h6>
-    <div v-for="(security, i) in selectedEntry.security.filter(s => s.scheme.in !== 'cookie')" :key="i">
+    </h6> -->
+   <!--  <div v-for="(security, i) in selectedEntry.security.filter(s => s.scheme.in !== 'cookie')" :key="i">
       <v-container>
         <label>{{security.scheme.name}}</label>
         <v-text-field v-model="currentRequest.security[security.scheme.name]" type="string"></v-text-field>
       </v-container>
-    </div>
+    </div> -->
 
     <h5 class="text-h5 d-inline-block fuchsia--text" v-if="selectedEntry.parameters && selectedEntry.parameters.length">
       Parameters
@@ -54,10 +54,11 @@
     <!-- <v-subheader v-if="selectedEntry.requestBody">
       Body
     </v-subheader> -->
+
     <multipart-form ref="multipartForm" v-if="selectedEntry.requestBody && selectedEntry.requestBody.selectedType === 'multipart/form-data'" :request-body="selectedEntry.requestBody" />
     <v-container v-else-if="selectedEntry.requestBody">
       <label class="text-h5 d-inline-block grape--text" for="payload">Payload ({{selectedEntry.requestBody.selectedType}})</label>
-      <v-textarea v-if="this.selectedEntry.method ==='post'" name="payload" v-model="currentRequest.body" id="test" rows="4"></v-textarea>
+      <v-textarea v-if="this.selectedEntry.method ==='post'" name="payload" v-model="currentRequest[''+selectedEntry.operationId]" id="test" rows="4"></v-textarea>
      <v-textarea v-else name="payload" v-model="currentRequest.putBody" id="test" rows="4"></v-textarea>
     </v-container>
   </form>
@@ -106,15 +107,6 @@ export default {
       this.$forceUpdate();
     }
   },
-  // updated: function() {
-  //   if (this.family) {
-  //     this.currentRequest.params['family'] = this.family
-  //   } else if(this.claimResponseId){
-  //     this.currentRequest.params['resourceId'] = this.claimResponseId
-  //   } else if(this.beneficiary){
-  //      this.currentRequest.params['beneficiary'] = this.beneficiary
-  //   }
-  // },
   data: () => ({
    family: '',
    beneficiary: '',
@@ -126,7 +118,7 @@ export default {
    coverageSampleBody: coverageBody,
    locationSampleBody: locationBody,
    practitionerSampleBody: practitionerBody,
-   organizationSampleBody: organizationBody,
+   organizationSampleBody: organizationBody
   }),
   methods: {
     stringify,
@@ -154,6 +146,9 @@ export default {
         case api.includes('/Organization'):
           this.procesOrganization();
           break;
+        case api.includes('/SOA'):
+          this.procesSOAPExamples(api);
+          break;
         default:
           console.log("in default.......")
       }
@@ -169,7 +164,10 @@ export default {
       }if (this.selectedEntry.requestBody) {
         const dummyPatientBody = { ...this.patientSampleBody };
         delete dummyPatientBody.id
-        this.currentRequest.body = JSON.stringify(dummyPatientBody, null, 4);
+        let id = this.selectedEntry.operationId
+        this.currentRequest[id] = JSON.stringify(dummyPatientBody, null, 4);
+        this.$forceUpdate();
+        //this.currentRequest.body = JSON.stringify(dummyPatientBody, null, 4);
       }
     },
 
@@ -226,7 +224,9 @@ export default {
       }if (this.selectedEntry.requestBody) {
         const dummyCoverageBody = { ...this.coverageSampleBody };
         delete dummyCoverageBody.id
-        this.currentRequest.body = JSON.stringify(dummyCoverageBody, null, 4);
+        let id = this.selectedEntry.operationId
+        this.currentRequest[id] = JSON.stringify(dummyCoverageBody, null, 4);
+        //this.currentRequest.body = JSON.stringify(dummyCoverageBody, null, 4);
       }
     },
 
@@ -332,7 +332,9 @@ export default {
       }if (this.selectedEntry.requestBody) {
         const dummyLocationeBody = { ...this.locationSampleBody };
         delete dummyLocationeBody.id
-        this.currentRequest.body = JSON.stringify(dummyLocationeBody, null, 4);
+        let id = this.selectedEntry.operationId
+        this.currentRequest[id] = JSON.stringify(dummyLocationeBody, null, 4);
+        //this.currentRequest.body = JSON.stringify(dummyLocationeBody, null, 4);
       }
     },
 
@@ -393,7 +395,9 @@ export default {
       }if (this.selectedEntry.requestBody) {
         const dummyPractitionerBody = { ...this.practitionerSampleBody };
         delete dummyPractitionerBody.id
-        this.currentRequest.body = JSON.stringify(dummyPractitionerBody, null, 4);
+        let id = this.selectedEntry.operationId
+        this.currentRequest[id] = JSON.stringify(dummyPractitionerBody, null, 4);
+        //this.currentRequest.body = JSON.stringify(dummyPractitionerBody, null, 4);
       }
     },
 
@@ -454,7 +458,9 @@ export default {
       }if (this.selectedEntry.requestBody) {
         const dummyOrganizationBody = { ...this.organizationSampleBody };
         delete dummyOrganizationBody.id
-        this.currentRequest.body = JSON.stringify(dummyOrganizationBody, null, 4);
+        let id = this.selectedEntry.operationId
+        this.currentRequest[id] = JSON.stringify(dummyOrganizationBody, null, 4);
+        //this.currentRequest.body = JSON.stringify(dummyOrganizationBody, null, 4);
       }
     },
     getOrganizationDynamicData(){
@@ -504,6 +510,20 @@ export default {
           return res[1]
         }
       }
+    },
+
+    // #Read XML file and set as example for all SOAP API endpoints
+    procesSOAPExamples(file){
+      let path = "/files"+file+".xml"
+      Vue.http.get(path).then(
+        response => {
+          var format = require('xml-formatter');
+          let id = this.selectedEntry.operationId
+          this.currentRequest[id] = response.body;
+          this.$forceUpdate();
+        }).catch(e => {
+          console.log(e);
+      });
     },
 
   // Common method for Parsing Response hash(Lookup, DeepLookup) and mapping missing keys(mapKey)
