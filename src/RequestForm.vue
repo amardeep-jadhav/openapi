@@ -128,22 +128,22 @@ export default {
     getDynamicExamples(){
       var api = this.selectedEntry.path
       switch(true) {
-        case api.includes('/Patient'):
+        case this.selectedEntry.tags[0] ==='Patient':
           this.procesPatient();
           break;
-        case api.includes('/Coverage'):
+        case this.selectedEntry.tags[0] === 'Coverage':
           this.procesCoverage();
           break;
-        case api.includes('/ClaimResponse'):
+        case this.selectedEntry.tags[0] === 'ClaimResponse':
           this.procesClaimResponse();
           break;
-        case api.includes('/Location'):
+        case this.selectedEntry.tags[0] === 'Location':
           this.procesLocation();
           break;
-        case api.includes('/Practitioner'):
+        case this.selectedEntry.tags[0] === 'Practitioner':
           this.procesPractitioner();
           break;
-        case api.includes('/Organization'):
+        case  this.selectedEntry.tags[0] === 'Organization':
           this.procesOrganization();
           break;
         case api.includes('/SOA'):

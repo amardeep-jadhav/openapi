@@ -620,11 +620,12 @@ export default {
             p =>
               p.in === "query" &&
               (p.schema.type === "array"
-                ? request.params[p.name].length
+                ? request.params[p.name]
                 : request.params[p.name])
           )
           .map(p => ({
             // TODO : join character for array should depend of p.style
+
             [p.name]:
               p.schema.type === "array"
                 ? request.params[p.name].join(",")
