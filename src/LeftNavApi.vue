@@ -64,12 +64,12 @@ export default {
 
 <style scoped>
 .clsEntryMethod {
- width: 66px;
+ width: 75px;
  border-radius: 5px;
  border: 1px dashed #BCB2BB;
 }
 .clsEntryPath {
- width: calc(100% - 66px);
+ width: calc(100% - 75px);
 }
 a.clsEntryPath:hover {
   text-decoration:underline;
