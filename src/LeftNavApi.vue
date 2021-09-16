@@ -47,8 +47,10 @@ export default {
       this.apiVerb = window.location.href.split('?')[1].split("=")[1]
       if (this.apiVerb.includes("#")){
         this.apiVerb = this.apiVerb.match(/.*#/)[0].slice(0, -1);
-      }  
-      this.modifiedTags = eval("this.tags.".concat(this.apiVerb))
+      }
+      this.apiVerb = decodeURIComponent((this.apiVerb + '').replace(/\+/g, '%20'));
+      this.modifiedTags = this.tags[this.apiVerb]
+      //this.modifiedTags = eval("this.tags.".concat(this.apiVerb))
     }
   },
   methods: {

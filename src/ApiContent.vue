@@ -486,9 +486,11 @@ export default {
       if (this.apiVerb.includes("#")){
         this.apiVerb = this.apiVerb.match(/.*#/)[0].slice(0, -1);
         console.log(this.apiVerb)
-      } 
-      this.exactVerb = this.apiVerb.split("=")[1]
-      this.modifiedTags = eval("this.tags.".concat(this.exactVerb));
+      }
+      let str = this.apiVerb.split("=")[1]
+      this.exactVerb = decodeURIComponent((str + '').replace(/\+/g, '%20'));
+      //this.modifiedTags = eval("this.tags.".concat(this.exactVerb));
+      this.modifiedTags = this.tags[this.exactVerb]
     },
     selectedEntry: function(){
       if (this.currentResponse) {
