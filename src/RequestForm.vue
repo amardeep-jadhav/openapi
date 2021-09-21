@@ -133,31 +133,47 @@ export default {
     },
     getDynamicExamples(){
       var api = this.selectedEntry.path
+      var isPostOrPut = this.selectedEntry.method == 'put' || this.selectedEntry.method =='post'
       switch(true) {
-        case this.selectedEntry.tags[0] ==='Patient':
-          this.procesPatient();
-          break;
-        case this.selectedEntry.tags[0] === 'Coverage':
-          this.procesCoverage();
-          break;
-        case this.selectedEntry.tags[0] === 'ClaimResponse':
-          this.procesClaimResponse();
-          break;
-        case this.selectedEntry.tags[0] === 'Location':
-          this.procesLocation();
-          break;
-        case this.selectedEntry.tags[0] === 'Practitioner':
-          this.procesPractitioner();
-          break;
-        case  this.selectedEntry.tags[0] === 'Organization':
-          this.procesOrganization();
+        case  api.includes('/ACM'):
+          if (isPostOrPut) {
+            this.processACMExamples(api);
+          }
           break;
         case api.includes('/SOA'):
           this.procesSOAPExamples(api);
           break;
         default:
+          if (isPostOrPut) {
+            this.processFHIRExamples(api);
+          }
           console.log("in default.......")
       }
+      // switch(true) {
+      //   case this.selectedEntry.tags[0] ==='Patient':
+      //     this.procesPatient();
+      //     break;
+      //   case this.selectedEntry.tags[0] === 'Coverage':
+      //     this.procesCoverage();
+      //     break;
+      //   case this.selectedEntry.tags[0] === 'ClaimResponse':
+      //     this.procesClaimResponse();
+      //     break;
+      //   case this.selectedEntry.tags[0] === 'Location':
+      //     this.procesLocation();
+      //     break;
+      //   case this.selectedEntry.tags[0] === 'Practitioner':
+      //     this.procesPractitioner();
+      //     break;
+      //   case  this.selectedEntry.tags[0] === 'Organization':
+      //     this.procesOrganization();
+      //     break;
+      //   case api.includes('/SOA'):
+      //     this.procesSOAPExamples(api);
+      //     break;
+      //   default:
+      //     console.log("in default.......")
+      // }
     },
 
     // #Fire request to "Patient resource" get result , parse it and and set as example 
@@ -516,6 +532,46 @@ export default {
           return res[1]
         }
       }
+    },
+
+    processFHIRExamples(file){
+      file = file.split('/')[1]
+      let path = "/files/"+file+".json"
+      Vue.http.get(path).then(
+        response => {
+          let id = this.selectedEntry.operationId
+          let Body = JSON.stringify(response.body, null, 4);
+          if (this.selectedEntry.method == 'post') {
+            const dummyPatientBody = { ...response.body };
+            delete dummyPatientBody.id
+            this.currentRequest[id] = JSON.stringify(dummyPatientBody, null, 4);;
+          }else{
+            this.currentRequest.putBody = Body;
+          }
+          this.$forceUpdate();
+        }).catch(e => {
+          console.log(e);
+      });
+    },
+
+    processACMExamples(file){
+      file = file.split('/')[1]
+      let path = "/files/"+file+".json"
+      Vue.http.get(path).then(
+        response => {
+          let id = this.selectedEntry.operationId
+          let Body = JSON.stringify(response.body, null, 4);
+          if (this.selectedEntry.method == 'post') {
+            const dummyPatientBody = { ...response.body };
+            delete dummyPatientBody.id
+            this.currentRequest[id] = JSON.stringify(dummyPatientBody, null, 4);;
+          }else{
+            this.currentRequest.putBody = Body;
+          }
+          this.$forceUpdate();
+        }).catch(e => {
+          console.log(e);
+      });
     },
 
     // #Read XML file and set as example for all SOAP API endpoints
