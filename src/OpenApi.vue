@@ -251,10 +251,11 @@ export default {
   },
   watch: {
     tags: function(){
-      this.apiVerb = window.location.href.split('?')[1].split("=")[1] +" End Points";
+      this.apiVerb = window.location.href.split('?')[1].split("=")[1]
+      this.apiVerb = decodeURIComponent((this.apiVerb + '').replace(/\+/g, '%20')) +" End Points";
        if (this.apiVerb.includes("#")){
         this.apiVerb = this.apiVerb.match(/.*#/)[0].slice(0, -1) +" End Points";
-      } 
+      }
     }
   },
   created() {
@@ -659,3 +660,4 @@ body > .v-application .theme--light .clsEndPointSection .v-list-item__content > 
     font-family: "museo-sans", sans-serif !important;
 } */
 </style>
+

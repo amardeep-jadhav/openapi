@@ -615,6 +615,10 @@ export default {
       const entry = this.selectedEntry;
       const request = this.currentRequest;
       if (!entry || !request) return;
+      if (request.params["item-serviced"]) {
+        request.params["item-serviced"]= request.params["item-serviced"].split(",").map(function (value) {
+          return value.trim();}).join("&item-serviced=")
+        }
       let params = Object.assign(
         {},
         ...(entry.parameters || [])
@@ -627,10 +631,9 @@ export default {
           )
           .map(p => ({
             // TODO : join character for array should depend of p.style
-
             [p.name]:
               p.schema.type === "array"
-                ? request.params[p.name].join(",")
+                ? request.params[p.name]
                 : request.params[p.name]
           }))
       );
@@ -663,7 +666,6 @@ export default {
             params[s.scheme.name] = request.security[s.scheme.name];
           }
         });
-
       const httpRequest = {
         method: entry.method,
         url:

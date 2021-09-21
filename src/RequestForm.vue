@@ -41,9 +41,15 @@
         </v-select>
       </v-container>
 
-      <v-chip v-model="currentRequest.params[parameter.name]" :v-text-field-placeholder="parameter.name" :v-text-field-type="parameter.schema.items.type" v-if="parameter.schema.type === 'array' && !parameter.schema.items.enum">
+      <v-container class="pa-0 pt-4" v-if="parameter.schema.type === 'array' && !parameter.schema.items.enum">
+        <label class="text-h5 d-inline-block grape--text">{{parameter.name}}</label>
+        <v-text-field  class="pa-0" v-model.lazy.trim="currentRequest.params[parameter.name]" 
+        :hint="parameter.example" persistent-hint
+        :type="parameter.schema.type"></v-text-field>
+      </v-container>
+     <!--  <v-chip v-model="currentRequest.params[parameter.name]" :v-text-field-placeholder="parameter.name" :v-text-field-type="parameter.schema.items.type" v-if="parameter.schema.type === 'array' && !parameter.schema.items.enum">
         <template slot-scope="chip">{{ chip.value }}</template>
-      </v-chip>
+      </v-chip> -->
 
       <v-container class="pa-0 pt-4" v-if="parameter.schema.type === 'boolean'">
         <label class="text-h5 d-inline-block grape--text">{{parameter.name}}</label>
