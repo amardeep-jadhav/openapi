@@ -442,6 +442,7 @@ export default {
   data: () => ({
     drawer: true,
     validKeys: false,
+    uuid: "",
     modifiedTags: null,
     apiVerb: null,
     exactVerb: null,
@@ -657,6 +658,7 @@ export default {
       );
       headers['API_Key'] = this.$store.state.apiKey
       headers['Secret_Key'] = this.$store.state.apiSecret
+      headers['uuid'] = this.$store.state.uuid
       entry.security
         .filter(s => !!request.security[s.scheme.name])
         .forEach(s => {
@@ -752,9 +754,11 @@ export default {
 
     verifySuccess(response) {
       if (response.body.projects.length !== 0){
+        this.uuid = response.body.projects[0].uuid
         this.validKeys = true
         this.$store.dispatch("setApiKey", this.apiKey);
         this.$store.dispatch("setSecretKey", this.secretKey);
+        this.$store.dispatch("setUUID", this.uuid);
         this.$notify({
           group: "foo",
           type: "success",
@@ -765,6 +769,7 @@ export default {
         this.validKeys = false;
         this.$store.dispatch("setApiKey", '');
         this.$store.dispatch("setSecretKey", '');
+        this.$store.dispatch("setUUID", '');
         this.$notify({
           group: "foo",
           type: "error",
@@ -947,6 +952,7 @@ async function getTags(api) {
   right:22px;
 }
 </style>
+
 
 
 
